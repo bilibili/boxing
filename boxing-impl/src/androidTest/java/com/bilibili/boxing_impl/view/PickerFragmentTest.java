@@ -1,0 +1,82 @@
+/*
+ *  Copyright (C) 2017 Bilibili
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *          http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+package com.bilibili.boxing_impl.view;
+
+import android.support.test.espresso.NoMatchingViewException;
+import android.support.test.espresso.ViewAssertion;
+import android.support.test.espresso.ViewInteraction;
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
+import android.view.View;
+
+import com.bilibili.boxing.model.entity.BaseMedia;
+import com.bilibili.boxing.model.entity.impl.ImageMedia;
+import com.bilibili.boxing_impl.R;
+
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+/**
+ * @author ChenSL
+ */
+@RunWith(AndroidJUnit4.class)
+public class PickerFragmentTest {
+    @Rule
+    public ActivityTestRule<TestBlankActivity> mRule = new ActivityTestRule<>(TestBlankActivity.class);
+
+    @Before
+    public void setup() {
+    }
+
+    @Test
+    public void showMedia() {
+        List<BaseMedia> medias = new ArrayList<>();
+        medias.add(new ImageMedia("1", "TEST1"));
+        medias.add(new ImageMedia("2", "TEST2"));
+        medias.add(new ImageMedia("3", "TEST3"));
+
+        ViewInteraction container = onView(withId(R.id.container));
+        container.check(new ViewAssertion() {
+            @Override
+            public void check(View view, NoMatchingViewException noViewFoundException) {
+                assertNotNull(view);
+                assertTrue(view.getVisibility() == View.VISIBLE);
+            }
+        });
+        ViewInteraction empty = onView(withId(R.id.empty_txt));
+        empty.check(new ViewAssertion() {
+            @Override
+            public void check(View view, NoMatchingViewException noViewFoundException) {
+                assertNotNull(view);
+                assertTrue(view.getVisibility() == View.GONE);
+            }
+        });
+
+    }
+
+}

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~  Copyright (C) 2017 Bilibili
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~          http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/media_recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone"
+        android:scrollbars="vertical"/>
+
+    <include
+        android:id="@+id/empty_txt"
+        layout="@layout/layout_empty_txt"/>
+
+    <ProgressBar
+        android:id="@+id/loading"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:indeterminate="true"/>
+
+    <FrameLayout
+        android:id="@+id/multi_picker_layout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/white">
+
+        <Button
+            android:id="@+id/choose_preview_btn"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="@dimen/item_spacing"
+            android:background="@drawable/selector_button_solid"
+            android:text="预览"
+            android:textAppearance="@style/TextAppearance.App.Medium"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/choose_ok_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="@dimen/item_spacing"
+            android:background="@drawable/selector_button_solid"
+            android:minWidth="60dp"
+            android:paddingLeft="@dimen/item_half_spacing"
+            android:paddingRight="@dimen/item_half_spacing"
+            android:text="@string/ok"
+            android:textAppearance="@style/TextAppearance.App.Medium"
+            android:textColor="@color/white"/>
+    </FrameLayout>
+
+</LinearLayout>

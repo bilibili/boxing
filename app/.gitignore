@@ -1,0 +1,51 @@
+*.apk
+*.ap_
+*.dex
+*.class
+
+local.properties
+proguard/
+*.log
+.idea
+*.iml
+
+# Generated files
+bin/
+gen/
+
+# Gradle files
+.gradle/
+build/
+/*/build/
+
+# IntelliJ IDEA
+*.ipr
+*.iws
+
+# Gradle
+.gradle
+gradlew.bat
+build
+
+reports
+/captures
+jacoco.exec
+
+# Mac system files
+.DS_Store
+
+# Android Studio Navigation editor temp files
+.navigation/
+out
+lib
+
+# Eclipse project files
+.classpath
+.project
+.settings/
+eclipsebin
+.metadata/
+
+#NDK
+obj/
+jniLibs
