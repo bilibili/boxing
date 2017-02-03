@@ -14,42 +14,39 @@
 - 支持自定义UI
 
 ### Download                                                                  
----                                                                           
+---
 核心版本：只包含核心功能。
-                                 
-实现版本：在核心功能之上添加了实现界面。                  
-                                                                              
-- Maven
-                                                                       
-核心版本                                                                 
-                                                                              
-		<dependency>                                                              
-  		<groupId>com.bilibili</groupId>                                         
-  		<artifactId>boxing</artifactId>                                         
-  		<version>0.1.0</version>                                       
-  		<type>pom</type>                                                        
-		</dependency>                      		                                    
-		                                                                          
+实现版本：在核心功能之上添加了实现界面。                                                                                       
+- Maven 
+  ​                                                  
+  核心版本                                                                                                                                            
+```xml
+<dependency>                                                      
+  	<groupId>com.bilibili</groupId>                                    
+  	<artifactId>boxing</artifactId>                                    
+  	<version>0.1.0</version>                                       
+  	<type>pom</type>                                                
+</dependency> 
+```
 实现版本                                                                   
-                                                                              
-		<dependency>                                                              
-  		<groupId>com.bilibili</groupId>                                         
-  		<artifactId>boxing-impl</artifactId>                                    
-  		<version>0.1.0</version>                                       
-  		<type>pom</type>                                                        
-		</dependency>                                                             
-                                                                              
-                                                                              
-- Gradle
-                                                                    
+```xml
+<dependency>                                                          
+  	<groupId>com.bilibili</groupId>                                    
+  	<artifactId>boxing-impl</artifactId>                              
+  	<version>0.1.0</version>                                       
+  	<type>pom</type>                                                  
+</dependency>                                                      
+```
+- Gradle   
+  ​                                                    
 核心版本                                                                 
-                                                                              
-		compile 'com.bilibili:boxing:0.1.0'                              
-		                                                                          
+```java                                                                         
+compile 'com.bilibili:boxing:0.1.0'                              
+```
 实现版本                                                                   
-                                                                              
-		compile 'com.bilibili:boxing-impl:0.1.0'               
-		          
+```java                                                                        
+compile 'com.bilibili:boxing-impl:0.1.0'               
+```
 
 ### 预览图
 
@@ -61,70 +58,63 @@
 #### 简单用法
 
 - 初始化图片加载（必选）
-
-		IBoxingMediaLoader loader = new BoxingFrescoLoader(this); // 使用fresco实现IBoxingMediaLoader
-		BoxingMediaLoader.getInstance().init(loader); 
-
-		BoxingMediaLoader.getInstance().displayThumbnail(); // 加载缩略图
-		BoxingMediaLoader.getInstance().displayRaw(); //加载原始图
-		
+```java
+BoxingMediaLoader.getInstance().init(new IBoxingMediaLoader()); // 需要实现IBoxingMediaLoader 
+```
 - 初始化图片裁剪（可选）
-
-
-		BoxingCrop.getInstance().init(new BoxingUcrop()); // 使用Ucrop实现IBoxingCrop
-		
-		BoxingCrop.getInstance().onStartCrop(); // 调用裁剪
-		BoxingCrop.getInstance().onCropFinish(); // 取到结果Uri 
+```java
+BoxingCrop.getInstance().init(new IBoxingCrop());  // 需要实现 IBoxingCrop 
+```
 
 - 构造参数
-指定模式：图片单选，多选，视频单选，是否支持gif和相机。
-
-
-		BoxingConfig config = new BoxingConfig(Mode); // Mode：Mode.SINGLE_IMG, Mode.MULTI_IMG, Mode.VIDEO
-		config.needCamera().needGif() // 支持gif和相机
-		
-		
+  指定模式：图片单选，多选，视频单选，是否支持gif和相机。
+```java
+BoxingConfig config = new BoxingConfig(Mode); // Mode：Mode.SINGLE_IMG, Mode.MULTI_IMG, Mode.VIDEO
+config.needCamera().needGif() // 支持gif和相机
+```
 - 初始化Boxing，构造Intent并启动
+```java
+// 启动缩略图界面, 依赖boxing-impl.
+Boxing.of(config).withIntent(context, BoxingActivity.class).start(callerActivity, REQUEST_CODE); 
 
+// 启动预览原图界面，依赖boxing-impl.
+Boxing.of(config).withIntent(context, BoxingViewActivity.class).start(callerActivity, REQUEST_CODE); 
 
-		Boxing.of(config).withIntent(context, class).start(callerActivity, REQUEST_CODE);
-    
-		// 提供一个多图选择模式的of重载
-		Boxing.of().withIntent(context, class).start(callerActivity, REQUEST_CODE);
-    
+// 调用of方法默认使用Mode.MULTI_IMG
+Boxing.of().withIntent(context, class).start(callerActivity, REQUEST_CODE);
+```
+
 - 取结果
-  
+```java
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+  	List<BaseMedia> medias = Boxing.getResult(data);
+  	//注意判断null
+}
+```
 
-		protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-			List<BaseMedia> medias = Boxing.getResult(data);
-			//注意判断null
-		
-		}
-		
 ### 进阶用法
 初始化图片加载和裁剪同上。
 
 - 自定义Activity与Fragment
-继承AbsBoxingViewActivity和AbsBoxingViewFragment。
-调用`Boxing.of(config).withIntent(context, class).start(callerActivity, REQUEST_CODE);`启动。
+  继承AbsBoxingViewActivity和AbsBoxingViewFragment。
+  调用`Boxing.of(config).withIntent(context, class).start(callerActivity, REQUEST_CODE);`启动。
 
 - 仅自定义Fragment
-继承AbsBoxingViewFragment，不依赖AbsBoxingViewActivity。
-调用`Boxing.of(BoxingConfig).setupFragment(AbsBoxingViewFragment, OnFinishListener);`完成配置。
+  继承AbsBoxingViewFragment，不依赖AbsBoxingViewActivity。
+  调用`Boxing.of(BoxingConfig).setupFragment(AbsBoxingViewFragment, OnFinishListener);`完成配置。
 
 ### FileProvider
 Android N 版本使用相机必须在AndroidManifest.xml中添加
-
-        <provider                                                 
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.file.provider" >                   
-                                                                  
-            <meta-data                                            
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/boxing_file_provider"/>    
-                                                                  
-        </provider>                 
-                                      
+```xml
+<provider                                                 
+	android:name="android.support.v4.content.FileProvider"
+	android:authorities="${applicationId}.file.provider" >               
+	<meta-data                                            
+		android:name="android.support.FILE_PROVIDER_PATHS"
+		android:resource="@xml/boxing_file_provider"/>
+</provider>                 
+```
 
 ### TODO
 支持同时存在多个不同的config。

@@ -23,33 +23,37 @@ UI version: contain UI implements base on core version.
 
 Core version
 
-		<dependency>                       
-  		<groupId>com.bilibili</groupId>  
-  		<artifactId>boxing</artifactId>  
-  		<version>0.1.0</version>
-  		<type>pom</type>                 
-		</dependency>                      		
-		
+```xml
+<dependency>                       
+  	<groupId>com.bilibili</groupId>  
+  	<artifactId>boxing</artifactId>  
+  	<version>0.1.0</version>
+  	<type>pom</type>                
+</dependency>                      		
+```
+
 UI version
 
-		<dependency>                          
-  		<groupId>com.bilibili</groupId>     
-  		<artifactId>boxing-impl</artifactId>
-  		<version>0.1.0</version>   
-  		<type>pom</type>                    
-		</dependency>                         
-
+```xml
+<dependency>                          
+  	<groupId>com.bilibili</groupId>     
+  	<artifactId>boxing-impl</artifactId>
+  	<version>0.1.0</version>   
+  	<type>pom</type>                    
+</dependency>                         
+```
 
 - Gradle
 
 Core version              
+```java
+compile 'com.bilibili:boxing:0.1.0'
+```
 
-		compile 'com.bilibili:boxing:0.1.0'
-		
 UI version
-
-		compile 'com.bilibili:boxing-impl:0.1.0'
-		
+```java
+compile 'com.bilibili:boxing-impl:0.1.0'
+```
 
 ### Preview
 
@@ -60,66 +64,62 @@ UI version
 ### Getting Started
 
 - Media loading initialization(required)
+```java
+BoxingMediaLoader.getInstance().init(new IBoxingMediaLoader()); // a class implements IBoxingMediaLoader 
+```
 
-		IBoxingMediaLoader loader = new BoxingFrescoLoader(this); // use fresco implements IBoxingMediaLoader
-		BoxingMediaLoader.getInstance().init(loader); 
-
-		BoxingMediaLoader.getInstance().displayThumbnail(); // load thumbnail
-		BoxingMediaLoader.getInstance().displayRaw(); // load raw image
-		
 - Image cropping initialization(optional)
-
-		BoxingCrop.getInstance().init(new BoxingUcrop()); // use Ucrop implements IBoxingCrop
-		
-		BoxingCrop.getInstance().onStartCrop(); //  start cropping
-		BoxingCrop.getInstance().onCropFinish(); // get target Uri 
-
+```java
+BoxingCrop.getInstance().init(new IBoxingCrop());  // a class implements IBoxingCrop 
+```
 - Build BoxingConfig
-Specify the mode(Mode.SINGLE_IMG, Mode.MULTI_IMG, Mode.VIDEO) with camera and gif support. 
-
-		BoxingConfig config = new BoxingConfig(Mode); // Mode：Mode.SINGLE_IMG, Mode.MULTI_IMG, Mode.VIDEO
-		config.needCamera().needGif() // camera and gif support
-		
-		
+  Specify the mode(Mode.SINGLE_IMG, Mode.MULTI_IMG, Mode.VIDEO) with camera and gif support. 
+```java
+BoxingConfig config = new BoxingConfig(Mode); // Mode：Mode.SINGLE_IMG, Mode.MULTI_IMG, Mode.VIDEO
+config.needCamera().needGif() // camera and gif support
+```
 - Get Boxing, set Intent and call start
-
-		Boxing.of(config).withIntent(context, class).start(callerActivity, REQUEST_CODE);
-		// call of() by default use Mode.MULTI_IMG 
-		Boxing.of().withIntent(context, class).start(callerActivity, REQUEST_CODE);
-    
+```java
+// start thumbnails Activity, need boxing-impl.
+Boxing.of(config).withIntent(context, BoxingActivity.class).start(callerActivity, REQUEST_CODE); 
+  	
+// start view raw image Activity, need boxing-impl.
+Boxing.of(config).withIntent(context, BoxingViewActivity.class).start(callerActivity, REQUEST_CODE); 
+  	
+// call of() use Mode.MULTI_IMG by default.
+Boxing.of().withIntent(context, class).start(callerActivity, REQUEST_CODE);
+```
 - Get Result
-
-		protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-			List<BaseMedia> medias = Boxing.getResult(data);
-			// avoid null
-		
-		}
-		
+```java
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+  	List<BaseMedia> medias = Boxing.getResult(data);
+  	// avoid null
+}
+```
 ### Advanced usage
 Media loading and image cropping initialization are the same as Simple Usage.
 
 - Customize Activity and Fragment
-Extends AbsBoxingViewActivity and AbsBoxingViewFragment.
-call `Boxing.of(config).withIntent(context, class).start(callerActivity, REQUEST_CODE);` to start.
+  Extends AbsBoxingViewActivity and AbsBoxingViewFragment.
+  call `Boxing.of(config).withIntent(context, AbsBoxingViewActivity.class).start(callerActivity, REQUEST_CODE);` to start.
 
 - Only customize Fragment
-Extends AbsBoxingViewFragment,no AbsBoxingViewActivity.
-call `Boxing.of(BoxingConfig).setupFragment(AbsBoxingViewFragment, OnFinishListener);` to start.
+  Extends AbsBoxingViewFragment,no AbsBoxingViewActivity.
+  call `Boxing.of(BoxingConfig).setupFragment(AbsBoxingViewFragment, OnFinishListener);` to start.
 
 
 ### FileProvider                                                                                   
 Use camera in Android N, add this in AndroidManifest.xml                                                        
-                                                                                                  
-        <provider                                                                                 
-            android:name="android.support.v4.content.FileProvider"                                
-            android:authorities="${applicationId}.file.provider" >                                                   
-                                                                                                  
-            <meta-data                                                                            
-                android:name="android.support.FILE_PROVIDER_PATHS"                                
-                android:resource="@xml/boxing_file_provider"/>                                    
-                                                                                                  	
-        </provider>                                                                               
-        
+```xml
+<provider                                                 
+	android:name="android.support.v4.content.FileProvider"
+	android:authorities="${applicationId}.file.provider" >               
+	<meta-data                                            
+		android:name="android.support.FILE_PROVIDER_PATHS"
+		android:resource="@xml/boxing_file_provider"/>
+</provider>                 
+```
 
 ### TODO
 Support different config at the same moment.
