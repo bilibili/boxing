@@ -112,8 +112,6 @@ public class PickerUtilTest {
         boolean hasFile = BoxingFileHelper.createFile("/");
         assertTrue(hasFile);
 
-        boolean hasFile1 = BoxingFileHelper.createFile("/hha");
-        assertTrue(hasFile1);
     }
 
     @Test
