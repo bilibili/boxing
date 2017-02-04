@@ -36,7 +36,6 @@ android {
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
 
-
     buildTypes {
         release {
             minifyEnabled false
@@ -46,6 +45,11 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 
