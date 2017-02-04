@@ -33,7 +33,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    productFlavors {
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 
