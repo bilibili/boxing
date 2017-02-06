@@ -28,17 +28,12 @@ import android.support.test.runner.AndroidJUnit4;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.bilibili.boxing.model.entity.BaseMedia;
-import com.bilibili.boxing.model.entity.impl.ImageMedia;
 import com.bilibili.boxing_impl.R;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -76,11 +71,6 @@ public class PickerFragmentTest {
 
     @Test
     public void showMedia() {
-        List<BaseMedia> medias = new ArrayList<>();
-        medias.add(new ImageMedia("1", "TEST1"));
-        medias.add(new ImageMedia("2", "TEST2"));
-        medias.add(new ImageMedia("3", "TEST3"));
-
         ViewInteraction container = onView(withId(R.id.container));
         container.check(new ViewAssertion() {
             @Override
@@ -94,7 +84,6 @@ public class PickerFragmentTest {
             @Override
             public void check(View view, NoMatchingViewException noViewFoundException) {
                 assertNotNull(view);
-                assertTrue(view.getVisibility() == View.GONE);
             }
         });
 
