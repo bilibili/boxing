@@ -1,6 +1,6 @@
 ## boxing
 ---
-Android multi-media selector based on MVP mode.[中文文档](README_CN.md)
+Android multi-media selector based on MVP mode.[中文文档](README_CN.md)  [![Build Status](https://travis-ci.org/Bilibili/boxing.svg?branch=master)](https://travis-ci.org/Bilibili/boxing)
 
 #### boxing Inside: 
 [![bili](screenshot/bili.webp)](https://play.google.com/store/apps/details?id=tv.danmaku.bili)
