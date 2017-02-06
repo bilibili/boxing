@@ -22,6 +22,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bilibili.boxing.BoxingMediaLoader;
 import com.bilibili.boxing.loader.IBoxingCallback;
@@ -54,6 +55,7 @@ public class TestBlankActivity extends FragmentActivity {
             }
         });
         BoxingViewFragment fragment = BoxingViewFragment.newInstance();
+        fragment.setTitleTxt((TextView) findViewById(R.id.pick_album_txt));
         fragment.setPresenter(new PickerPresenter(fragment));
         fragment.setPickerConfig(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG));
 

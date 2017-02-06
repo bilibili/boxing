@@ -31,6 +31,8 @@ import java.util.Locale;
  * @author ChenSL
  */
 public class VideoMedia extends BaseMedia {
+    private static final long MB = 1024 * 1024;
+    
     private String mTitle;
     private String mDuration;
     private String mDateTaken;
@@ -92,10 +94,17 @@ public class VideoMedia extends BaseMedia {
         return mTitle;
     }
 
-
-    @Override
-    public long getSize() {
-        return super.getSize() >> 20;
+    public String getSizeByUnit() {
+        double size = getSize();
+        if (size == 0) {
+            return "0K";
+        }
+        if (size >= MB) {
+            double sizeInM = size / MB;
+            return String.format(Locale.getDefault(), "%.1f", sizeInM) + "M";
+        }
+        double sizeInK = size / 1024;
+        return String.format(Locale.getDefault(), "%.1f", sizeInK) + "K";
     }
 
     public String getDateTaken() {

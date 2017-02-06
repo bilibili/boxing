@@ -236,11 +236,12 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
 
     @Override
     public void showMedia(@Nullable List<BaseMedia> medias, int totalCount) {
-        if (medias != null) {
-            mImages.addAll(medias);
-            mAdapter.notifyDataSetChanged();
-            checkSelectedMedia(mImages, mSelectedImages);
+        if (medias == null || totalCount <= 0) {
+            return;
         }
+        mImages.addAll(medias);
+        mAdapter.notifyDataSetChanged();
+        checkSelectedMedia(mImages, mSelectedImages);
         setupGallery();
 
         if (mToolbar != null && mNeedAllCount) {

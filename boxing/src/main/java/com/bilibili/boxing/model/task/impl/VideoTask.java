@@ -60,8 +60,9 @@ public class VideoTask implements IMediaTask<VideoMedia> {
         final Cursor cursor = cr.query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, MEDIA_COL, null, null,
                 MediaStore.Images.Media.DATE_MODIFIED + " desc" + " LIMIT " + page * IMediaTask.PAGE_LIMIT + " , " + IMediaTask.PAGE_LIMIT);
         try {
+            int count = 0;
             if (cursor != null && cursor.moveToFirst()) {
-                int count = cursor.getCount();
+                count = cursor.getCount();
                 do {
                     String data = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATA));
                     String id = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media._ID));
@@ -76,6 +77,8 @@ public class VideoTask implements IMediaTask<VideoMedia> {
 
                 } while (cursor.moveToNext() && !cursor.isLast() && !cursor.isLast());
                 postMedias(callback, videoMedias, count);
+            } else {
+                postMedias(callback, null, 0);
             }
         } finally {
             if (cursor != null) {

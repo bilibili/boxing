@@ -131,8 +131,7 @@ public class MediaItemLayout extends FrameLayout {
             mVideoLayout.setVisibility(VISIBLE);
             VideoMedia videoMedia = (VideoMedia) media;
             ((TextView) mVideoLayout.findViewById(R.id.video_duration_txt)).setText(videoMedia.getDuration());
-            String size = getResources().getString(R.string.video_size_fmt, videoMedia.getSize());
-            ((TextView) mVideoLayout.findViewById(R.id.video_size_txt)).setText(size);
+            ((TextView) mVideoLayout.findViewById(R.id.video_size_txt)).setText(videoMedia.getSizeByUnit());
             setCover(videoMedia.getPath());
         }
     }
