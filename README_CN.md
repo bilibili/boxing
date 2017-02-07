@@ -1,6 +1,6 @@
 ## boxing
 ---
-基于MVP模式的Android多媒体选择器。
+基于MVP模式的Android多媒体选择器。[![Build Status](https://travis-ci.org/Bilibili/boxing.svg?branch=master)](https://travis-ci.org/Bilibili/boxing)
 
 #### boxing Inside: 
 [![bili](screenshot/bili.webp)](https://play.google.com/store/apps/details?id=tv.danmaku.bili)
@@ -39,7 +39,7 @@
 ```
 - Gradle   
   ​                                                    
-核心版本                                                                 
+  核心版本                                                                 
 ```java                                                                         
 compile 'com.bilibili:boxing:0.1.0'                              
 ```

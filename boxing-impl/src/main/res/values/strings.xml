@@ -24,7 +24,6 @@
     <string name="image_preview_ok_fmt">%1$s/%2$s 确定</string>
     <string name="image_select_ok_fmt">(%1$s/%2$s) 确定</string>
     <string name="album_images_fmt">(%d)</string>
-    <string name="video_size_fmt">%dM</string>
 
     <string name="max_image_over">你最多只能选择九张图片</string>
     <string name="gif_too_big">您选择的gif图片过大，请压缩后再上传</string>

@@ -140,6 +140,8 @@ public class ImageTask implements IMediaTask<ImageMedia> {
                 }
             } while (!cursor.isLast() && cursor.moveToNext());
             postMedias(result, allCount, callback);
+        } else {
+            postMedias(null, 0, callback);
         }
         clear();
     }

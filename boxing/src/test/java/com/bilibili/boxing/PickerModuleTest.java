@@ -134,8 +134,34 @@ public class PickerModuleTest {
         assertEquals(duration1, "36:00");
 
     }
+    
+    @Test
+    public void testSize() {
+        VideoMedia videoMedia = new VideoMedia.Builder("233", "233").build();
+        videoMedia.setSize("-1");
+        String result = videoMedia.getSizeByUnit();
+        assertEquals(result, "0K");
 
+        videoMedia.setSize("0");
+        result = videoMedia.getSizeByUnit();
+        assertEquals(result, "0K");
 
+        videoMedia.setSize("200");
+        result = videoMedia.getSizeByUnit();
+        assertEquals(result, "0.2K");
+
+        videoMedia.setSize("1024");
+        result = videoMedia.getSizeByUnit();
+        assertEquals(result, "1.0K");
+
+        videoMedia.setSize("1048576");
+        result = videoMedia.getSizeByUnit();
+        assertEquals(result, "1.0M");
+
+        videoMedia.setSize("2048576");
+        result = videoMedia.getSizeByUnit();
+        assertEquals(result, "2.0M");
+    }
 
 }
 
