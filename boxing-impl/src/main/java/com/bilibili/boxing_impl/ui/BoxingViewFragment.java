@@ -99,7 +99,9 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
     @Override
     public void startLoading() {
         loadMedias();
-        loadAlbum();
+        if (!BoxingManager.getInstance().getBoxingConfig().isVideoMode()) {
+            loadAlbum();
+        }
     }
 
     @Override
