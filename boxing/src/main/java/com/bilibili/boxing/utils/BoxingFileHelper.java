@@ -58,6 +58,12 @@ public class BoxingFileHelper {
             return null;
         }
         String result = cacheDir.getAbsolutePath() + "/boxing";
+        try {
+            BoxingFileHelper.createFile(result);
+        } catch (ExecutionException | InterruptedException e) {
+            BoxingLog.d("cache dir " + result + " not exist");
+            return null;
+        }
         BoxingLog.d("cache dir is: " + result);
         return result;
     }
