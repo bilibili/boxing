@@ -60,21 +60,23 @@ public class VideoTask implements IMediaTask<VideoMedia> {
         final Cursor cursor = cr.query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, MEDIA_COL, null, null,
                 MediaStore.Images.Media.DATE_MODIFIED + " desc" + " LIMIT " + page * IMediaTask.PAGE_LIMIT + " , " + IMediaTask.PAGE_LIMIT);
         try {
-            if (cursor != null && cursor.moveToFirst()) {
+            if (cursor != null) {
                 int count = cursor.getCount();
-                do {
-                    String data = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATA));
-                    String id = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media._ID));
-                    String title = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.TITLE));
-                    String type = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.MIME_TYPE));
-                    String size = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.SIZE));
-                    String date = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATE_TAKEN));
-                    String duration = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DURATION));
-                    VideoMedia video = new VideoMedia.Builder(id, data).setTitle(title).setDuration(duration)
-                            .setSize(size).setDataTaken(date).setMimeType(type).build();
-                    videoMedias.add(video);
+                if (cursor.moveToFirst()) {
+                    do {
+                        String data = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATA));
+                        String id = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media._ID));
+                        String title = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.TITLE));
+                        String type = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.MIME_TYPE));
+                        String size = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.SIZE));
+                        String date = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATE_TAKEN));
+                        String duration = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DURATION));
+                        VideoMedia video = new VideoMedia.Builder(id, data).setTitle(title).setDuration(duration)
+                                .setSize(size).setDataTaken(date).setMimeType(type).build();
+                        videoMedias.add(video);
 
-                } while (cursor.moveToNext() && !cursor.isLast() && !cursor.isLast());
+                    } while (cursor.moveToNext() && !cursor.isLast() && !cursor.isLast());
+                }
                 postMedias(callback, videoMedias, count);
             }
         } finally {
