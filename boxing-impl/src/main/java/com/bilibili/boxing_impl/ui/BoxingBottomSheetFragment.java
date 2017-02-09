@@ -19,6 +19,7 @@ package com.bilibili.boxing_impl.ui;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -99,9 +100,9 @@ public class BoxingBottomSheetFragment extends AbsBoxingViewFragment implements 
 
 
     @Override
-    public void onCameraActivityResult(int requestCode, int resultCode) {
-        super.onCameraActivityResult(requestCode, resultCode);
+    public void onCameraActivityResult(int requestCode, int resultCode, Intent data) {
         showProgressDialog();
+        super.onCameraActivityResult(requestCode, resultCode, data);
     }
 
     private void showProgressDialog() {

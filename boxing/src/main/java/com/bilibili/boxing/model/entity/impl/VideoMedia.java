@@ -144,7 +144,7 @@ public class VideoMedia extends BaseMedia {
             return this;
         }
 
-        public Builder setDataTaken(String dateTaken) {
+        public Builder setDateTaken(String dateTaken) {
             this.mDateTaken = dateTaken;
             return this;
         }

@@ -307,9 +307,9 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
 
 
     @Override
-    public void onCameraActivityResult(int requestCode, int resultCode) {
+    public void onCameraActivityResult(int requestCode, int resultCode, Intent data) {
         showProgressDialog();
-        super.onCameraActivityResult(requestCode, resultCode);
+        super.onCameraActivityResult(requestCode, resultCode, data);
     }
 
     private void showProgressDialog() {

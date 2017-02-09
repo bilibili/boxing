@@ -72,7 +72,7 @@ public class VideoTask implements IMediaTask<VideoMedia> {
                     String date = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATE_TAKEN));
                     String duration = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DURATION));
                     VideoMedia video = new VideoMedia.Builder(id, data).setTitle(title).setDuration(duration)
-                            .setSize(size).setDataTaken(date).setMimeType(type).build();
+                            .setSize(size).setDateTaken(date).setMimeType(type).build();
                     videoMedias.add(video);
 
                 } while (cursor.moveToNext() && !cursor.isLast() && !cursor.isLast());
