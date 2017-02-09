@@ -130,7 +130,7 @@ public class CameraPickerHelper {
      * @param fragment      not null if activity is null.
      * @param subFolderPath a folder in external DCIM, must start with "/".
      */
-    public void startVideo(Activity activity, Fragment fragment, String subFolderPath) {
+    public void startRecord(Activity activity, Fragment fragment, String subFolderPath) {
         String cameraOutDir = BoxingFileHelper.getExternalDCIM(subFolderPath);
         try {
             if (BoxingFileHelper.createFile(cameraOutDir)) {

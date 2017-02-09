@@ -429,7 +429,7 @@ public abstract class AbsBoxingViewFragment extends Fragment implements PickerCo
                 requestPermissions(CAMERA_PERMISSIONS, REQUEST_CODE_PERMISSION);
             } else {
                 if (BoxingManager.getInstance().getBoxingConfig().isVideoMode()) {
-                    mCameraPicker.startVideo(activity, fragment, subFolderPath);
+                    mCameraPicker.startRecord(activity, fragment, subFolderPath);
                 } else {
                     mCameraPicker.startCamera(activity, fragment, subFolderPath);
                 }
