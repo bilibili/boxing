@@ -166,7 +166,7 @@ public abstract class AbsBoxingViewFragment extends Fragment implements PickerCo
 
     private void initCameraPhotoPicker(Bundle savedInstanceState) {
         BoxingConfig config = BoxingManager.getInstance().getBoxingConfig();
-        if (config == null || config.isVideoMode() || !config.isNeedCamera()) {
+        if (config == null || !config.isNeedCamera()) {
             return;
         }
         mCameraPicker = new CameraPickerHelper(savedInstanceState);
@@ -424,7 +424,9 @@ public abstract class AbsBoxingViewFragment extends Fragment implements PickerCo
             if (!BoxingBuilderConfig.TESTING && ContextCompat.checkSelfPermission(getActivity(), CAMERA_PERMISSIONS[0]) != PERMISSION_GRANTED) {
                 requestPermissions(CAMERA_PERMISSIONS, REQUEST_CODE_PERMISSION);
             } else {
-                mCameraPicker.startCamera(activity, fragment, subFolderPath);
+                if (!BoxingManager.getInstance().getBoxingConfig().isVideoMode()) {
+                    mCameraPicker.startCamera(activity, fragment, subFolderPath);
+                }
             }
         } catch (IllegalArgumentException | IllegalStateException e) {
             onRequestPermissionError(CAMERA_PERMISSIONS, e);

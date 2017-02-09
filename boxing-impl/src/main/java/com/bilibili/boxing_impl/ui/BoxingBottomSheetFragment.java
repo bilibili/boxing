@@ -100,8 +100,8 @@ public class BoxingBottomSheetFragment extends AbsBoxingViewFragment implements 
 
     @Override
     public void onCameraActivityResult(int requestCode, int resultCode) {
-        super.onCameraActivityResult(requestCode, resultCode);
         showProgressDialog();
+        super.onCameraActivityResult(requestCode, resultCode);
     }
 
     private void showProgressDialog() {

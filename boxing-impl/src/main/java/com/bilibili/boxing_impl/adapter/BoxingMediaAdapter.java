@@ -72,7 +72,7 @@ public class BoxingMediaAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0 && mMediaConfig.isNeedCamera() && !mMediaConfig.isVideoMode()) {
+        if (position == 0 && mMediaConfig.isNeedCamera()) {
             return CAMERA_TYPE;
         }
         return NORMAL_TYPE;
