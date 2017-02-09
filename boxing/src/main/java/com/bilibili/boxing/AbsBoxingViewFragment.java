@@ -374,11 +374,13 @@ public abstract class AbsBoxingViewFragment extends Fragment implements PickerCo
     }
 
     /**
-     * extra call to load albums in database. most of time it is not necessary.
-     * use {@link #showAlbum(List)} to get result.
+     * extra call to load albums in database, use {@link #showAlbum(List)} to get result.
+     * In {@link BoxingConfig.Mode#VIDEO} it is not necessary.
      */
     public void loadAlbum() {
-        mPresenter.loadAlbums();
+        if (!BoxingManager.getInstance().getBoxingConfig().isVideoMode()) {
+            mPresenter.loadAlbums();
+        }
     }
 
     public final boolean hasNextPage() {
