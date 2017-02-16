@@ -88,4 +88,15 @@ public class BoxingFileHelper {
         return result;
     }
 
+    public static boolean isFileValid(String path) {
+        if (TextUtils.isEmpty(path)) {
+            return false;
+        }
+        File file = new File(path);
+        return isFileValid(file);
+    }
+
+    public static boolean isFileValid(File file) {
+        return file.exists() && file.isFile() && file.length() > 0 && file.canRead();
+    }
 }

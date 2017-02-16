@@ -54,6 +54,7 @@ import java.io.File;
 
 /**
  * use Fresco(https://github.com/facebook/fresco) to display medias.
+ * can <b>not</b> be used in Production Environment.
  *
  * @author ChenSL
  */

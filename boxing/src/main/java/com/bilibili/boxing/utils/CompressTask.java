@@ -46,11 +46,11 @@ public class CompressTask {
                 final String path = image.getPath();
                 File compressSaveFile = imageCompressor.getCompressOutFile(path);
                 File needCompressFile = new File(path);
-                if (isLegalFile(compressSaveFile)) {
+                if (BoxingFileHelper.isFileValid(compressSaveFile)) {
                     image.setCompressPath(compressSaveFile.getAbsolutePath());
                     return true;
                 }
-                if (!isLegalFile(needCompressFile)) {
+                if (!BoxingFileHelper.isFileValid(needCompressFile)) {
                     return false;
                 } else if (image.getSize() < maxSize) {
                     image.setCompressPath(path);
@@ -58,7 +58,7 @@ public class CompressTask {
                 } else {
                     try {
                         File result = imageCompressor.compress(needCompressFile);
-                        boolean suc = isLegalFile(result);
+                        boolean suc = BoxingFileHelper.isFileValid(result);
                         image.setCompressPath(suc ? result.getAbsolutePath() : null);
                         return suc;
                     } catch (IOException | OutOfMemoryError | NullPointerException | IllegalArgumentException e) {
@@ -76,7 +76,4 @@ public class CompressTask {
         }
     }
 
-    private static boolean isLegalFile(File file) {
-        return file != null && file.exists() && file.isFile() && file.length() > 0 && file.canRead();
-    }
 }
