@@ -29,6 +29,7 @@ import android.text.TextUtils;
 import com.bilibili.boxing.model.entity.BaseMedia;
 import com.bilibili.boxing.utils.BoxingExecutor;
 import com.bilibili.boxing.utils.BoxingExifHelper;
+import com.bilibili.boxing.utils.BoxingFileHelper;
 import com.bilibili.boxing.utils.CompressTask;
 import com.bilibili.boxing.utils.ImageCompressor;
 
@@ -213,9 +214,9 @@ public class ImageMedia extends BaseMedia implements Parcelable {
 
     @NonNull
     public String getThumbnailPath() {
-        if (!TextUtils.isEmpty(mThumbnailPath)) {
+        if (BoxingFileHelper.isFileValid(mThumbnailPath)) {
             return mThumbnailPath;
-        } else if (!TextUtils.isEmpty(mCompressPath)) {
+        } else if (BoxingFileHelper.isFileValid(mCompressPath)) {
             return mCompressPath;
         }
         return mPath;

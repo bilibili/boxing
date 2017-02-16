@@ -30,6 +30,7 @@ import com.bumptech.glide.request.target.Target;
 
 /**
  * use https://github.com/bumptech/glide as media loader.
+ * can <b>not</b> be used in Production Environment.
  *
  * @author ChenSL
  */

@@ -30,6 +30,7 @@ import com.squareup.picasso.Transformation;
 
 /**
  * use https://github.com/square/picasso as media loader.
+ * can <b>not</b> be used in Production Environment.
  *
  * @author ChenSL
  */
