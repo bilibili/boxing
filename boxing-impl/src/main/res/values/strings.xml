@@ -25,7 +25,7 @@
     <string name="image_select_ok_fmt">(%1$s/%2$s) 确定</string>
     <string name="album_images_fmt">(%d)</string>
 
-    <string name="max_image_over">你最多只能选择九张图片</string>
+    <string name="max_image_over_fmt">你最多只能选择%d张图片</string>
     <string name="gif_too_big">您选择的gif图片过大，请压缩后再上传</string>
     <string name="pick_single_video">视频单选</string>
     <string name="pick_multi_image">图片多选</string>
@@ -43,6 +43,6 @@
     <string name="handling">处理中</string>
     <string name="default_album">默认相册</string>
     <string name="nothing_found">什么也找不到</string>
-    <string name="too_many_picture">您最多只能选择九张图片</string>
+    <string name="too_many_picture_fmt">您最多只能选择%d张图片</string>
 
 </resources>

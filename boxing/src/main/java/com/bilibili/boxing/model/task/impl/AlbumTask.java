@@ -123,11 +123,10 @@ public class AlbumTask {
     }
 
     private void getAlbumList(@NonNull final IAlbumTaskCallback callback) {
-        if (mBucketMap == null) {
-            postAlbums(callback, null);
-
-        }
         List<AlbumEntity> tmpList = new ArrayList<>();
+        if (mBucketMap == null) {
+            postAlbums(callback, tmpList);
+        }
         for (Map.Entry<String, AlbumEntity> entry : mBucketMap.entrySet()) {
             tmpList.add(entry.getValue());
         }

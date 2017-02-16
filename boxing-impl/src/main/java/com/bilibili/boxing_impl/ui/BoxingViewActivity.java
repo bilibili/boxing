@@ -52,8 +52,6 @@ import java.util.List;
 public class BoxingViewActivity extends AbsBoxingViewActivity {
     public static final String EXTRA_TYPE_BACK = "com.bilibili.boxing_impl.ui.BoxingViewActivity.type_back";
 
-    private static final int MAX_NUMBER = 9;
-
     HackyViewPager mGallery;
     ProgressBar mProgressBar;
 
@@ -65,6 +63,7 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
     private int mTotalCount;
     private int mStartPos;
     private int mPos;
+    private int mMaxCount;
 
     private String mAlbumId;
     private Toolbar mToolbar;
@@ -83,6 +82,7 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
         initData();
         initView();
         startLoading();
+        mMaxCount = getMaxCount();
     }
 
     private void createToolbar() {
@@ -135,7 +135,7 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
     private void setOkTextNumber() {
         if (mImages != null && mNeedEdit) {
             int selectedSize = mSelectedImages.size();
-            int size = Math.max(mSelectedImages.size(), MAX_NUMBER);
+            int size = Math.max(mSelectedImages.size(), mMaxCount);
             mOkBtn.setText(getString(R.string.image_preview_ok_fmt, String.valueOf(selectedSize)
                     , String.valueOf(size)));
             mOkBtn.setEnabled(selectedSize > 0);
@@ -173,8 +173,9 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
             if (mCurrentImageItem == null) {
                 return false;
             }
-            if (mSelectedImages.size() >= MAX_NUMBER && !mCurrentImageItem.isSelected()) {
-                Toast.makeText(this, R.string.max_image_over, Toast.LENGTH_SHORT).show();
+            if (mSelectedImages.size() >= mMaxCount && !mCurrentImageItem.isSelected()) {
+                String warning = getString(R.string.max_image_over_fmt, mMaxCount);
+                Toast.makeText(this, warning, Toast.LENGTH_SHORT).show();
                 return true;
             }
             if (mCurrentImageItem.isSelected()) {

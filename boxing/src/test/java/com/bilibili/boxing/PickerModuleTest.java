@@ -163,5 +163,20 @@ public class PickerModuleTest {
         assertEquals(result, "2.0M");
     }
 
+    @Test
+    public void testMaxCount() {
+        mPickerManager.setBoxingConfig(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).withMaxCount(10));
+        BoxingConfig config = mPickerManager.getBoxingConfig();
+        int count = config.getMaxCount();
+        assertEquals(count, 10);
+
+        mPickerManager.setBoxingConfig(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).withMaxCount(0));
+        config = mPickerManager.getBoxingConfig();
+        count = config.getMaxCount();
+        assertEquals(count, BoxingConfig.DEFAULT_SELECTED_COUNT);
+
+
+    }
+
 }
 

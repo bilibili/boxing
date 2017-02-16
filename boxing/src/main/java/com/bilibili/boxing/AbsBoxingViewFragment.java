@@ -150,7 +150,6 @@ public abstract class AbsBoxingViewFragment extends Fragment implements PickerCo
         super.onCreate(savedInstanceState);
 
         initCameraPhotoPicker(savedInstanceState);
-
     }
 
     @Nullable
@@ -290,7 +289,7 @@ public abstract class AbsBoxingViewFragment extends Fragment implements PickerCo
      * @param config {@link BoxingConfig}
      */
     @Override
-    public final void setPickerConfig(@NonNull BoxingConfig config) {
+    public final void setPickerConfig(BoxingConfig config) {
         if (config == null) {
             return;
         }
@@ -389,6 +388,17 @@ public abstract class AbsBoxingViewFragment extends Fragment implements PickerCo
 
     public final void onLoadNextPage() {
         mPresenter.onLoadNextPage();
+    }
+
+    /**
+     * get the max count set before
+     */
+    public final int getMaxCount() {
+        BoxingConfig config = BoxingManager.getInstance().getBoxingConfig();
+        if (config == null) {
+           return BoxingConfig.DEFAULT_SELECTED_COUNT;
+        }
+        return config.getMaxCount();
     }
 
     /**

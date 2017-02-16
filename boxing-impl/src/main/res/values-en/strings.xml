@@ -24,7 +24,7 @@
     <string name="image_preview_ok_fmt">%1$s/%2$s OK</string>
     <string name="image_select_ok_fmt">(%1$s/%2$s) OK</string>
 
-    <string name="max_image_over">9 picture is limited</string>
+    <string name="max_image_over_fmt">%d picture is limited</string>
     <string name="gif_too_big">the gif is too big!</string>
     <string name="pick_single_video">Pick a video</string>
     <string name="pick_multi_image">Pick pictures</string>
@@ -42,5 +42,5 @@
     <string name="default_album">pictures</string>
     <string name="crop_error">sorry, error occurs when cropping</string>
     <string name="nothing_found">nothing!</string>
-    <string name="too_many_picture">You can only select up to nine pictures</string>
+    <string name="too_many_picture_fmt">You can only select up to %d pictures</string>
 </resources>

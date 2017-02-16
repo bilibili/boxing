@@ -31,6 +31,8 @@ import android.os.Parcelable;
  * @author ChenSL
  */
 public class BoxingConfig implements Parcelable {
+    public static final int DEFAULT_SELECTED_COUNT = 9;
+
     private Mode mMode = Mode.SINGLE_IMG;
     private ViewMode mViewMode = ViewMode.PREVIEW;
     private BoxingCropOption mCropOption;
@@ -38,6 +40,8 @@ public class BoxingConfig implements Parcelable {
     private boolean mNeedCamera;
     private boolean mNeedGif;
     private boolean mNeedPaging = true;
+
+    private int mMaxCount = DEFAULT_SELECTED_COUNT;
 
     public enum Mode {
         SINGLE_IMG, MULTI_IMG, VIDEO
@@ -72,6 +76,16 @@ public class BoxingConfig implements Parcelable {
 
     public BoxingCropOption getCropOption() {
         return mCropOption;
+    }
+
+    /**
+     * get the max count set by {@link #withMaxCount(int)}, otherwise return 9.
+     */
+    public int getMaxCount() {
+        if (mMaxCount > 0) {
+            return mMaxCount;
+        }
+        return DEFAULT_SELECTED_COUNT;
     }
 
     public boolean isNeedLoading() {
@@ -132,6 +146,18 @@ public class BoxingConfig implements Parcelable {
         return this;
     }
 
+    /**
+     * set the max count of selected medias in {@link Mode#MULTI_IMG}
+     * @param count max count
+     */
+    public BoxingConfig withMaxCount(int count) {
+        if (count < 1) {
+            return this;
+        }
+        this.mMaxCount = count;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "BoxingConfig{" +
@@ -153,6 +179,7 @@ public class BoxingConfig implements Parcelable {
         dest.writeByte(this.mNeedCamera ? (byte) 1 : (byte) 0);
         dest.writeByte(this.mNeedGif ? (byte) 1 : (byte) 0);
         dest.writeByte(this.mNeedPaging ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.mMaxCount);
     }
 
     protected BoxingConfig(Parcel in) {
@@ -164,6 +191,7 @@ public class BoxingConfig implements Parcelable {
         this.mNeedCamera = in.readByte() != 0;
         this.mNeedGif = in.readByte() != 0;
         this.mNeedPaging = in.readByte() != 0;
+        this.mMaxCount = in.readInt();
     }
 
     public static final Creator<BoxingConfig> CREATOR = new Creator<BoxingConfig>() {

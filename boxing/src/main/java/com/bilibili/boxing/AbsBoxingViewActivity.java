@@ -211,6 +211,17 @@ public abstract class AbsBoxingViewActivity extends AppCompatActivity implements
         mPresenter.loadMedias(page, albumId);
     }
 
+    /**
+     * get the max count set before
+     */
+    public final int getMaxCount() {
+        BoxingConfig config = BoxingManager.getInstance().getBoxingConfig();
+        if (config == null) {
+            return BoxingConfig.DEFAULT_SELECTED_COUNT;
+        }
+        return config.getMaxCount();
+    }
+
     @NonNull
     public final ArrayList<BaseMedia> getSelectedImages() {
         if (mSelectedImages != null) {

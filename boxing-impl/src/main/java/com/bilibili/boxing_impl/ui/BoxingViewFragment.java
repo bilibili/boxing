@@ -69,7 +69,6 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
     private static final int IMAGE_CROP_REQUEST_CODE = 9087;
 
     private static final int GRID_COUNT = 3;
-    private static final int MAX_SELECTED_COUNT = 9;
 
     private boolean mIsPreview;
     private boolean mIsCamera;
@@ -85,6 +84,8 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
     private PopupWindow mAlbumPopWindow;
     private ProgressBar mLoadingView;
 
+    private int mMaxCount;
+
     public static BoxingViewFragment newInstance() {
         return new BoxingViewFragment();
     }
@@ -94,6 +95,7 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
         mAlbumWindowAdapter = new BoxingAlbumAdapter(getContext());
         mMediaAdapter = new BoxingMediaAdapter(getContext());
         mMediaAdapter.setSelectedMedias(selectedMedias);
+        mMaxCount = getMaxCount();
     }
 
     @Override
@@ -167,7 +169,7 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
     }
 
     @Override
-    public void showMedia(List<BaseMedia> medias, int allCount) {
+    public void showMedia(@Nullable List<BaseMedia> medias, int allCount) {
         if (medias == null || isEmptyData(medias)
                 && isEmptyData(mMediaAdapter.getAllMedias())) {
             showEmptyData();
@@ -223,7 +225,7 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
         if (mPreBtn == null || medias == null) {
             return;
         }
-        boolean enabled = medias.size() > 0 && medias.size() <= MAX_SELECTED_COUNT;
+        boolean enabled = medias.size() > 0 && medias.size() <= mMaxCount;
         mPreBtn.setEnabled(enabled);
     }
 
@@ -231,10 +233,10 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
         if (mOkBtn == null || medias == null) {
             return;
         }
-        boolean enabled = medias.size() > 0 && medias.size() <= MAX_SELECTED_COUNT;
+        boolean enabled = medias.size() > 0 && medias.size() <= mMaxCount;
         mOkBtn.setEnabled(enabled);
         mOkBtn.setText(enabled ? getString(R.string.image_select_ok_fmt, String.valueOf(medias.size())
-                , String.valueOf(MAX_SELECTED_COUNT)) : getString(R.string.ok));
+                , String.valueOf(mMaxCount)) : getString(R.string.ok));
     }
 
     @Override
@@ -473,8 +475,9 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
             MediaItemLayout layout = (MediaItemLayout) view;
             List<BaseMedia> selectedMedias = mMediaAdapter.getSelectedMedias();
             if (isSelected) {
-                if (selectedMedias.size() >= MAX_SELECTED_COUNT) {
-                    Toast.makeText(getActivity(), R.string.too_many_picture, Toast.LENGTH_SHORT).show();
+                if (selectedMedias.size() >= mMaxCount) {
+                    String warning = getString(R.string.too_many_picture_fmt, mMaxCount);
+                    Toast.makeText(getActivity(), warning, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (!selectedMedias.contains(photoMedia)) {
