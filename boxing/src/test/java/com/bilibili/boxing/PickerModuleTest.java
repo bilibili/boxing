@@ -95,11 +95,11 @@ public class PickerModuleTest {
         assertEquals(compressPath, "/");
         imageMedia.setCompressPath("111");
         String compressPath1 = imageMedia.getThumbnailPath();
-        assertEquals(compressPath1, "111");
+        assertEquals(compressPath1, "/");
 
         imageMedia = new ImageMedia.Builder("233", "233").setThumbnailPath("999").build();
         String compressPath3 = imageMedia.getThumbnailPath();
-        assertEquals(compressPath3, "999");
+        assertEquals(compressPath3, "233");
 
         assertEquals(imageMedia.getMimeType(), "image/jpeg");
         imageMedia.setImageType(ImageMedia.IMAGE_TYPE.GIF);
