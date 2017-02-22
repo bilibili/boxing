@@ -107,7 +107,8 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
         if (mNeedLoading && mImages == null) {
             mImages = new ArrayList<>();
         } else {
-            mImages = mSelectedImages;
+            mImages = new ArrayList<>();
+            mImages.addAll(mSelectedImages);
         }
     }
 
@@ -223,7 +224,7 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
                     , String.valueOf(mSelectedImages.size())));
             mProgressBar.setVisibility(View.GONE);
             mGallery.setVisibility(View.VISIBLE);
-            mAdapter.setMedias(mSelectedImages);
+            mAdapter.setMedias(mImages);
         } else {
             loadMedia(mAlbumId, mStartPos, mCurrentPage);
             mAdapter.setMedias(mImages);
