@@ -322,7 +322,7 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
 
         @Override
         public void onPageSelected(int position) {
-            if (position < mImages.size()) {
+            if (mToolbar != null && position < mImages.size()) {
                 mToolbar.setTitle(getString(R.string.image_preview_title_fmt, String.valueOf(position + 1)
                         , mNeedLoading ? String.valueOf(mTotalCount) : String.valueOf(mImages.size())));
                 mCurrentImageItem = (ImageMedia) mImages.get(position);
