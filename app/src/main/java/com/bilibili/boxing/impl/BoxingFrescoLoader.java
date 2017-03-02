@@ -106,7 +106,7 @@ public class BoxingFrescoLoader implements IBoxingMediaLoader {
                     onFailureImpl(dataSource);
                     return;
                 }
-                String path = (String) img.getTag();
+                String path = (String) img.getTag(R.string.app_name);
                 if (absPath.equals(path)) {
                     img.setImageBitmap(bitmap);
                 }
