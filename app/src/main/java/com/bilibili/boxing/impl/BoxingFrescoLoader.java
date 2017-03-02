@@ -92,9 +92,9 @@ public class BoxingFrescoLoader implements IBoxingMediaLoader {
 
 
     @Override
-    public void displayThumbnail(@NonNull final ImageView img, @NonNull String absPath, int width, int height) {
-        absPath = "file://" + absPath;
-        ImageRequestBuilder requestBuilder = ImageRequestBuilder.newBuilderWithSource(Uri.parse(absPath));
+    public void displayThumbnail(@NonNull final ImageView img, @NonNull final String absPath, int width, int height) {
+        String finalAbsPath = "file://" + absPath;
+        ImageRequestBuilder requestBuilder = ImageRequestBuilder.newBuilderWithSource(Uri.parse(finalAbsPath));
         requestBuilder.setResizeOptions(new ResizeOptions(width, height));
         ImageRequest request = requestBuilder.build();
         final DataSource<CloseableReference<CloseableImage>> dataSource =
@@ -106,7 +106,10 @@ public class BoxingFrescoLoader implements IBoxingMediaLoader {
                     onFailureImpl(dataSource);
                     return;
                 }
-                img.setImageBitmap(bitmap);
+                String path = (String) img.getTag();
+                if (absPath.equals(path)) {
+                    img.setImageBitmap(bitmap);
+                }
             }
 
             @Override
