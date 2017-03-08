@@ -56,6 +56,8 @@ import java.io.File;
  * use Fresco(https://github.com/facebook/fresco) to display medias.
  * can <b>not</b> be used in Production Environment.
  *
+ * fresco strongly suggest to use DraweeView instead of ImageView, according to https://github.com/facebook/fresco/issues/1550.
+ *
  * @author ChenSL
  */
 public class BoxingFrescoLoader implements IBoxingMediaLoader {
@@ -99,26 +101,27 @@ public class BoxingFrescoLoader implements IBoxingMediaLoader {
         ImageRequest request = requestBuilder.build();
         final DataSource<CloseableReference<CloseableImage>> dataSource =
                 Fresco.getImagePipeline().fetchDecodedImage(request, null);
-        dataSource.subscribe(new BaseBitmapDataSubscriber() {
+
+        dataSource.subscribe(new BaseDataSubscriber<CloseableReference<CloseableImage>>() {
+
             @Override
-            protected void onNewResultImpl(Bitmap bitmap) {
-                if (bitmap == null || bitmap.isRecycled()) {
-                    onFailureImpl(dataSource);
-                    return;
-                }
+            protected void onNewResultImpl(DataSource<CloseableReference<CloseableImage>> dataSource) {
                 String path = (String) img.getTag(R.string.app_name);
                 if (path == null || absPath.equals(path)) {
-                    img.setImageBitmap(bitmap);
+                    if (dataSource.getResult() == null) {
+                        onFailureImpl(dataSource);
+                        return;
+                    }
+                    CloseableStaticBitmap bitmap = (CloseableStaticBitmap) dataSource.getResult().get();
+                    img.setImageBitmap(bitmap.getUnderlyingBitmap());
                 }
             }
 
             @Override
             protected void onFailureImpl(DataSource<CloseableReference<CloseableImage>> dataSource) {
                 img.setImageResource(R.drawable.ic_default_image);
-
             }
         }, UiThreadImmediateExecutorService.getInstance());
-
     }
 
     @Override
