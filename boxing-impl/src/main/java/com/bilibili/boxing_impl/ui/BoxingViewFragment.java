@@ -21,19 +21,15 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,7 +43,6 @@ import com.bilibili.boxing.model.entity.BaseMedia;
 import com.bilibili.boxing.model.entity.impl.ImageMedia;
 import com.bilibili.boxing.utils.BoxingFileHelper;
 import com.bilibili.boxing_impl.R;
-import com.bilibili.boxing_impl.WindowManagerHelper;
 import com.bilibili.boxing_impl.adapter.BoxingAlbumAdapter;
 import com.bilibili.boxing_impl.adapter.BoxingMediaAdapter;
 import com.bilibili.boxing_impl.view.MediaItemLayout;
@@ -81,7 +76,7 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
     private ProgressDialog mDialog;
     private TextView mEmptyTxt;
     private TextView mTitleTxt;
-    private PopupWindow mAlbumPopWindow;
+    private BoxingPopupWindow mAlbumPopWindow;
     private ProgressBar mLoadingView;
 
     private int mMaxCount;
@@ -342,50 +337,15 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
     public void setTitleTxt(TextView titleTxt) {
         mTitleTxt = titleTxt;
         mTitleTxt.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 if (mAlbumPopWindow == null) {
-                    int height = WindowManagerHelper.getScreenHeight(v.getContext()) -
-                            (WindowManagerHelper.getToolbarHeight(v.getContext())
-                                    + WindowManagerHelper.getStatusBarHeight(v.getContext()));
-                    View windowView = createWindowView();
-                    mAlbumPopWindow = new PopupWindow(windowView, ViewGroup.LayoutParams.MATCH_PARENT,
-                            height, true);
-                    mAlbumPopWindow.setAnimationStyle(R.style.PopupAnimation);
-                    mAlbumPopWindow.setOutsideTouchable(true);
-                    mAlbumPopWindow.setBackgroundDrawable(new ColorDrawable
-                            (ContextCompat.getColor(v.getContext(), R.color.colorPrimaryAlpha)));
-                    mAlbumPopWindow.setContentView(windowView);
+                    mAlbumWindowAdapter.setAlbumOnClickListener(new OnAlbumItemOnClickListener());
+                    mAlbumPopWindow = new BoxingPopupWindow(getContext(), mAlbumWindowAdapter, mTitleTxt);
                 }
-                mAlbumPopWindow.showAsDropDown(v, 0, 0);
-            }
-
-            @NonNull
-            private View createWindowView() {
-                View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_album, null);
-                RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.album_recycleview);
-                recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
-                recyclerView.addItemDecoration(new SpacesItemDecoration(2, 1));
-
-                View albumShadowLayout = view.findViewById(R.id.album_shadow);
-                albumShadowLayout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dismissAlbumWindow();
-                    }
-                });
-                mAlbumWindowAdapter.setAlbumOnClickListener(new OnAlbumItemOnClickListener());
-                recyclerView.setAdapter(mAlbumWindowAdapter);
-                return view;
+                mAlbumPopWindow.show();
             }
         });
-    }
-
-    private void dismissAlbumWindow() {
-        if (mAlbumPopWindow != null && mAlbumPopWindow.isShowing()) {
-            mAlbumPopWindow.dismiss();
-        }
     }
 
     private class ScrollListener extends RecyclerView.OnScrollListener {
@@ -517,7 +477,7 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
                 albumMedia.mIsSelected = true;
                 adapter.notifyDataSetChanged();
             }
-            dismissAlbumWindow();
+            mAlbumPopWindow.dismiss();
         }
     }
 
