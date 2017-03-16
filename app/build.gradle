@@ -55,5 +55,4 @@ dependencies {
         exclude group: 'com.squareup.okhttp3'
     }
     compile 'com.facebook.fresco:animated-gif:1.0.0'
-    compile 'com.android.support:support-v4:25.0.1'
 }
