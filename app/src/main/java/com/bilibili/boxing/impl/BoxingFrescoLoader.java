@@ -43,7 +43,6 @@ import com.facebook.imagepipeline.animated.base.AnimatedDrawable;
 import com.facebook.imagepipeline.animated.factory.AnimatedDrawableFactory;
 import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
-import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
 import com.facebook.imagepipeline.image.CloseableAnimatedImage;
 import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.image.CloseableStaticBitmap;
@@ -112,8 +111,8 @@ public class BoxingFrescoLoader implements IBoxingMediaLoader {
                         onFailureImpl(dataSource);
                         return;
                     }
-                    CloseableStaticBitmap bitmap = (CloseableStaticBitmap) dataSource.getResult().get();
-                    img.setImageBitmap(bitmap.getUnderlyingBitmap());
+                    Drawable drawable = createDrawableFromFetchedResult(img.getContext(), dataSource.getResult().get());
+                    img.setImageDrawable(drawable);
                 }
             }
 
