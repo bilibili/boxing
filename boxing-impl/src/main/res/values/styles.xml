@@ -17,35 +17,35 @@
 
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="Boxing.AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/boxing_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/boxing_colorPrimaryDark</item>
+        <item name="colorAccent">@color/boxing_colorAccent</item>
     </style>
 
     <!-- BoxingActivity Theme-->
-    <style name="AppTheme.NoActionBar" parent="AppTheme">
+    <style name="Boxing.AppTheme.NoActionBar" parent="Boxing.AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:fitsSystemWindows">false</item>
     </style>
 
-    <style name="PopupAnimation" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/fade_in</item>
-        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    <style name="Boxing.PopupAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/boxing_fade_in</item>
+        <item name="android:windowExitAnimation">@anim/boxing_fade_out</item>
     </style>
 
-    <style name="ToolbarTheme" parent="AppTheme.NoActionBar" >
-        <item name="titleTextColor">@color/white</item>
-        <item name="android:textColorSecondary">@color/white</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:background">@color/colorPrimaryDark</item>
+    <style name="Boxing.ToolbarTheme" parent="Boxing.AppTheme.NoActionBar" >
+        <item name="titleTextColor">@color/boxing_white</item>
+        <item name="android:textColorSecondary">@color/boxing_white</item>
+        <item name="android:textColor">@color/boxing_white</item>
+        <item name="android:background">@color/boxing_colorPrimaryDark</item>
     </style>
 
     <!-- TextAppearance -->
-    <style name="TextAppearance.App.Medium" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">@dimen/text_size_medium</item>
+    <style name="Boxing.TextAppearance.App.Medium" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/boxing_text_size_medium</item>
     </style>
 
 </resources>

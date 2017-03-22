@@ -22,7 +22,7 @@
     android:id="@+id/image_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black1"
+    android:background="@color/boxing_black1"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:elevation="2dp"
         android:layout_height="?android:attr/actionBarSize"
-        app:theme="@style/ToolbarTheme">
+        app:theme="@style/Boxing.ToolbarTheme">
 
         <TextView
             android:id="@+id/title"
@@ -41,7 +41,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:textAppearance="@style/TextAppearance.App.Medium"/>
+            android:textAppearance="@style/Boxing.TextAppearance.App.Medium"/>
     </android.support.v7.widget.Toolbar>
 
     <ProgressBar
@@ -72,12 +72,12 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="@dimen/item_spacing"
+            android:layout_marginRight="@dimen/boxing_item_spacing"
             android:minWidth="60dp"
-            android:paddingLeft="@dimen/item_half_spacing"
-            android:paddingRight="@dimen/item_half_spacing"
-            android:text="@string/ok"
-            android:background="@drawable/selector_button_solid"
-            android:textColor="@color/white"/>
+            android:paddingLeft="@dimen/boxing_item_half_spacing"
+            android:paddingRight="@dimen/boxing_item_half_spacing"
+            android:text="@string/boxing_ok"
+            android:background="@drawable/selector_boxing_btn_solid"
+            android:textColor="@color/boxing_white"/>
     </FrameLayout>
 </LinearLayout>

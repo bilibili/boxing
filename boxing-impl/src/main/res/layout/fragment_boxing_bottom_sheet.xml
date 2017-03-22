@@ -26,8 +26,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/black"
-        android:padding="@dimen/activity_vertical_margin">
+        android:background="@color/boxing_black"
+        android:padding="@dimen/boxing_activity_vertical_margin">
 
         <TextView
             android:id="@+id/textView"
@@ -35,8 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="left"
-            android:text="@string/default_album"
-            android:textColor="@color/white"/>
+            android:text="@string/boxing_default_album"
+            android:textColor="@color/boxing_white"/>
 
         <TextView
             android:id="@+id/finish_txt"
@@ -44,8 +44,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="right"
-            android:text="@string/finish"
-            android:textColor="@color/white"/>
+            android:text="@string/boxing_finish"
+            android:textColor="@color/boxing_white"/>
 
     </LinearLayout>
 
@@ -53,7 +53,7 @@
         android:id="@+id/media_recycleview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white1"
+        android:background="@color/boxing_white1"
         android:visibility="gone"/>
 
     <ProgressBar
@@ -67,6 +67,6 @@
 
     <include
         android:id="@+id/empty_txt"
-        layout="@layout/layout_empty_txt"/>
+        layout="@layout/layout_boxing_empty_txt"/>
 
 </LinearLayout>

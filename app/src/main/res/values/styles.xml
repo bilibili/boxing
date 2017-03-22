@@ -20,13 +20,13 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/boxing_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/boxing_colorPrimaryDark</item>
+        <item name="colorAccent">@color/boxing_colorAccent</item>
     </style>
 
     <!-- BoxingActivity Theme-->
-    <style name="AppTheme.NoActionBar" parent="AppTheme">
+    <style name="AppTheme.NoActionBar" parent="Boxing.AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowNoTitle">true</item>
@@ -35,11 +35,11 @@
 
     <!-- TextAppearance -->
     <style name="TextAppearance.App" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textSize">@dimen/boxing_text_size_medium</item>
     </style>
 
     <style name="TextAppearance.App.Medium">
-        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textSize">@dimen/boxing_text_size_medium</item>
     </style>
 
 </resources>

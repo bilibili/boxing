@@ -39,7 +39,7 @@ public class BoxingPicassoLoader implements IBoxingMediaLoader {
     @Override
     public void displayThumbnail(@NonNull ImageView img, @NonNull String absPath, int width, int height) {
         String path = "file://" + absPath;
-        Picasso.with(img.getContext()).load(path).placeholder(R.drawable.ic_default_image).centerCrop().resize(width, height).into(img);
+        Picasso.with(img.getContext()).load(path).placeholder(R.drawable.ic_boxing_default_image).centerCrop().resize(width, height).into(img);
     }
 
     @Override

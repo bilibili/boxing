@@ -16,5 +16,5 @@
   -->
 
 <resources>
-    <string name="app_name">Boxing</string>
+    <string name="boxing_app_name">Boxing</string>
 </resources>

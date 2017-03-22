@@ -33,7 +33,7 @@
 
     <include
         android:id="@+id/empty_txt"
-        layout="@layout/layout_empty_txt"/>
+        layout="@layout/layout_boxing_empty_txt"/>
 
     <ProgressBar
         android:id="@+id/loading"
@@ -47,32 +47,32 @@
         android:id="@+id/multi_picker_layout"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="@color/white">
+        android:background="@color/boxing_white">
 
         <Button
             android:id="@+id/choose_preview_btn"
             android:layout_width="60dp"
             android:layout_height="30dp"
             android:layout_gravity="left|center_vertical"
-            android:layout_marginLeft="@dimen/item_spacing"
-            android:background="@drawable/selector_button_solid"
+            android:layout_marginLeft="@dimen/boxing_item_spacing"
+            android:background="@drawable/selector_boxing_btn_solid"
             android:text="预览"
-            android:textAppearance="@style/TextAppearance.App.Medium"
-            android:textColor="@color/white"/>
+            android:textAppearance="@style/Boxing.TextAppearance.App.Medium"
+            android:textColor="@color/boxing_white"/>
 
         <Button
             android:id="@+id/choose_ok_btn"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="@dimen/item_spacing"
-            android:background="@drawable/selector_button_solid"
+            android:layout_marginRight="@dimen/boxing_item_spacing"
+            android:background="@drawable/selector_boxing_btn_solid"
             android:minWidth="60dp"
-            android:paddingLeft="@dimen/item_half_spacing"
-            android:paddingRight="@dimen/item_half_spacing"
-            android:text="@string/ok"
-            android:textAppearance="@style/TextAppearance.App.Medium"
-            android:textColor="@color/white"/>
+            android:paddingLeft="@dimen/boxing_item_half_spacing"
+            android:paddingRight="@dimen/boxing_item_half_spacing"
+            android:text="@string/boxing_ok"
+            android:textAppearance="@style/Boxing.TextAppearance.App.Medium"
+            android:textColor="@color/boxing_white"/>
     </FrameLayout>
 
 </LinearLayout>

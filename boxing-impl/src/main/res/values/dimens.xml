@@ -16,16 +16,16 @@
   -->
 
 <resources>
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="boxing_activity_horizontal_margin">16dp</dimen>
+    <dimen name="boxing_activity_vertical_margin">16dp</dimen>
 
-    <dimen name="text_size_xlarge">16sp</dimen>
-    <dimen name="text_size_large">14sp</dimen>
-    <dimen name="text_size_medium">12sp</dimen>
-    <dimen name="text_size_small">10sp</dimen>
+    <dimen name="boxing_text_size_xlarge">16sp</dimen>
+    <dimen name="boxing_text_size_large">14sp</dimen>
+    <dimen name="boxing_text_size_medium">12sp</dimen>
+    <dimen name="boxing_text_size_small">10sp</dimen>
 
-    <dimen name="item_spacing">8dp</dimen>
-    <dimen name="item_half_spacing">4dp</dimen>
-    <dimen name="media_margin">2dp</dimen>
-    <dimen name="corner_radius">2dp</dimen>
+    <dimen name="boxing_item_spacing">8dp</dimen>
+    <dimen name="boxing_item_half_spacing">4dp</dimen>
+    <dimen name="boxing_media_margin">2dp</dimen>
+    <dimen name="boxing_corner_radius">2dp</dimen>
 </resources>

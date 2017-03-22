@@ -67,7 +67,7 @@ public class BoxingMediaAdapter extends RecyclerView.Adapter {
         this.mOffset = mMediaConfig.isNeedCamera() ? 1 : 0;
         this.mMultiImageMode = mMediaConfig.getMode() == BoxingConfig.Mode.MULTI_IMG;
         this.mOnCheckListener = new OnCheckListener();
-        this.mDefaultDrawable = ContextCompat.getDrawable(context, R.drawable.ic_default_image);
+        this.mDefaultDrawable = ContextCompat.getDrawable(context, R.drawable.ic_boxing_default_image);
     }
 
     @Override
@@ -81,9 +81,9 @@ public class BoxingMediaAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (CAMERA_TYPE == viewType) {
-            return new CameraViewHolder(mInflater.inflate(R.layout.layout_recycleview_header, parent, false));
+            return new CameraViewHolder(mInflater.inflate(R.layout.layout_boxing_recycleview_header, parent, false));
         }
-        return new ImageViewHolder(mInflater.inflate(R.layout.layout_recycleview_item, parent, false));
+        return new ImageViewHolder(mInflater.inflate(R.layout.layout_boxing_recycleview_item, parent, false));
     }
 
     @Override

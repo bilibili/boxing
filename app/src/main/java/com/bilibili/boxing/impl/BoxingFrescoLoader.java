@@ -105,7 +105,7 @@ public class BoxingFrescoLoader implements IBoxingMediaLoader {
 
             @Override
             protected void onNewResultImpl(DataSource<CloseableReference<CloseableImage>> dataSource) {
-                String path = (String) img.getTag(R.string.app_name);
+                String path = (String) img.getTag(R.string.boxing_app_name);
                 if (path == null || absPath.equals(path)) {
                     if (dataSource.getResult() == null) {
                         onFailureImpl(dataSource);
@@ -118,7 +118,7 @@ public class BoxingFrescoLoader implements IBoxingMediaLoader {
 
             @Override
             protected void onFailureImpl(DataSource<CloseableReference<CloseableImage>> dataSource) {
-                img.setImageResource(R.drawable.ic_default_image);
+                img.setImageResource(R.drawable.ic_boxing_default_image);
             }
         }, UiThreadImmediateExecutorService.getInstance());
     }

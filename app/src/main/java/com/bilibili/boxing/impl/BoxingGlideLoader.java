@@ -41,7 +41,7 @@ public class BoxingGlideLoader implements IBoxingMediaLoader {
         String path = "file://" + absPath;
         try {
             // https://github.com/bumptech/glide/issues/1531
-            Glide.with(img.getContext()).load(path).placeholder(R.drawable.ic_default_image).crossFade().centerCrop().into(img);
+            Glide.with(img.getContext()).load(path).placeholder(R.drawable.ic_boxing_default_image).crossFade().centerCrop().into(img);
         } catch(IllegalArgumentException ignore) {
         }
 

@@ -16,17 +16,18 @@
   ~
   -->
 
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/empty_txt"
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_gravity="center"
-    android:layout_weight="1"
-    android:drawablePadding="4dp"
-    android:gravity="center"
-    android:text="@string/nothing_found"
-    android:textColor="@color/black"
-    android:visibility="gone"
-    tools:visibility="visible"/>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       android:shape="oval">
+
+    <solid android:color="@color/boxing_colorPrimaryAlpha"/>
+
+    <stroke
+        android:width="0.3dp"
+        android:color="@color/boxing_white"/>
+
+    <size
+        android:width="18dp"
+        android:height="18dp"/>
+
+
+</shape>

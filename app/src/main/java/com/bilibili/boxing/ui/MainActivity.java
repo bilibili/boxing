@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void createToolbar() {
         Toolbar bar = (Toolbar) findViewById(R.id.nav_top_bar);
         setSupportActionBar(bar);
-        getSupportActionBar().setTitle(R.string.app_name);
+        getSupportActionBar().setTitle(R.string.boxing_app_name);
         bar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -16,12 +16,12 @@
   ~
   -->
 
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <corners
-        android:radius="@dimen/corner_radius" />
-    <solid
-        android:color="#fafafa" />
-
-</shape>
+    <item
+        android:id="@+id/menu_image_item_selected"
+        android:icon="@drawable/shape_boxing_unchecked"
+        android:title=""
+        app:showAsAction="always" />
+</menu>

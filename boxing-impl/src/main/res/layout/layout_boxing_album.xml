@@ -16,11 +16,23 @@
   ~
   -->
 
-<android.support.v7.widget.Toolbar
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_top_bar"
     android:layout_width="match_parent"
-    android:layout_height="56dp"
-    app:theme="@style/ToolbarTheme"/>
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/album_recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@color/boxing_white"
+        android:scrollbars="vertical"/>
+
+    <View
+        android:id="@+id/album_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/boxing_colorPrimaryAlpha"/>
+
+</LinearLayout>

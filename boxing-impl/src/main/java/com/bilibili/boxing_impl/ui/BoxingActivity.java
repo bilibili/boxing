@@ -77,7 +77,7 @@ public class BoxingActivity extends AbsBoxingActivity {
     private void setTitleTxt(BoxingConfig config) {
         TextView titleTxt = (TextView) findViewById(R.id.pick_album_txt);
         if (config.getMode() == BoxingConfig.Mode.VIDEO) {
-            titleTxt.setText(R.string.video_title);
+            titleTxt.setText(R.string.boxing_video_title);
             titleTxt.setCompoundDrawables(null, null, null, null);
             return;
         }

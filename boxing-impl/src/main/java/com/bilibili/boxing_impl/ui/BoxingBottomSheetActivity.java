@@ -79,7 +79,7 @@ public class BoxingBottomSheetActivity extends AbsBoxingActivity implements View
         Toolbar bar = (Toolbar) findViewById(R.id.nav_top_bar);
         setSupportActionBar(bar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(R.string.default_album);
+        getSupportActionBar().setTitle(R.string.boxing_default_album);
         bar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +90,7 @@ public class BoxingBottomSheetActivity extends AbsBoxingActivity implements View
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_pick_flow, menu);
+        getMenuInflater().inflate(R.menu.activity_boxing_pick_flow, menu);
         return true;
     }
 

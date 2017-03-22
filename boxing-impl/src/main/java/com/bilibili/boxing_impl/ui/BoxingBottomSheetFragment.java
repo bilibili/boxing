@@ -88,7 +88,7 @@ public class BoxingBottomSheetFragment extends AbsBoxingViewFragment implements 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), GRID_COUNT);
         gridLayoutManager.setSmoothScrollbarEnabled(true);
         mRecycleView.setLayoutManager(gridLayoutManager);
-        mRecycleView.addItemDecoration(new SpacesItemDecoration(getResources().getDimensionPixelOffset(R.dimen.media_margin), GRID_COUNT));
+        mRecycleView.addItemDecoration(new SpacesItemDecoration(getResources().getDimensionPixelOffset(R.dimen.boxing_media_margin), GRID_COUNT));
         mRecycleView.setAdapter(mMediaAdapter);
         mRecycleView.addOnScrollListener(new ScrollListener());
         mMediaAdapter.setOnMediaClickListener(new OnMediaClickListener());
@@ -108,7 +108,7 @@ public class BoxingBottomSheetFragment extends AbsBoxingViewFragment implements 
         if (mDialog == null) {
             mDialog = new ProgressDialog(getActivity());
             mDialog.setIndeterminate(true);
-            mDialog.setMessage(getString(R.string.handling));
+            mDialog.setMessage(getString(R.string.boxing_handling));
         }
         if (!mDialog.isShowing()) {
             mDialog.show();
@@ -177,7 +177,7 @@ public class BoxingBottomSheetFragment extends AbsBoxingViewFragment implements 
         if (permissions.length > 0) {
             if (permissions[0].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 showEmptyData();
-                Toast.makeText(getContext(), R.string.storage_permission_deny, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.boxing_storage_permission_deny, Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -24,72 +24,72 @@
     android:orientation="vertical"
     tools:context="com.bilibili.boxing.ui.FirstActivity">
 
-    <include layout="@layout/layout_app_bar"/>
+    <include layout="@layout/layout_boxing_app_bar"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/boxing_activity_vertical_margin"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/single_image_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/boxing_activity_horizontal_margin"
+            android:layout_marginRight="@dimen/boxing_activity_horizontal_margin"
             android:layout_weight="1"
             android:background="@drawable/rect_color_primary"
             android:gravity="center"
-            android:padding="@dimen/item_spacing"
-            android:text="@string/pick_single_image"
-            android:textColor="@color/colorPrimaryDark"/>
+            android:padding="@dimen/boxing_item_spacing"
+            android:text="@string/boxing_pick_single_image"
+            android:textColor="@color/boxing_colorPrimaryDark"/>
 
         <TextView
             android:id="@+id/single_image_btn_crop_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/boxing_activity_horizontal_margin"
+            android:layout_marginRight="@dimen/boxing_activity_horizontal_margin"
             android:layout_weight="1"
             android:background="@drawable/rect_color_primary"
             android:gravity="center"
-            android:padding="@dimen/item_spacing"
-            android:text="@string/pick_single_image_crop"
-            android:textColor="@color/colorPrimaryDark"/>
+            android:padding="@dimen/boxing_item_spacing"
+            android:text="@string/boxing_pick_single_image_crop"
+            android:textColor="@color/boxing_colorPrimaryDark"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/boxing_activity_vertical_margin"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/multi_image_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/boxing_activity_horizontal_margin"
+            android:layout_marginRight="@dimen/boxing_activity_horizontal_margin"
             android:layout_weight="1"
             android:background="@drawable/rect_color_primary"
             android:gravity="center"
-            android:padding="@dimen/item_spacing"
-            android:text="@string/pick_multi_image"
-            android:textColor="@color/colorPrimaryDark"/>
+            android:padding="@dimen/boxing_item_spacing"
+            android:text="@string/boxing_pick_multi_image"
+            android:textColor="@color/boxing_colorPrimaryDark"/>
 
         <TextView
             android:id="@+id/video_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/boxing_activity_horizontal_margin"
+            android:layout_marginRight="@dimen/boxing_activity_horizontal_margin"
             android:layout_weight="1"
             android:background="@drawable/rect_color_primary"
             android:gravity="center"
-            android:padding="@dimen/item_spacing"
-            android:text="@string/pick_single_video"
-            android:textColor="@color/colorPrimaryDark"/>
+            android:padding="@dimen/boxing_item_spacing"
+            android:text="@string/boxing_pick_single_video"
+            android:textColor="@color/boxing_colorPrimaryDark"/>
 
     </LinearLayout>
 
@@ -97,22 +97,22 @@
         android:id="@+id/outside_bs_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/boxing_activity_horizontal_margin"
+        android:layout_marginRight="@dimen/boxing_activity_horizontal_margin"
+        android:layout_marginTop="@dimen/boxing_activity_vertical_margin"
         android:background="@drawable/rect_color_primary"
         android:gravity="center"
-        android:padding="@dimen/item_spacing"
+        android:padding="@dimen/boxing_item_spacing"
         android:text="@string/bottom_sheet"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:textColor="@color/boxing_colorPrimaryDark"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/media_recycle_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/item_spacing"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/boxing_item_spacing"
+        android:layout_marginLeft="@dimen/boxing_activity_horizontal_margin"
+        android:layout_marginRight="@dimen/boxing_activity_horizontal_margin"
         android:clickable="true"
         android:visibility="gone"
         tools:visibility="visible"/>

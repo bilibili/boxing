@@ -19,21 +19,21 @@
 
     <item android:state_enabled="true" android:state_pressed="true">
         <shape>
-            <corners android:radius="@dimen/corner_radius" />
-            <solid android:color="@color/black" />
+            <corners android:radius="@dimen/boxing_corner_radius" />
+            <solid android:color="@color/boxing_black" />
         </shape>
     </item>
 
     <item android:state_enabled="true">
         <shape>
-            <solid android:color="@color/black" />
-            <corners android:radius="@dimen/corner_radius" />
+            <solid android:color="@color/boxing_black" />
+            <corners android:radius="@dimen/boxing_corner_radius" />
         </shape>
     </item>
     <item android:state_enabled="false">
         <shape>
-            <solid android:color="@color/gray" />
-            <corners android:radius="@dimen/corner_radius" />
+            <solid android:color="@color/boxing_gray" />
+            <corners android:radius="@dimen/boxing_corner_radius" />
         </shape>
     </item>
 </selector>

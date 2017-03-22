@@ -16,12 +16,11 @@
   ~
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_top_bar"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    app:theme="@style/Boxing.ToolbarTheme"/>
 
-    <item
-        android:id="@+id/menu_open_image"
-        android:icon="@drawable/ic_camera_white"
-        android:title=""
-        app:showAsAction="always"/>
-</menu>

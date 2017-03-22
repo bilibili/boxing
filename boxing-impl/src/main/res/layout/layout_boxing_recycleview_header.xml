@@ -20,7 +20,7 @@
                 android:id="@+id/camera_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/black"
+                android:background="@color/boxing_black"
                 android:foreground="?android:selectableItemBackground"
                 android:minHeight="100dp"
                 android:minWidth="100dp">
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:src="@drawable/ic_camera_white"
-        android:textColor="@color/white"
+        android:src="@drawable/ic_boxing_camera_white"
+        android:textColor="@color/boxing_white"
         android:textSize="14sp"/>
 </RelativeLayout>

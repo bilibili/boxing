@@ -17,21 +17,21 @@
   -->
 
 <resources>
-    <color name="colorPrimary">#000000</color>
-    <color name="colorPrimaryDark">#ff212121</color>
-    <color name="colorPrimaryAlpha">#44000000</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="boxing_colorPrimary">#000000</color>
+    <color name="boxing_colorPrimaryDark">#ff212121</color>
+    <color name="boxing_colorPrimaryAlpha">#44000000</color>
+    <color name="boxing_colorAccent">#FF4081</color>
 
-    <color name="gray">#999999</color>
-    <color name="gray1">#333333</color>
+    <color name="boxing_gray">#999999</color>
+    <color name="boxing_gray1">#333333</color>
 
-    <color name="white">#ffffff</color>
-    <color name="white1">#fafafa</color>
-    <color name="white2">#eaeaea</color>
+    <color name="boxing_white">#ffffff</color>
+    <color name="boxing_white1">#fafafa</color>
+    <color name="boxing_white2">#eaeaea</color>
 
-    <color name="black">#000000</color>
-    <color name="black1">#1b1b1b</color>
-    <color name="black_alpha15">#26000000</color>
-    <color name="black_alpha20">#33000000</color>
-    <color name="black_alpha25">#3c000000</color>
+    <color name="boxing_black">#000000</color>
+    <color name="boxing_black1">#1b1b1b</color>
+    <color name="boxing_black_alpha15">#26000000</color>
+    <color name="boxing_black_alpha20">#33000000</color>
+    <color name="boxing_black_alpha25">#3c000000</color>
 </resources>

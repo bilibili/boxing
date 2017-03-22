@@ -20,7 +20,7 @@
        android:shape="rectangle">
     <corners android:radius="2dp"/>
 
-    <stroke android:color="@color/colorPrimaryDark" android:width="1dp"/>
+    <stroke android:color="@color/boxing_colorPrimaryDark" android:width="1dp"/>
 
     <solid android:color="@android:color/transparent" />
 </shape>

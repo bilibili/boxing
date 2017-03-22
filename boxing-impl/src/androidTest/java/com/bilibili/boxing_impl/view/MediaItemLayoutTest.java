@@ -60,7 +60,7 @@ public class MediaItemLayoutTest {
 
     @Test
     public void testMediaItemLayout() {
-        MediaItemLayout layout = (MediaItemLayout) LayoutInflater.from(InstrumentationRegistry.getContext()).inflate(R.layout.layout_recycleview_item, null, false);
+        MediaItemLayout layout = (MediaItemLayout) LayoutInflater.from(InstrumentationRegistry.getContext()).inflate(R.layout.layout_boxing_recycleview_item, null, false);
         assertNotNull(layout);
 
         VideoMedia videoMedia = new VideoMedia.Builder("233", "233").build();

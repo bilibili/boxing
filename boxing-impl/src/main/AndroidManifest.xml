@@ -20,28 +20,28 @@
 
     <application
         android:allowBackup="true"
-        android:label="@string/app_name"
+        android:label="@string/boxing_app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Boxing.AppTheme">
 
         <activity
             android:name="com.bilibili.boxing_impl.ui.BoxingActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/Boxing.AppTheme.NoActionBar">
         </activity>
 
         <activity
             android:name="com.bilibili.boxing_impl.ui.BoxingViewActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/Boxing.AppTheme.NoActionBar">
         </activity>
 
         <activity
             android:name="com.bilibili.boxing_impl.ui.BoxingBottomSheetActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/Boxing.AppTheme.NoActionBar"/>
 
     </application>
 

@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_margin="@dimen/item_half_spacing"/>
+        android:layout_margin="@dimen/boxing_item_half_spacing"/>
 
     <ProgressBar
         android:id="@+id/loading"

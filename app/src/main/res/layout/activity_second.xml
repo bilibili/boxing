@@ -29,29 +29,29 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/layout_app_bar"/>
+        <include layout="@layout/layout_boxing_app_bar"/>
 
         <TextView
             android:id="@+id/inside_bs_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/boxing_activity_horizontal_margin"
+            android:layout_marginRight="@dimen/boxing_activity_horizontal_margin"
+            android:layout_marginTop="@dimen/boxing_activity_vertical_margin"
             android:background="@drawable/rect_color_primary"
             android:gravity="center"
-            android:padding="@dimen/item_spacing"
+            android:padding="@dimen/boxing_item_spacing"
             android:text="@string/bottom_sheet"
-            android:textColor="@color/colorPrimaryDark"/>
+            android:textColor="@color/boxing_colorPrimaryDark"/>
 
         <ImageView
             android:id="@+id/media_result"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+            android:layout_marginTop="@dimen/boxing_activity_vertical_margin"
+            android:layout_marginLeft="@dimen/boxing_activity_horizontal_margin"
+            android:layout_marginRight="@dimen/boxing_activity_horizontal_margin"/>
 
     </LinearLayout>
 
@@ -59,7 +59,7 @@
         android:id="@+id/content_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
+        android:background="@color/boxing_black"
         app:behavior_hideable="true"
         app:behavior_peekHeight="0dp"
         app:layout_behavior="android.support.design.widget.BottomSheetBehavior"

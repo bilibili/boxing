@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="?android:selectableItemBackground"
-                android:paddingTop="@dimen/item_spacing">
+                android:paddingTop="@dimen/boxing_item_spacing">
 
     <ImageView
         android:id="@+id/album_thumbnail"
@@ -43,8 +43,8 @@
         android:ellipsize="end"
         android:maxEms="12"
         android:singleLine="true"
-        android:textAppearance="@style/TextAppearance.App.Medium"
-        android:textColor="@color/gray1"
+        android:textAppearance="@style/Boxing.TextAppearance.App.Medium"
+        android:textColor="@color/boxing_gray1"
         tools:text="My Favorite Album"/>
 
     <TextView
@@ -54,8 +54,8 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="4dp"
         android:layout_toRightOf="@id/album_name"
-        android:textAppearance="@style/TextAppearance.App.Medium"
-        android:textColor="@color/gray1"
+        android:textAppearance="@style/Boxing.TextAppearance.App.Medium"
+        android:textColor="@color/boxing_gray1"
         tools:text="(980)"/>
 
     <ImageView
@@ -65,7 +65,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="8dp"
-        android:src="@drawable/ic_check_black"
+        android:src="@drawable/ic_boxing_check_black"
         android:visibility="gone"
         tools:visibility="visible"/>
 </RelativeLayout>

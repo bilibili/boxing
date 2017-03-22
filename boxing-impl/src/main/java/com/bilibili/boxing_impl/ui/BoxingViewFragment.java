@@ -108,10 +108,10 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
     public void onRequestPermissionError(String[] permissions, Exception e) {
         if (permissions.length > 0) {
             if (permissions[0].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                Toast.makeText(getContext(), R.string.storage_permission_deny, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.boxing_storage_permission_deny, Toast.LENGTH_SHORT).show();
                 showEmptyData();
             } else if (permissions[0].equals(Manifest.permission.CAMERA)){
-                Toast.makeText(getContext(), R.string.camera_permission_deny, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.boxing_camera_permission_deny, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -160,7 +160,7 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), GRID_COUNT);
         gridLayoutManager.setSmoothScrollbarEnabled(true);
         mRecycleView.setLayoutManager(gridLayoutManager);
-        mRecycleView.addItemDecoration(new SpacesItemDecoration(getResources().getDimensionPixelOffset(R.dimen.media_margin), GRID_COUNT));
+        mRecycleView.addItemDecoration(new SpacesItemDecoration(getResources().getDimensionPixelOffset(R.dimen.boxing_media_margin), GRID_COUNT));
         mMediaAdapter.setOnCameraClickListener(new OnCameraClickListener());
         mMediaAdapter.setOnCheckedListener(new OnMediaCheckedListener());
         mMediaAdapter.setOnMediaClickListener(new OnMediaClickListener());
@@ -235,8 +235,8 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
         }
         boolean enabled = medias.size() > 0 && medias.size() <= mMaxCount;
         mOkBtn.setEnabled(enabled);
-        mOkBtn.setText(enabled ? getString(R.string.image_select_ok_fmt, String.valueOf(medias.size())
-                , String.valueOf(mMaxCount)) : getString(R.string.ok));
+        mOkBtn.setText(enabled ? getString(R.string.boxing_image_select_ok_fmt, String.valueOf(medias.size())
+                , String.valueOf(mMaxCount)) : getString(R.string.boxing_ok));
     }
 
     @Override
@@ -317,7 +317,7 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
         if (mDialog == null) {
             mDialog = new ProgressDialog(getActivity());
             mDialog.setIndeterminate(true);
-            mDialog.setMessage(getString(R.string.handling));
+            mDialog.setMessage(getString(R.string.boxing_handling));
         }
        if (!mDialog.isShowing()) {
            mDialog.show();
@@ -352,10 +352,10 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
                     View windowView = createWindowView();
                     mAlbumPopWindow = new PopupWindow(windowView, ViewGroup.LayoutParams.MATCH_PARENT,
                             height, true);
-                    mAlbumPopWindow.setAnimationStyle(R.style.PopupAnimation);
+                    mAlbumPopWindow.setAnimationStyle(R.style.Boxing_PopupAnimation);
                     mAlbumPopWindow.setOutsideTouchable(true);
                     mAlbumPopWindow.setBackgroundDrawable(new ColorDrawable
-                            (ContextCompat.getColor(v.getContext(), R.color.colorPrimaryAlpha)));
+                            (ContextCompat.getColor(v.getContext(), R.color.boxing_colorPrimaryAlpha)));
                     mAlbumPopWindow.setContentView(windowView);
                 }
                 mAlbumPopWindow.showAsDropDown(v, 0, 0);
@@ -363,7 +363,7 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
 
             @NonNull
             private View createWindowView() {
-                View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_album, null);
+                View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_boxing_album, null);
                 RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.album_recycleview);
                 recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
                 recyclerView.addItemDecoration(new SpacesItemDecoration(2, 1));
@@ -476,13 +476,13 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
             List<BaseMedia> selectedMedias = mMediaAdapter.getSelectedMedias();
             if (isSelected) {
                 if (selectedMedias.size() >= mMaxCount) {
-                    String warning = getString(R.string.too_many_picture_fmt, mMaxCount);
+                    String warning = getString(R.string.boxing_too_many_picture_fmt, mMaxCount);
                     Toast.makeText(getActivity(), warning, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (!selectedMedias.contains(photoMedia)) {
                     if (photoMedia.isGifOverSize()) {
-                        Toast.makeText(getActivity(), R.string.gif_too_big, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), R.string.boxing_gif_too_big, Toast.LENGTH_SHORT).show();
                         return;
                     }
                     selectedMedias.add(photoMedia);

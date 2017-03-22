@@ -27,14 +27,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/layout_app_bar"/>
+        <include layout="@layout/layout_boxing_app_bar"/>
 
         <ImageView
             android:id="@+id/media_result"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:padding="@dimen/activity_horizontal_margin"/>
+            android:padding="@dimen/boxing_activity_horizontal_margin"/>
 
     </LinearLayout>
 
@@ -42,7 +42,7 @@
         android:id="@+id/content_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white1"
+        android:background="@color/boxing_white1"
         app:behavior_hideable="true"
         app:behavior_peekHeight="300dp"
         app:layout_behavior="android.support.design.widget.BottomSheetBehavior"/>

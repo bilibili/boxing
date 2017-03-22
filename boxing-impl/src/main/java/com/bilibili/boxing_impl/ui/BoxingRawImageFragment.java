@@ -149,7 +149,7 @@ public class BoxingRawImageFragment extends Fragment {
             }
             BoxingLog.d(t != null ? t.getMessage() : "load raw image error.");
             mWr.get().dismissProgressDialog();
-            mWr.get().mImageView.setImageResource(R.drawable.ic_broken_image);
+            mWr.get().mImageView.setImageResource(R.drawable.ic_boxing_broken_image);
             if (mWr.get().mAttacher != null) {
                 mWr.get().mAttacher.update();
             }

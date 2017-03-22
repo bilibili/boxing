@@ -34,14 +34,14 @@
         android:layout_height="24dp"
         android:layout_gravity="right"
         android:padding="6dp"
-        android:src="@drawable/ic_unchecked"/>
+        android:src="@drawable/shape_boxing_unchecked"/>
 
     <FrameLayout
         android:id="@+id/video_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/colorPrimaryAlpha"
+        android:background="@color/boxing_colorPrimaryAlpha"
         android:paddingBottom="2dp"
         android:paddingTop="4dp"
         android:visibility="gone"
@@ -52,12 +52,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|left"
-            android:drawableLeft="@drawable/ic_play"
+            android:drawableLeft="@drawable/ic_boxing_play"
             android:drawablePadding="4dp"
             android:maxEms="6"
             android:paddingLeft="4dp"
-            android:textAppearance="@style/TextAppearance.App.Medium"
-            android:textColor="@color/white"
+            android:textAppearance="@style/Boxing.TextAppearance.App.Medium"
+            android:textColor="@color/boxing_white"
             tools:text="00:30"/>
 
         <TextView
@@ -67,8 +67,8 @@
             android:layout_gravity="center_vertical|right"
             android:maxEms="4"
             android:paddingRight="4dp"
-            android:textAppearance="@style/TextAppearance.App.Medium"
-            android:textColor="@color/white"
+            android:textAppearance="@style/Boxing.TextAppearance.App.Medium"
+            android:textColor="@color/boxing_white"
             tools:text="20M"/>
     </FrameLayout>
 
@@ -77,5 +77,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
-        android:background="@color/black_alpha15"/>
+        android:background="@color/boxing_black_alpha15"/>
 </merge>

@@ -17,30 +17,30 @@
   -->
 
 <resources>
-    <string name="ok">OK</string>
-    <string name="fab_label_camera">take a shot</string>
+    <string name="boxing_ok">OK</string>
+    <string name="boxing_fab_label_camera">take a shot</string>
 
-    <string name="image_preview_title_fmt">%1$s/%2$s</string>
-    <string name="image_preview_ok_fmt">%1$s/%2$s OK</string>
-    <string name="image_select_ok_fmt">(%1$s/%2$s) OK</string>
+    <string name="boxing_image_preview_title_fmt">%1$s/%2$s</string>
+    <string name="boxing_image_preview_ok_fmt">%1$s/%2$s OK</string>
+    <string name="boxing_image_select_ok_fmt">(%1$s/%2$s) OK</string>
 
-    <string name="max_image_over_fmt">%d picture is limited</string>
-    <string name="gif_too_big">the gif is too big!</string>
-    <string name="pick_single_video">Pick a video</string>
-    <string name="pick_multi_image">Pick pictures</string>
-    <string name="pick_single_image_crop">Pick a picture with crop</string>
-    <string name="pick_single_image">Pick a picture</string>
-    <string name="video_title">videos</string>
-    <string name="storage_deny">Device storage read error or temporarily unavailable. Please try again later</string>
-    <string name="finish">finish</string>
-    <string name="start_pick">start</string>
-    <string name="load_image_fail">load fail!</string>
-    <string name="storage_permission_deny">You need to access the storage device to select the picture
+    <string name="boxing_max_image_over_fmt">%d picture is limited</string>
+    <string name="boxing_gif_too_big">the gif is too big!</string>
+    <string name="boxing_pick_single_video">Pick a video</string>
+    <string name="boxing_pick_multi_image">Pick pictures</string>
+    <string name="boxing_pick_single_image_crop">Pick a picture with crop</string>
+    <string name="boxing_pick_single_image">Pick a picture</string>
+    <string name="boxing_video_title">videos</string>
+    <string name="boxing_storage_deny">Device storage read error or temporarily unavailable. Please try again later</string>
+    <string name="boxing_finish">finish</string>
+    <string name="boxing_start_pick">start</string>
+    <string name="boxing_load_image_fail">load fail!</string>
+    <string name="boxing_storage_permission_deny">You need to access the storage device to select the picture
         , please allow "storage space" right in the "System Settings" dialog box or authorization.</string>
-    <string name="camera_permission_deny">To access your camera to take pictures,
+    <string name="boxing_camera_permission_deny">To access your camera to take pictures,
         enable the "Use Camera" permission in the "System Settings" or Authorization dialog box.</string>
-    <string name="default_album">pictures</string>
-    <string name="crop_error">sorry, error occurs when cropping</string>
-    <string name="nothing_found">nothing!</string>
-    <string name="too_many_picture_fmt">You can only select up to %d pictures</string>
+    <string name="boxing_default_album">pictures</string>
+    <string name="boxing_crop_error">sorry, error occurs when cropping</string>
+    <string name="boxing_nothing_found">nothing!</string>
+    <string name="boxing_too_many_picture_fmt">You can only select up to %d pictures</string>
 </resources>

@@ -16,23 +16,12 @@
   ~
   -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/album_recycleview"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="@color/white"
-        android:scrollbars="vertical"/>
-
-    <View
-        android:id="@+id/album_shadow"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimaryAlpha"/>
-
-</LinearLayout>
+    <item
+        android:id="@+id/menu_open_image"
+        android:icon="@drawable/ic_boxing_camera_white"
+        android:title=""
+        app:showAsAction="always"/>
+</menu>

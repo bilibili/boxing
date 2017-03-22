@@ -74,7 +74,7 @@ public class MediaItemLayout extends FrameLayout {
 
     public MediaItemLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        View view = LayoutInflater.from(context).inflate(R.layout.layout_media_item, this, true);
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_boxing_media_item, this, true);
         mCoverImg = (ImageView) view.findViewById(R.id.media_item);
         mCheckImg = (ImageView) view.findViewById(R.id.media_item_check);
         mVideoLayout = view.findViewById(R.id.video_layout);
@@ -88,7 +88,7 @@ public class MediaItemLayout extends FrameLayout {
         int screenWidth = WindowManagerHelper.getScreenWidth(context);
         int width = 100;
         if (screenHeight != 0 && screenWidth != 0) {
-            width = (screenWidth - getResources().getDimensionPixelOffset(R.dimen.media_margin) * 4) / 3;
+            width = (screenWidth - getResources().getDimensionPixelOffset(R.dimen.boxing_media_margin) * 4) / 3;
         }
         mCoverImg.getLayoutParams().width = width;
         mCoverImg.getLayoutParams().height = width;
@@ -140,7 +140,7 @@ public class MediaItemLayout extends FrameLayout {
         if (mCoverImg == null || TextUtils.isEmpty(path)) {
             return;
         }
-        mCoverImg.setTag(R.string.app_name, path);
+        mCoverImg.setTag(R.string.boxing_app_name, path);
         BoxingMediaLoader.getInstance().displayThumbnail(mCoverImg, path, mScreenType.getValue(), mScreenType.getValue());
     }
 
@@ -148,10 +148,10 @@ public class MediaItemLayout extends FrameLayout {
     public void setChecked(boolean isChecked) {
         if (isChecked) {
             mFontLayout.setVisibility(View.VISIBLE);
-            mCheckImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_checked));
+            mCheckImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_boxing_checked));
         } else {
             mFontLayout.setVisibility(View.GONE);
-            mCheckImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_unchecked));
+            mCheckImg.setImageDrawable(getResources().getDrawable(R.drawable.shape_boxing_unchecked));
         }
     }
 

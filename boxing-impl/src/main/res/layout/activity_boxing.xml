@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         android:elevation="2dp"
-        app:theme="@style/ToolbarTheme">
+        app:theme="@style/Boxing.ToolbarTheme">
 
         <TextView
             android:id="@+id/pick_album_txt"
@@ -39,7 +39,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:text="@string/default_album"/>
+            android:text="@string/boxing_default_album"/>
     </android.support.v7.widget.Toolbar>
 
     <FrameLayout

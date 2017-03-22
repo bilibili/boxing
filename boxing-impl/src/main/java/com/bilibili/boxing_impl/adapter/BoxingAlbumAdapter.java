@@ -60,13 +60,13 @@ public class BoxingAlbumAdapter extends RecyclerView.Adapter implements View.OnC
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new AlbumViewHolder(mInflater.inflate(R.layout.layout_album_item, parent, false));
+        return new AlbumViewHolder(mInflater.inflate(R.layout.layout_boxing_album_item, parent, false));
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final AlbumViewHolder albumViewHolder = (AlbumViewHolder) holder;
-        albumViewHolder.mCoverImg.setImageResource(R.drawable.ic_default_image);
+        albumViewHolder.mCoverImg.setImageResource(R.drawable.ic_boxing_default_image);
         final int adapterPos = holder.getAdapterPosition();
         final AlbumEntity album = mAlums.get(adapterPos);
 
@@ -80,7 +80,7 @@ public class BoxingAlbumAdapter extends RecyclerView.Adapter implements View.OnC
             albumViewHolder.mLayout.setOnClickListener(this);
             albumViewHolder.mCheckedImg.setVisibility(album.mIsSelected ? View.VISIBLE : View.GONE);
             albumViewHolder.mSizeTxt.setText(albumViewHolder.mSizeTxt.
-                    getResources().getString(R.string.album_images_fmt, album.mCount));
+                    getResources().getString(R.string.boxing_album_images_fmt, album.mCount));
         } else {
             albumViewHolder.mNameTxt.setText(UNKNOW_ALBUM_NAME);
             albumViewHolder.mSizeTxt.setVisibility(View.GONE);

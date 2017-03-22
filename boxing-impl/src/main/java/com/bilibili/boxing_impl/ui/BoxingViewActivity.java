@@ -137,7 +137,7 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
         if (mImages != null && mNeedEdit) {
             int selectedSize = mSelectedImages.size();
             int size = Math.max(mSelectedImages.size(), mMaxCount);
-            mOkBtn.setText(getString(R.string.image_preview_ok_fmt, String.valueOf(selectedSize)
+            mOkBtn.setText(getString(R.string.boxing_image_preview_ok_fmt, String.valueOf(selectedSize)
                     , String.valueOf(size)));
             mOkBtn.setEnabled(selectedSize > 0);
         }
@@ -155,7 +155,7 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         if (mNeedEdit) {
-            getMenuInflater().inflate(R.menu.activity_image_viewer, menu);
+            getMenuInflater().inflate(R.menu.activity_boxing_image_viewer, menu);
             mSelectedMenuItem = menu.findItem(R.id.menu_image_item_selected);
             if (mCurrentImageItem != null) {
                 setMenuIcon(mCurrentImageItem.isSelected());
@@ -175,7 +175,7 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
                 return false;
             }
             if (mSelectedImages.size() >= mMaxCount && !mCurrentImageItem.isSelected()) {
-                String warning = getString(R.string.max_image_over_fmt, mMaxCount);
+                String warning = getString(R.string.boxing_max_image_over_fmt, mMaxCount);
                 Toast.makeText(this, warning, Toast.LENGTH_SHORT).show();
                 return true;
             }
@@ -184,7 +184,7 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
             } else {
                 if (!mSelectedImages.contains(mCurrentImageItem)) {
                     if (mCurrentImageItem.isGifOverSize()) {
-                        Toast.makeText(getApplicationContext(), R.string.gif_too_big, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.boxing_gif_too_big, Toast.LENGTH_SHORT).show();
                         return true;
                     }
                     mCurrentImageItem.setSelected(true);
@@ -209,7 +209,7 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
 
     private void setMenuIcon(boolean isSelected) {
         if (mNeedEdit) {
-            mSelectedMenuItem.setIcon(isSelected ? R.drawable.ic_checked : R.drawable.ic_unchecked);
+            mSelectedMenuItem.setIcon(isSelected ? R.drawable.ic_boxing_checked : R.drawable.shape_boxing_unchecked);
         }
     }
 
@@ -220,7 +220,7 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
             if (mStartPos > 0 && mStartPos < mSelectedImages.size()) {
                 mGallery.setCurrentItem(mStartPos, false);
             }
-            mToolbar.setTitle(getString(R.string.image_preview_title_fmt, String.valueOf(mStartPos + 1)
+            mToolbar.setTitle(getString(R.string.boxing_image_preview_title_fmt, String.valueOf(mStartPos + 1)
                     , String.valueOf(mSelectedImages.size())));
             mProgressBar.setVisibility(View.GONE);
             mGallery.setVisibility(View.VISIBLE);
@@ -247,7 +247,7 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
         setupGallery();
 
         if (mToolbar != null && mNeedAllCount) {
-            mToolbar.setTitle(getString(R.string.image_preview_title_fmt,
+            mToolbar.setTitle(getString(R.string.boxing_image_preview_title_fmt,
                     String.valueOf(++mPos), String.valueOf(totalCount)));
             mNeedAllCount = false;
         }
@@ -323,7 +323,7 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
         @Override
         public void onPageSelected(int position) {
             if (mToolbar != null && position < mImages.size()) {
-                mToolbar.setTitle(getString(R.string.image_preview_title_fmt, String.valueOf(position + 1)
+                mToolbar.setTitle(getString(R.string.boxing_image_preview_title_fmt, String.valueOf(position + 1)
                         , mNeedLoading ? String.valueOf(mTotalCount) : String.valueOf(mImages.size())));
                 mCurrentImageItem = (ImageMedia) mImages.get(position);
                 invalidateOptionsMenu();
