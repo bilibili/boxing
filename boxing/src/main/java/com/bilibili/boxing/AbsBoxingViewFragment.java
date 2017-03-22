@@ -20,11 +20,14 @@ package com.bilibili.boxing;
 import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -38,6 +41,7 @@ import com.bilibili.boxing.model.config.BoxingCropOption;
 import com.bilibili.boxing.model.entity.AlbumEntity;
 import com.bilibili.boxing.model.entity.BaseMedia;
 import com.bilibili.boxing.model.entity.impl.ImageMedia;
+import com.bilibili.boxing.model.entity.impl.VideoMedia;
 import com.bilibili.boxing.presenter.PickerContract;
 import com.bilibili.boxing.utils.CameraPickerHelper;
 
@@ -299,8 +303,8 @@ public abstract class AbsBoxingViewFragment extends Fragment implements PickerCo
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (mCameraPicker != null && requestCode == CameraPickerHelper.REQ_CODE_CAMERA) {
-            onCameraActivityResult(requestCode, resultCode);
+        if (mCameraPicker != null && requestCode == CameraPickerHelper.REQ_CODE_CAMERA || requestCode == CameraPickerHelper.REQ_CODE_REC) {
+            onCameraActivityResult(requestCode, resultCode, data);
         }
         if (hasCropBehavior()) {
             onCropActivityResult(requestCode, resultCode, data);
@@ -405,8 +409,8 @@ public abstract class AbsBoxingViewFragment extends Fragment implements PickerCo
      * successfully get result from camera in {@link #onActivityResult(int, int, Intent)}.
      * call this after other operations.
      */
-    public void onCameraActivityResult(int requestCode, int resultCode) {
-        mCameraPicker.onActivityResult(requestCode, resultCode);
+    public void onCameraActivityResult(int requestCode, int resultCode, Intent data) {
+        mCameraPicker.onActivityResult(requestCode, resultCode, data);
     }
 
     /**
@@ -434,7 +438,9 @@ public abstract class AbsBoxingViewFragment extends Fragment implements PickerCo
             if (!BoxingBuilderConfig.TESTING && ContextCompat.checkSelfPermission(getActivity(), CAMERA_PERMISSIONS[0]) != PERMISSION_GRANTED) {
                 requestPermissions(CAMERA_PERMISSIONS, REQUEST_CODE_PERMISSION);
             } else {
-                if (!BoxingManager.getInstance().getBoxingConfig().isVideoMode()) {
+                if (BoxingManager.getInstance().getBoxingConfig().isVideoMode()) {
+                    mCameraPicker.startRecord(activity, fragment, subFolderPath);
+                } else {
                     mCameraPicker.startCamera(activity, fragment, subFolderPath);
                 }
             }
@@ -456,15 +462,51 @@ public abstract class AbsBoxingViewFragment extends Fragment implements PickerCo
             if (fragment == null) {
                 return;
             }
-            File file = new File(helper.getSourceFilePath());
 
-            if (!file.exists()) {
-                onError(helper);
-                return;
+            String filePath = helper.getSourceFilePath();
+            if (BoxingManager.getInstance().getBoxingConfig().isVideoMode()) {
+                File file = new File(filePath);
+                MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+                retriever.setDataSource(filePath);
+
+                String size = String.valueOf(file.length());
+                String date = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DATE);
+                String dur = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+                String title = file.getName();
+                String type = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_MIMETYPE);
+
+                ContentValues values = new ContentValues();
+                values.put(MediaStore.Video.Media.DATA, filePath);
+                values.put(MediaStore.Video.Media.TITLE, title);
+                values.put(MediaStore.Video.Media.MIME_TYPE, type);
+                values.put(MediaStore.Video.Media.SIZE, size);
+                values.put(MediaStore.Video.Media.DATE_TAKEN, date);
+                values.put(MediaStore.Video.Media.DURATION, dur);
+                fragment
+                        .getContext()
+                        .getContentResolver()
+                        .insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, values);
+
+                VideoMedia media = new VideoMedia.Builder("", filePath)
+                        .setTitle(title)
+                        .setDuration(dur)
+                        .setSize(size)
+                        .setDateTaken(date)
+                        .setMimeType(type)
+                        .build();
+                fragment.onCameraFinish(media);
+            } else {
+                File file = new File(filePath);
+
+                if (!file.exists()) {
+                    onError(helper);
+                    return;
+                }
+
+                ImageMedia cameraMedia = new ImageMedia(file);
+                cameraMedia.saveMediaStore(fragment.getAppCr());
+                fragment.onCameraFinish(cameraMedia);
             }
-            ImageMedia cameraMedia = new ImageMedia(file);
-            cameraMedia.saveMediaStore(fragment.getAppCr());
-            fragment.onCameraFinish(cameraMedia);
         }
 
         @Override

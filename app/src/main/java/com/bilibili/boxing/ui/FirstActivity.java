@@ -119,7 +119,7 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
                 Boxing.of().withIntent(this, BoxingActivity.class).start(this, REQUEST_CODE);
                 break;
             case R.id.video_btn:
-                BoxingConfig videoConfig = new BoxingConfig(BoxingConfig.Mode.VIDEO);
+                BoxingConfig videoConfig = new BoxingConfig(BoxingConfig.Mode.VIDEO).needCamera();
                 Boxing.of(videoConfig).withIntent(this, BoxingActivity.class).start(this, REQUEST_CODE);
                 break;
             case R.id.outside_bs_btn:
