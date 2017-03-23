@@ -17,7 +17,7 @@
 
 <resources>
 
-    <style name="Boxing.AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="Boxing.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/boxing_colorPrimary</item>
         <item name="colorPrimaryDark">@color/boxing_colorPrimaryDark</item>
         <item name="colorAccent">@color/boxing_colorAccent</item>
@@ -25,8 +25,6 @@
 
     <!-- BoxingActivity Theme-->
     <style name="Boxing.AppTheme.NoActionBar" parent="Boxing.AppTheme">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:fitsSystemWindows">false</item>
     </style>
