@@ -69,6 +69,11 @@ public class BoxingFileHelper {
     }
 
     @Nullable
+    public static String getBoxingPathInDCIM() {
+        return getExternalDCIM(null);
+    }
+
+    @Nullable
     public static String getExternalDCIM(String subDir) {
         String result = null;
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
