@@ -75,7 +75,7 @@ public class VideoTask implements IMediaTask<VideoMedia> {
                             .setSize(size).setDataTaken(date).setMimeType(type).build();
                     videoMedias.add(video);
 
-                } while (cursor.moveToNext() && !cursor.isLast() && !cursor.isLast());
+                } while (cursor.moveToNext());
                 postMedias(callback, videoMedias, count);
             } else {
                 postMedias(callback, videoMedias, 0);
