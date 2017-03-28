@@ -87,7 +87,7 @@ public class PickerUtilTest {
         ImageCompressor illegalCompressor = new ImageCompressor(new File("///"));
         ImageMedia media = new ImageMedia("123", "44");
         ImageCompressor compressor = new ImageCompressor(new File("src/main/res/"));
-        ImageMedia media1 = new ImageMedia("1223", "../boxing-impl/src/main/res/drawable-hdpi/ic_camera.png");
+        ImageMedia media1 = new ImageMedia("1223", "../boxing-impl/src/main/res/drawable-hdpi/ic_boxing_camera.png");
         media1.setSize("233");
 
         boolean result1 = CompressTask.compress(null, null, 0);

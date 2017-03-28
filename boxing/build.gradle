@@ -130,7 +130,7 @@ dependencies {
     testCompile "org.powermock:powermock-classloading-xstream:1.6.4"
 
     // Robolectric
-    testCompile ("org.robolectric:robolectric:3.0") {
+    testCompile ("org.robolectric:robolectric:3.1.2") {
         exclude group: 'commons-logging'
         exclude group: 'org.apache.httpcomponents'
     }
