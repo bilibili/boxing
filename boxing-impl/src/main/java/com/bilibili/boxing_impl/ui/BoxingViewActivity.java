@@ -82,7 +82,6 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
         initData();
         initView();
         startLoading();
-        mMaxCount = getMaxCount();
     }
 
     private void createToolbar() {
@@ -104,6 +103,7 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
         mStartPos = getStartPos();
         mNeedLoading = BoxingManager.getInstance().getBoxingConfig().isNeedLoading();
         mNeedEdit = BoxingManager.getInstance().getBoxingConfig().isNeedEdit();
+        mMaxCount = getMaxCount();
         if (mNeedLoading && mImages == null) {
             mImages = new ArrayList<>();
         } else {
