@@ -133,6 +133,5 @@ dependencies {
         exclude module: 'recyclerview-v7'
     }
     androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile 'junit:junit:4.12'
     compile project(":boxing")
 }
