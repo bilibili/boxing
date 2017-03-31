@@ -27,7 +27,7 @@ Core version
 <dependency>                       
   	<groupId>com.bilibili</groupId>  
   	<artifactId>boxing</artifactId>  
-  	<version>0.4.0</version>
+  	<version>0.5.0</version>
   	<type>pom</type>                
 </dependency>                      		
 ```
@@ -38,7 +38,7 @@ UI version
 <dependency>                          
   	<groupId>com.bilibili</groupId>     
   	<artifactId>boxing-impl</artifactId>
-  	<version>0.4.0</version>   
+  	<version>0.5.0</version>   
   	<type>pom</type>                    
 </dependency>                         
 ```
@@ -47,12 +47,12 @@ UI version
 
 Core version              
 ```java
-compile 'com.bilibili:boxing:0.4.0'
+compile 'com.bilibili:boxing:0.5.0'
 ```
 
 UI version
 ```java
-compile 'com.bilibili:boxing-impl:0.4.0'
+compile 'com.bilibili:boxing-impl:0.5.0'
 ```
 
 ### Preview

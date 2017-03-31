@@ -24,7 +24,7 @@
 <dependency>                                                      
   	<groupId>com.bilibili</groupId>                                    
   	<artifactId>boxing</artifactId>                                    
-  	<version>0.4.0</version>                                       
+  	<version>0.5.0</version>                                       
   	<type>pom</type>                                                
 </dependency> 
 ```
@@ -33,7 +33,7 @@
 <dependency>                                                          
   	<groupId>com.bilibili</groupId>                                    
   	<artifactId>boxing-impl</artifactId>                              
-  	<version>0.4.0</version>                                       
+  	<version>0.5.0</version>                                       
   	<type>pom</type>                                                  
 </dependency>                                                      
 ```
@@ -41,11 +41,11 @@
   ​                                                    
   核心版本                                                                 
 ```java                                                                         
-compile 'com.bilibili:boxing:0.4.0'                              
+compile 'com.bilibili:boxing:0.5.0'                              
 ```
 实现版本                                                                   
 ```java                                                                        
-compile 'com.bilibili:boxing-impl:0.4.0'               
+compile 'com.bilibili:boxing-impl:0.5.0'               
 ```
 
 ### 预览图
