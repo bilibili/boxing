@@ -80,7 +80,11 @@ public class BoxingRawImageFragment extends Fragment {
         mAttacher = new PhotoViewAttacher(mImageView);
         mAttacher.setRotatable(true);
         mAttacher.setToRightAngle(true);
-        ((AbsBoxingViewActivity) getActivity()).loadRawImage(mImageView, mMedia.getPath(), new BoxingCallback(this));
+
+        final AbsBoxingViewActivity activity = (AbsBoxingViewActivity) getActivity();
+        if (activity != null) {
+            activity.loadRawImage(mImageView, mMedia.getPath(), new BoxingCallback(this));
+        }
     }
 
     private void dismissProgressDialog() {
@@ -103,12 +107,17 @@ public class BoxingRawImageFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         if (mAttacher != null) {
             mAttacher.cleanup();
             mAttacher = null;
+
+            final AbsBoxingViewActivity activity = (AbsBoxingViewActivity) getActivity();
+            if (activity != null) {
+                activity.recycleRawImage(mImageView, mMedia.getPath());
+            }
             mImageView = null;
         }
+        super.onDestroyView();
     }
 
     private static class BoxingCallback implements IBoxingCallback {
