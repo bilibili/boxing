@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import com.bilibili.boxing.demo.R;
 import com.bilibili.boxing.loader.IBoxingCallback;
 import com.bilibili.boxing.loader.IBoxingMediaLoader;
+import com.bilibili.boxing.loader.IBoxingMediaRecyclingLoader;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
@@ -34,7 +35,7 @@ import com.bumptech.glide.request.target.Target;
  *
  * @author ChenSL
  */
-public class BoxingGlideLoader implements IBoxingMediaLoader {
+public class BoxingGlideLoader implements IBoxingMediaRecyclingLoader {
 
     @Override
     public void displayThumbnail(@NonNull ImageView img, @NonNull String absPath, int width, int height) {
@@ -42,7 +43,7 @@ public class BoxingGlideLoader implements IBoxingMediaLoader {
         try {
             // https://github.com/bumptech/glide/issues/1531
             Glide.with(img.getContext()).load(path).placeholder(R.drawable.ic_boxing_default_image).crossFade().centerCrop().into(img);
-        } catch(IllegalArgumentException ignore) {
+        } catch (IllegalArgumentException ignore) {
         }
 
     }
@@ -77,4 +78,13 @@ public class BoxingGlideLoader implements IBoxingMediaLoader {
 
     }
 
+    @Override
+    public void recycleThumbnail(@NonNull ImageView img, @NonNull String absPath) {
+        Glide.clear(img);
+    }
+
+    @Override
+    public void recycleRaw(@NonNull ImageView img, @NonNull String absPath) {
+        Glide.clear(img);
+    }
 }
