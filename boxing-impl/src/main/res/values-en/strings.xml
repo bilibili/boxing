@@ -25,6 +25,7 @@
     <string name="boxing_image_select_ok_fmt">(%1$s/%2$s) OK</string>
 
     <string name="boxing_max_image_over_fmt">%d picture is limited</string>
+    <string name="boxing_image_too_big">the image is too big!</string>
     <string name="boxing_gif_too_big">the gif is too big!</string>
     <string name="boxing_pick_single_video">Pick a video</string>
     <string name="boxing_pick_multi_image">Pick pictures</string>

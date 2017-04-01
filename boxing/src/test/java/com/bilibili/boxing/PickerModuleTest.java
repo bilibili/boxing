@@ -38,6 +38,7 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -105,6 +106,13 @@ public class PickerModuleTest {
         imageMedia.setImageType(ImageMedia.IMAGE_TYPE.GIF);
         assertEquals(imageMedia.getMimeType(), "image/gif");
 
+        final BoxingConfig config = new BoxingConfig();
+        config.withMaxImageSize(100);
+        mPickerManager.setBoxingConfig(config);
+        imageMedia.setSize("99");
+        assertFalse(imageMedia.isImageOverSize());
+        imageMedia.setSize("101");
+        assertTrue(imageMedia.isImageOverSize());
     }
 
     @Test

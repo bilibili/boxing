@@ -412,6 +412,7 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
             int pos = (int) v.getTag(R.id.media_item_check);
             BoxingConfig.Mode mode = BoxingManager.getInstance().getBoxingConfig().getMode();
             if (mode == BoxingConfig.Mode.SINGLE_IMG) {
+                if (!canSelectMedia(media)) { return; }
                 singleImageClick(media);
             } else if (mode == BoxingConfig.Mode.MULTI_IMG) {
                 multiImageClick(pos);
@@ -481,10 +482,7 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
                     return;
                 }
                 if (!selectedMedias.contains(photoMedia)) {
-                    if (photoMedia.isGifOverSize()) {
-                        Toast.makeText(getActivity(), R.string.boxing_gif_too_big, Toast.LENGTH_SHORT).show();
-                        return;
-                    }
+                    if (!canSelectMedia(photoMedia)) { return; }
                     selectedMedias.add(photoMedia);
                 }
             } else {

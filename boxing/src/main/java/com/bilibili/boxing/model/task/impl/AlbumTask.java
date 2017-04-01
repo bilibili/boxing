@@ -110,7 +110,10 @@ public class AlbumTask {
                 String picPath = coverCursor.getString(coverCursor.getColumnIndex(Media.DATA));
                 String id = coverCursor.getString(coverCursor.getColumnIndex(Media._ID));
                 album.mCount = coverCursor.getCount();
-                album.mImageList.add(new ImageMedia(id, picPath));
+
+                final ImageMedia imageItem  = new ImageMedia(id, picPath);
+
+                album.mImageList.add(imageItem);
                 if (album.mImageList.size() > 0) {
                     mBucketMap.put(buckId, album);
                 }

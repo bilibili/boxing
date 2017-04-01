@@ -26,6 +26,7 @@
     <string name="boxing_album_images_fmt">(%d)</string>
 
     <string name="boxing_max_image_over_fmt">你最多只能选择%d张图片</string>
+    <string name="boxing_image_too_big">您选择的图片过大，请压缩后再上传</string>
     <string name="boxing_gif_too_big">您选择的gif图片过大，请压缩后再上传</string>
     <string name="boxing_pick_single_video">视频单选</string>
     <string name="boxing_pick_multi_image">图片多选</string>

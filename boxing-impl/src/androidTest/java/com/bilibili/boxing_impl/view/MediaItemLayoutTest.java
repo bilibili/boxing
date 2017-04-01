@@ -52,7 +52,7 @@ public class MediaItemLayoutTest {
             }
 
             @Override
-            public void displayRaw(@NonNull ImageView img, @NonNull String absPath, IBoxingCallback callback) {
+            public void displayRaw(@NonNull ImageView img, @NonNull String absPath, int width, int height, IBoxingCallback callback) {
 
             }
         });

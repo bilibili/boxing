@@ -134,6 +134,7 @@ public class ImageTask implements IMediaTask<ImageMedia> {
                     }
                     ImageMedia imageItem = new ImageMedia.Builder(id, picPath).setThumbnailPath(mThumbnailMap.get(id))
                             .setSize(size).setMimeType(mimeType).setHeight(height).setWidth(width).build();
+
                     if (!result.contains(imageItem)) {
                         result.add(imageItem);
                     }

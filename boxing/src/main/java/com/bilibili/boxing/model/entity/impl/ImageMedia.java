@@ -26,6 +26,8 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import com.bilibili.boxing.model.BoxingManager;
+import com.bilibili.boxing.model.config.BoxingConfig;
 import com.bilibili.boxing.model.entity.BaseMedia;
 import com.bilibili.boxing.utils.BoxingExecutor;
 import com.bilibili.boxing.utils.BoxingExifHelper;
@@ -43,8 +45,8 @@ import java.io.File;
  * @author ChenSL
  */
 public class ImageMedia extends BaseMedia implements Parcelable {
-    private static final long MAX_GIF_SIZE = 1024 * 1024L;
-    private static final long MAX_IMAGE_SIZE = 1024 * 1024L;
+    private static final long DEFAULT_MAX_IMAGE_COMPRESSION_SIZE = 1024 * 1024L;
+    private static final long DEFAULT_MAX_GIF_SIZE = 1024 * 1024L;
 
     private boolean mIsSelected;
     private String mThumbnailPath;
@@ -94,15 +96,31 @@ public class ImageMedia extends BaseMedia implements Parcelable {
     }
 
     public boolean isGifOverSize() {
-        return isGif() && getSize() > MAX_GIF_SIZE;
+        long currentMaxSize = getMaxImageSize();
+
+        if (currentMaxSize <= 0) {
+            currentMaxSize = DEFAULT_MAX_GIF_SIZE;
+        }
+
+        return isGif() && getSize() > currentMaxSize;
     }
 
     public boolean isGif() {
         return getImageType() == IMAGE_TYPE.GIF;
     }
 
+    /**
+     * Indicates whether the current image has the size that is bigger than the allowed one.
+     *
+     * @return {@code true} if the image is too large, {@code false} otherwise.
+     */
+    public boolean isImageOverSize() {
+        final long currentMaxSize = getMaxImageSize();
+        return currentMaxSize > 0 && getSize() > currentMaxSize;
+    }
+
     public boolean compress(ImageCompressor imageCompressor) {
-        return CompressTask.compress(imageCompressor, this, MAX_IMAGE_SIZE);
+        return CompressTask.compress(imageCompressor, this, DEFAULT_MAX_IMAGE_COMPRESSION_SIZE);
     }
 
     public boolean compress(ImageCompressor imageCompressor, int maxSize) {
@@ -154,6 +172,19 @@ public class ImageMedia extends BaseMedia implements Parcelable {
 
     public int getWidth() {
         return mWidth;
+    }
+
+    /**
+     * @return The max image size in accordance with {@link BoxingConfig} or {@code -1} which means unlimited size.
+     */
+    private long getMaxImageSize() {
+        final BoxingConfig config = BoxingManager.getInstance().getBoxingConfig();
+
+        if (config != null) {
+            return config.getMaxImageSize();
+        }
+
+        return -1;
     }
 
     public void removeExif() {

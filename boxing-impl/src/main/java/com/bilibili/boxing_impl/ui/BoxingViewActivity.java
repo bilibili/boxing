@@ -183,10 +183,7 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
                 cancelImage();
             } else {
                 if (!mSelectedImages.contains(mCurrentImageItem)) {
-                    if (mCurrentImageItem.isGifOverSize()) {
-                        Toast.makeText(getApplicationContext(), R.string.boxing_gif_too_big, Toast.LENGTH_SHORT).show();
-                        return true;
-                    }
+                    if (!canSelectMedia(mCurrentImageItem)) { return false; }
                     mCurrentImageItem.setSelected(true);
                     mSelectedImages.add(mCurrentImageItem);
                 }

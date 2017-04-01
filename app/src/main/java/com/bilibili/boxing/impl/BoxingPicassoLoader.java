@@ -26,6 +26,7 @@ import com.bilibili.boxing.loader.IBoxingCallback;
 import com.bilibili.boxing.loader.IBoxingMediaLoader;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 import com.squareup.picasso.Transformation;
 
 /**
@@ -43,25 +44,28 @@ public class BoxingPicassoLoader implements IBoxingMediaLoader {
     }
 
     @Override
-    public void displayRaw(@NonNull ImageView img, @NonNull String absPath, final IBoxingCallback callback) {
+    public void displayRaw(@NonNull ImageView img, @NonNull String absPath, int width, int height, final IBoxingCallback callback) {
         String path = "file://" + absPath;
-        Picasso.with(img.getContext())
-                .load(path).transform(new BitmapTransform(1080, 720))
-                .into(img, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        if (callback != null) {
-                            callback.onSuccess();
-                        }
-                    }
+        RequestCreator creator = Picasso.with(img.getContext())
+                .load(path);
+        if (width > 0 && height > 0) {
+            creator.transform(new BitmapTransform(width, height));
+        }
+        creator.into(img, new Callback() {
+            @Override
+            public void onSuccess() {
+                if (callback != null) {
+                    callback.onSuccess();
+                }
+            }
 
-                    @Override
-                    public void onError() {
-                        if (callback != null) {
-                            callback.onFail(null);
-                        }
-                    }
-                });
+            @Override
+            public void onError() {
+                if (callback != null) {
+                    callback.onFail(null);
+                }
+            }
+        });
     }
 
     private class BitmapTransform implements Transformation {

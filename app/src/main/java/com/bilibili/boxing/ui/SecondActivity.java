@@ -33,6 +33,7 @@ import com.bilibili.boxing.BoxingMediaLoader;
 import com.bilibili.boxing.demo.R;
 import com.bilibili.boxing.model.config.BoxingConfig;
 import com.bilibili.boxing.model.entity.BaseMedia;
+import com.bilibili.boxing.presenter.PickerPresenter;
 import com.bilibili.boxing_impl.ui.BoxingBottomSheetFragment;
 import com.bilibili.boxing_impl.ui.BoxingViewActivity;
 
@@ -76,10 +77,12 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                     if (medias != null && medias.size() > 0) {
                         BaseMedia media = mMedia = medias.get(0);
                         String path = media.getPath();
-                        BoxingMediaLoader.getInstance().displayRaw(mResultImg, path, null);
+                        BoxingMediaLoader.getInstance().displayRaw(mResultImg, path, 1080, 720, null);
                     }
                 }
             });
+        } else {
+            fragment.setPresenter(new PickerPresenter(fragment));
         }
     }
 
