@@ -22,6 +22,7 @@ import android.widget.ImageView;
 
 import com.bilibili.boxing.loader.IBoxingCallback;
 import com.bilibili.boxing.loader.IBoxingMediaLoader;
+import com.bilibili.boxing.loader.IBoxingMediaRecyclingLoader;
 
 /**
  * A loader holding {@link IBoxingMediaLoader} to displayThumbnail medias.
@@ -55,6 +56,46 @@ public class BoxingMediaLoader {
             throw new IllegalStateException("init method should be called first");
         }
         mLoader.displayRaw(img, path, callback);
+    }
+
+    /**
+     * Called when the thumbnail should be recycled.
+     *
+     * <p>
+     *  <b>Note:</b> Do nothing if the loader does not implement {@link IBoxingMediaRecyclingLoader}.
+     * </p>
+     *
+     * @param img  The {@link ImageView} with the thumbnail to recycle.
+     * @param path The absolute path to the recycled resource.
+     */
+    public void recycleThumbnail(@NonNull ImageView img, @NonNull String path) {
+        if (ensureLoader()) {
+            throw new IllegalStateException("init method should be called first");
+        }
+
+        if (mLoader instanceof IBoxingMediaRecyclingLoader) {
+            ((IBoxingMediaRecyclingLoader) mLoader).recycleThumbnail(img, path);
+        }
+    }
+
+    /**
+     * Called when the image resource should be recycled.
+     *
+     * <p>
+     * <b>Note:</b> Do nothing if the loader does not implement {@link IBoxingMediaRecyclingLoader}.
+     * </p>
+     *
+     * @param img  The {@link ImageView} with the raw image to recycle.
+     * @param path The absolute path to the recycled resource.
+     */
+    public void recycleRaw(@NonNull ImageView img, @NonNull String path) {
+        if (ensureLoader()) {
+            throw new IllegalStateException("init method should be called first");
+        }
+
+        if (mLoader instanceof IBoxingMediaRecyclingLoader) {
+            ((IBoxingMediaRecyclingLoader) mLoader).recycleRaw(img, path);
+        }
     }
 
     public IBoxingMediaLoader getLoader() {
