@@ -41,8 +41,8 @@ public interface IBoxingMediaLoader {
      *
      * @param img      the display ImageView.Through ImageView.getTag(R.string.boxing_app_name) to get the absolute path of the exact path to display.
      * @param absPath  the absolute path to display, may be out of date when fast scrolling.
-     * @param width the expected width
-     * @param height the expected height
+     * @param width the expected width, 0 means the raw width.
+     * @param height the expected height, 0 means the raw height.
      * @param callback the callback for the load result.
      */
     void displayRaw(@NonNull ImageView img, @NonNull String absPath, int width, int height, IBoxingCallback callback);

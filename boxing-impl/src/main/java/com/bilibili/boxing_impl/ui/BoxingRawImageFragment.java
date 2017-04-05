@@ -23,7 +23,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +45,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
  *
  * @author ChenSL
  */
-public class BoxingRawImageFragment extends Fragment {
+public class BoxingRawImageFragment extends BoxingBaseFragment {
     private static final String BUNDLE_IMAGE = "com.bilibili.boxing_impl.ui.BoxingRawImageFragment.image";
     private static final int MAX_SCALE = 15;
     private static final long MAX_IMAGE1 = 1024 * 1024L;
@@ -85,10 +84,21 @@ public class BoxingRawImageFragment extends Fragment {
         mAttacher = new PhotoViewAttacher(mImageView);
         mAttacher.setRotatable(true);
         mAttacher.setToRightAngle(true);
-        Point point = getResizePointer(mMedia.getSize());
-        ((AbsBoxingViewActivity) getActivity()).loadRawImage(mImageView, mMedia.getPath(), point.x, point.y, new BoxingCallback(this));
     }
 
+    @Override
+    void setUserVisibleCompat(boolean isVisibleToUser) {
+        if (isVisibleToUser) {
+            Point point = getResizePointer(mMedia.getSize());
+            ((AbsBoxingViewActivity) getActivity()).loadRawImage(mImageView, mMedia.getPath(), point.x, point.y, new BoxingCallback(this));
+        }
+    }
+
+    /**
+     * resize the image or not according to size.
+     *
+     * @param size the size of image
+     */
     private Point getResizePointer(long size) {
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         Point point = new Point(metrics.widthPixels, metrics.heightPixels);
@@ -98,6 +108,10 @@ public class BoxingRawImageFragment extends Fragment {
         } else if (size >= MAX_IMAGE1) {
             point.x >>= 1;
             point.y >>= 1;
+        } else if (size > 0) {
+            // avoid some images do not have a size.
+            point.x = 0;
+            point.y = 0;
         }
         return point;
     }
