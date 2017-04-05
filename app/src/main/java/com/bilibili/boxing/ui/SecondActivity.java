@@ -33,6 +33,7 @@ import com.bilibili.boxing.BoxingMediaLoader;
 import com.bilibili.boxing.demo.R;
 import com.bilibili.boxing.model.config.BoxingConfig;
 import com.bilibili.boxing.model.entity.BaseMedia;
+import com.bilibili.boxing.presenter.PickerPresenter;
 import com.bilibili.boxing_impl.ui.BoxingBottomSheetFragment;
 import com.bilibili.boxing_impl.ui.BoxingViewActivity;
 
@@ -80,6 +81,8 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 }
             });
+        } else {
+            fragment.setPresenter(new PickerPresenter(fragment));
         }
     }
 
