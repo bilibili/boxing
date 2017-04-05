@@ -41,18 +41,18 @@ public class BoxingGlideLoader implements IBoxingMediaLoader {
         String path = "file://" + absPath;
         try {
             // https://github.com/bumptech/glide/issues/1531
-            Glide.with(img.getContext()).load(path).placeholder(R.drawable.ic_boxing_default_image).crossFade().centerCrop().into(img);
+            Glide.with(img.getContext()).load(path).placeholder(R.drawable.ic_boxing_default_image).crossFade().centerCrop().override(width, height).into(img);
         } catch(IllegalArgumentException ignore) {
         }
 
     }
 
     @Override
-    public void displayRaw(@NonNull final ImageView img, @NonNull String absPath, final IBoxingCallback callback) {
+    public void displayRaw(@NonNull final ImageView img, @NonNull String absPath, int width, int height, final IBoxingCallback callback) {
         String path = "file://" + absPath;
         Glide.with(img.getContext())
                 .load(path)
-                .asBitmap()
+                .asBitmap().override(width, height)
                 .listener(new RequestListener<String, Bitmap>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<Bitmap> target, boolean isFirstResource) {

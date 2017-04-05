@@ -43,10 +43,10 @@ public class BoxingPicassoLoader implements IBoxingMediaLoader {
     }
 
     @Override
-    public void displayRaw(@NonNull ImageView img, @NonNull String absPath, final IBoxingCallback callback) {
+    public void displayRaw(@NonNull ImageView img, @NonNull String absPath, int width, int height, final IBoxingCallback callback) {
         String path = "file://" + absPath;
         Picasso.with(img.getContext())
-                .load(path).transform(new BitmapTransform(1080, 720))
+                .load(path).transform(new BitmapTransform(width, height))
                 .into(img, new Callback() {
                     @Override
                     public void onSuccess() {
