@@ -162,7 +162,7 @@ public class BoxingBottomSheetActivity extends AbsBoxingActivity implements View
 
             ImageMedia imageMedia = (ImageMedia) medias.get(0);
             mImagePath = imageMedia.getPath();
-            BoxingMediaLoader.getInstance().displayRaw(mImage, mImagePath, null);
+            BoxingMediaLoader.getInstance().displayRaw(mImage, mImagePath, 1080, 720, null);
         }
         hideBottomSheet();
     }
