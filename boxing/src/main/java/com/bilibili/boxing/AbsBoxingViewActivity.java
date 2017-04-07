@@ -119,8 +119,8 @@ public abstract class AbsBoxingViewActivity extends AppCompatActivity implements
         return getApplicationContext().getContentResolver();
     }
 
-    public final void loadRawImage(@NonNull ImageView img, @NonNull String path, IBoxingCallback callback) {
-        BoxingMediaLoader.getInstance().displayRaw(img, path, callback);
+    public final void loadRawImage(@NonNull ImageView img, @NonNull String path, int width, int height, IBoxingCallback callback) {
+        BoxingMediaLoader.getInstance().displayRaw(img, path, width, height, callback);
     }
 
     /**

@@ -124,9 +124,12 @@ public class BoxingFrescoLoader implements IBoxingMediaLoader {
     }
 
     @Override
-    public void displayRaw(@NonNull ImageView img, @NonNull String absPath, IBoxingCallback callback) {
+    public void displayRaw(@NonNull ImageView img, @NonNull String absPath, int width, int height,  IBoxingCallback callback) {
         absPath = "file://" + absPath;
         ImageRequestBuilder requestBuilder = ImageRequestBuilder.newBuilderWithSource(Uri.parse(absPath));
+        if (width > 0 && height > 0) {
+            requestBuilder.setResizeOptions(new ResizeOptions(width, height));
+        }
         ImageRequest request = requestBuilder.build();
         loadImage(request, img, callback);
     }
