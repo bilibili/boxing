@@ -54,6 +54,13 @@ public interface PickerContract {
         void showAlbum(@Nullable List<AlbumEntity> albums);
 
         /**
+         * show the error message regarding the oversize media
+         *
+         * @param media The oversize media.
+         */
+        void showOverSizeErrorFor(BaseMedia media);
+
+        /**
          * get the {@link ContentResolver} in the view
          */
         @NonNull
@@ -115,6 +122,14 @@ public interface PickerContract {
         boolean hasNextPage();
 
         boolean canLoadNextPage();
+
+        /**
+         * Checks whether the media is allowed to be selected in accordance with current config.
+         *
+         * @param media The media to check.
+         * @return {@code true} if the media is valid, {@code false} otherwise.
+         */
+        boolean canSelectMedia(BaseMedia media);
 
         /**
          * load next page

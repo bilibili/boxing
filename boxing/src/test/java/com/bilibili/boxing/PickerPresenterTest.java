@@ -178,4 +178,16 @@ public class PickerPresenterTest {
                 ArgumentCaptor.forClass(Integer.class).capture(), ArgumentCaptor.forClass(String.class).capture(), mLoadMediaCallback.capture());
     }
 
+    @Test
+    public void canSelectMedia() {
+        final BoxingConfig config = new BoxingConfig();
+        config.withMaxImageSize(100);
+        Mockito.when(mPickerManager.getBoxingConfig()).thenReturn(config);
+
+        final BaseMedia media = new ImageMedia("id", "path");
+        media.setSize("99");
+        Assert.assertTrue(mPresenter.canSelectMedia(media));
+        media.setSize("101");
+        Assert.assertFalse(mPresenter.canSelectMedia(media));
+    }
 }

@@ -96,8 +96,6 @@ public class BoxingBottomSheetFragment extends AbsBoxingViewFragment implements 
         view.findViewById(R.id.finish_txt).setOnClickListener(this);
     }
 
-
-
     @Override
     public void onCameraActivityResult(int requestCode, int resultCode) {
         showProgressDialog();
@@ -211,6 +209,7 @@ public class BoxingBottomSheetFragment extends AbsBoxingViewFragment implements 
         public void onClick(View v) {
             ArrayList<BaseMedia> iMedias = new ArrayList<>();
             BaseMedia media = (BaseMedia) v.getTag();
+            if (!canSelectMedia(media)) { return; }
             iMedias.add(media);
             onFinish(iMedias);
         }

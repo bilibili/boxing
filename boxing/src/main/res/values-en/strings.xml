@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~  Copyright (C) 2017 Bilibili
   ~
@@ -16,8 +17,6 @@
   -->
 
 <resources>
-    <string name="boxing_app_name">Boxing</string>
-
-    <string name="boxing_image_too_big">您选择的图片过大，请压缩后再上传</string>
-    <string name="boxing_gif_too_big">您选择的gif图片过大，请压缩后再上传</string>
+    <string name="boxing_image_too_big">the image is too big!</string>
+    <string name="boxing_gif_too_big">the gif is too big!</string>
 </resources>

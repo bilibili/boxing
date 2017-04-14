@@ -30,6 +30,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.widget.Toast;
 
 import com.bilibili.boxing.model.BoxingBuilderConfig;
 import com.bilibili.boxing.model.BoxingManager;
@@ -128,6 +129,20 @@ public abstract class AbsBoxingViewFragment extends Fragment implements PickerCo
      */
     @Override
     public void showAlbum(@Nullable List<AlbumEntity> albums) {
+    }
+
+    @Override
+    public void showOverSizeErrorFor(@NonNull BaseMedia media) {
+        final Activity activity = getActivity();
+        if (activity != null) {
+            if (media instanceof ImageMedia) {
+                if (((ImageMedia) media).isGif()) {
+                    Toast.makeText(activity, R.string.boxing_gif_too_big, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(activity, R.string.boxing_image_too_big, Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 
     /**
@@ -386,6 +401,14 @@ public abstract class AbsBoxingViewFragment extends Fragment implements PickerCo
         return mPresenter.canLoadNextPage();
     }
 
+    /**
+     * Corresponds to {@link com.bilibili.boxing.presenter.PickerContract.Presenter#canSelectMedia(BaseMedia)}.
+     *
+     * @param media The media to check.
+     * @return {@code true} if the media can be selected.
+     */
+    public final boolean canSelectMedia(@NonNull BaseMedia media) { return mPresenter.canSelectMedia(media); }
+
     public final void onLoadNextPage() {
         mPresenter.onLoadNextPage();
     }
@@ -462,7 +485,7 @@ public abstract class AbsBoxingViewFragment extends Fragment implements PickerCo
                 onError(helper);
                 return;
             }
-            ImageMedia cameraMedia = new ImageMedia(file);
+            final ImageMedia cameraMedia = new ImageMedia(file);
             cameraMedia.saveMediaStore(fragment.getAppCr());
             fragment.onCameraFinish(cameraMedia);
         }

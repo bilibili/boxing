@@ -25,12 +25,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bilibili.boxing.loader.IBoxingCallback;
 import com.bilibili.boxing.model.BoxingManager;
 import com.bilibili.boxing.model.config.BoxingConfig;
 import com.bilibili.boxing.model.entity.AlbumEntity;
 import com.bilibili.boxing.model.entity.BaseMedia;
+import com.bilibili.boxing.model.entity.impl.ImageMedia;
 import com.bilibili.boxing.presenter.PickerContract;
 import com.bilibili.boxing.presenter.PickerPresenter;
 
@@ -68,6 +70,17 @@ public abstract class AbsBoxingViewActivity extends AppCompatActivity implements
 
     @Override
     public void showAlbum(@Nullable List<AlbumEntity> albums) {
+    }
+
+    @Override
+    public void showOverSizeErrorFor(@NonNull BaseMedia media) {
+        if (media instanceof ImageMedia) {
+            if (((ImageMedia) media).isGif()) {
+                Toast.makeText(this, R.string.boxing_gif_too_big, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, R.string.boxing_image_too_big, Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     /**
@@ -142,6 +155,14 @@ public abstract class AbsBoxingViewActivity extends AppCompatActivity implements
         BoxingConfig config = BoxingManager.getInstance().getBoxingConfig();
         return config != null && config.isSingleImageMode() && config.getCropOption() != null;
     }
+
+    /**
+     * Corresponds to {@link com.bilibili.boxing.presenter.PickerContract.Presenter#canSelectMedia(BaseMedia)}.
+     *
+     * @param media The media to check.
+     * @return {@code true} if media can be selected.
+     */
+    public final boolean canSelectMedia(@NonNull BaseMedia media) { return mPresenter.canSelectMedia(media); }
 
     /**
      * to start the crop behavior, call it when {@link #hasCropBehavior()} return true.

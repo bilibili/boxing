@@ -42,6 +42,7 @@ public class BoxingConfig implements Parcelable {
     private boolean mNeedPaging = true;
 
     private int mMaxCount = DEFAULT_SELECTED_COUNT;
+    private long mMaxImageSize = -1;
 
     public enum Mode {
         SINGLE_IMG, MULTI_IMG, VIDEO
@@ -86,6 +87,14 @@ public class BoxingConfig implements Parcelable {
             return mMaxCount;
         }
         return DEFAULT_SELECTED_COUNT;
+    }
+
+    /**
+     * get the max image size set by {@link #withMaxImageSize(long)}}, if not set return {@code -1} which means unlimited size for ordinary images (png, jpg, etc.) and the limit of 1 mb for GIFs.
+     * @return max image size
+     */
+    public long getMaxImageSize() {
+        return mMaxImageSize;
     }
 
     public boolean isNeedLoading() {
@@ -158,6 +167,20 @@ public class BoxingConfig implements Parcelable {
         return this;
     }
 
+    /**
+     * set the max allowed image size in bytes.
+     * @param maxImageSize max image size, if not set the default max size is used instead
+     * @return the build config to chain calls
+     */
+    public BoxingConfig withMaxImageSize(long maxImageSize) {
+        if (maxImageSize <= 0) {
+            return this;
+        }
+
+        this.mMaxImageSize = maxImageSize;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "BoxingConfig{" +
@@ -180,6 +203,7 @@ public class BoxingConfig implements Parcelable {
         dest.writeByte(this.mNeedGif ? (byte) 1 : (byte) 0);
         dest.writeByte(this.mNeedPaging ? (byte) 1 : (byte) 0);
         dest.writeInt(this.mMaxCount);
+        dest.writeLong(this.mMaxImageSize);
     }
 
     protected BoxingConfig(Parcel in) {
@@ -192,6 +216,7 @@ public class BoxingConfig implements Parcelable {
         this.mNeedGif = in.readByte() != 0;
         this.mNeedPaging = in.readByte() != 0;
         this.mMaxCount = in.readInt();
+        this.mMaxImageSize = in.readLong();
     }
 
     public static final Creator<BoxingConfig> CREATOR = new Creator<BoxingConfig>() {
