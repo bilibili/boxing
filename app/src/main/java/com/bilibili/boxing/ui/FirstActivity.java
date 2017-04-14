@@ -35,6 +35,7 @@ import com.bilibili.boxing.AbsBoxingActivity;
 import com.bilibili.boxing.Boxing;
 import com.bilibili.boxing.BoxingMediaLoader;
 import com.bilibili.boxing.demo.R;
+import com.bilibili.boxing.model.BoxingManager;
 import com.bilibili.boxing.model.config.BoxingConfig;
 import com.bilibili.boxing.model.config.BoxingCropOption;
 import com.bilibili.boxing.model.entity.BaseMedia;
@@ -98,7 +99,7 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
         int id = v.getId();
         switch (id) {
             case R.id.single_image_btn:
-                BoxingConfig singleImgConfig = new BoxingConfig(BoxingConfig.Mode.SINGLE_IMG);
+                BoxingConfig singleImgConfig = new BoxingConfig(BoxingConfig.Mode.SINGLE_IMG).withMediaPlaceHolderRes(R.drawable.ic_boxing_default_image);
                 Boxing.of(singleImgConfig).withIntent(this, BoxingActivity.class).start(this, COMPRESS_REQUEST_CODE);
                 break;
             case R.id.single_image_btn_crop_btn:
@@ -112,7 +113,8 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
                         .appendPath(cachePath)
                         .appendPath(String.format(Locale.US, "%s.jpg", System.currentTimeMillis()))
                         .build();
-                BoxingConfig singleCropImgConfig = new BoxingConfig(BoxingConfig.Mode.SINGLE_IMG).withCropOption(new BoxingCropOption(destUri));
+                BoxingConfig singleCropImgConfig = new BoxingConfig(BoxingConfig.Mode.SINGLE_IMG).withCropOption(new BoxingCropOption(destUri))
+                        .withMediaPlaceHolderRes(R.drawable.ic_boxing_default_image);
                 Boxing.of(singleCropImgConfig).withIntent(this, BoxingActivity.class).start(this, REQUEST_CODE);
                 break;
             case R.id.multi_image_btn:
@@ -198,7 +200,7 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             if (holder instanceof MediaViewHolder) {
                 MediaViewHolder mediaViewHolder = (MediaViewHolder) holder;
-                mediaViewHolder.mImageView.setImageResource(R.drawable.ic_boxing_default_image);
+                mediaViewHolder.mImageView.setImageResource(BoxingManager.getInstance().getBoxingConfig().getMediaPlaceHolderRes());
                 BaseMedia media = mList.get(position);
                 String path;
                 if (media instanceof ImageMedia) {

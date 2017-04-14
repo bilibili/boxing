@@ -18,9 +18,7 @@
 package com.bilibili.boxing_impl.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,7 +55,7 @@ public class BoxingMediaAdapter extends RecyclerView.Adapter {
     private View.OnClickListener mOnMediaClickListener;
     private OnCheckListener mOnCheckListener;
     private OnMediaCheckedListener mOnCheckedListener;
-    private Drawable mDefaultDrawable;
+    private int mDefaultRes;
 
     public BoxingMediaAdapter(Context context) {
         this.mInflater = LayoutInflater.from(context);
@@ -67,7 +65,7 @@ public class BoxingMediaAdapter extends RecyclerView.Adapter {
         this.mOffset = mMediaConfig.isNeedCamera() ? 1 : 0;
         this.mMultiImageMode = mMediaConfig.getMode() == BoxingConfig.Mode.MULTI_IMG;
         this.mOnCheckListener = new OnCheckListener();
-        this.mDefaultDrawable = ContextCompat.getDrawable(context, R.drawable.ic_boxing_default_image);
+        this.mDefaultRes = mMediaConfig.getMediaPlaceHolderRes();
     }
 
     @Override
@@ -96,7 +94,7 @@ public class BoxingMediaAdapter extends RecyclerView.Adapter {
             final BaseMedia media = mMedias.get(pos);
             final ImageViewHolder vh = (ImageViewHolder) holder;
 
-            vh.mItemLayout.setDrawable(mDefaultDrawable);
+            vh.mItemLayout.setImageRes(mDefaultRes);
             vh.mItemLayout.setTag(media);
 
             vh.mItemLayout.setOnClickListener(mOnMediaClickListener);

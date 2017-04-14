@@ -118,7 +118,7 @@ public class BoxingFrescoLoader implements IBoxingMediaLoader {
 
             @Override
             protected void onFailureImpl(DataSource<CloseableReference<CloseableImage>> dataSource) {
-                img.setImageResource(R.drawable.ic_boxing_default_image);
+                img.setImageResource(R.drawable.ic_boxing_broken_image);
             }
         }, UiThreadImmediateExecutorService.getInstance());
     }

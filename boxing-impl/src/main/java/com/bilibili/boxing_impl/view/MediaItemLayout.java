@@ -19,7 +19,7 @@ package com.bilibili.boxing_impl.view;
 
 import android.content.Context;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -116,10 +116,9 @@ public class MediaItemLayout extends FrameLayout {
         return result;
     }
 
-    @SuppressWarnings("deprecation")
-    public void setDrawable(Drawable drawable) {
+    public void setImageRes(@DrawableRes int imageRes) {
         if (mCoverImg != null) {
-            mCoverImg.setImageDrawable(drawable);
+            mCoverImg.setImageResource(imageRes);
         }
     }
 

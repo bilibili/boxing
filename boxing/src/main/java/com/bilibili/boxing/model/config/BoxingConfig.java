@@ -19,6 +19,7 @@ package com.bilibili.boxing.model.config;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.DrawableRes;
 
 /**
  * The pick config.<br/>
@@ -36,6 +37,9 @@ public class BoxingConfig implements Parcelable {
     private Mode mMode = Mode.SINGLE_IMG;
     private ViewMode mViewMode = ViewMode.PREVIEW;
     private BoxingCropOption mCropOption;
+
+    private int mMediaPlaceHolderRes;
+    private int mAlbumPlaceHolderRes;
 
     private boolean mNeedCamera;
     private boolean mNeedGif;
@@ -86,6 +90,22 @@ public class BoxingConfig implements Parcelable {
             return mMaxCount;
         }
         return DEFAULT_SELECTED_COUNT;
+    }
+
+    /**
+     * get the image drawable resource by {@link BoxingConfig#withMediaPlaceHolderRes(int)}.
+     * @return >0, set a valid drawable resource; otherwise without a placeholder.
+     */
+    public @DrawableRes int getMediaPlaceHolderRes() {
+        return mMediaPlaceHolderRes;
+    }
+
+    /**
+     * get the album drawable resource by {@link BoxingConfig#withAlbumPlaceHolderRes(int)}.
+     * @return >0, set a valid drawable resource; otherwise without a placeholder.
+     */
+    public int getAlbumPlaceHolderRes() {
+        return mAlbumPlaceHolderRes;
     }
 
     public boolean isNeedLoading() {
@@ -158,6 +178,16 @@ public class BoxingConfig implements Parcelable {
         return this;
     }
 
+    public BoxingConfig withMediaPlaceHolderRes(@DrawableRes int mediaPlaceHolderRes) {
+        this.mMediaPlaceHolderRes = mediaPlaceHolderRes;
+        return this;
+    }
+
+    public BoxingConfig withAlbumPlaceHolderRes(@DrawableRes int albumPlaceHolderRes) {
+        this.mAlbumPlaceHolderRes = albumPlaceHolderRes;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "BoxingConfig{" +
@@ -176,6 +206,8 @@ public class BoxingConfig implements Parcelable {
         dest.writeInt(this.mMode == null ? -1 : this.mMode.ordinal());
         dest.writeInt(this.mViewMode == null ? -1 : this.mViewMode.ordinal());
         dest.writeParcelable(this.mCropOption, flags);
+        dest.writeInt(this.mMediaPlaceHolderRes);
+        dest.writeInt(this.mAlbumPlaceHolderRes);
         dest.writeByte(this.mNeedCamera ? (byte) 1 : (byte) 0);
         dest.writeByte(this.mNeedGif ? (byte) 1 : (byte) 0);
         dest.writeByte(this.mNeedPaging ? (byte) 1 : (byte) 0);
@@ -188,6 +220,8 @@ public class BoxingConfig implements Parcelable {
         int tmpMViewMode = in.readInt();
         this.mViewMode = tmpMViewMode == -1 ? null : ViewMode.values()[tmpMViewMode];
         this.mCropOption = in.readParcelable(BoxingCropOption.class.getClassLoader());
+        this.mMediaPlaceHolderRes = in.readInt();
+        this.mAlbumPlaceHolderRes = in.readInt();
         this.mNeedCamera = in.readByte() != 0;
         this.mNeedGif = in.readByte() != 0;
         this.mNeedPaging = in.readByte() != 0;

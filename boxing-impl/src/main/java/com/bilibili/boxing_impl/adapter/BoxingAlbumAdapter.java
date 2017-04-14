@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bilibili.boxing.BoxingMediaLoader;
+import com.bilibili.boxing.model.BoxingManager;
 import com.bilibili.boxing.model.entity.AlbumEntity;
 import com.bilibili.boxing.model.entity.impl.ImageMedia;
 import com.bilibili.boxing_impl.R;
@@ -47,11 +48,13 @@ public class BoxingAlbumAdapter extends RecyclerView.Adapter implements View.OnC
     private List<AlbumEntity> mAlums;
     private LayoutInflater mInflater;
     private OnAlbumClickListener mAlbumOnClickListener;
+    private int mDefaultRes;
 
     public BoxingAlbumAdapter(Context context) {
         this.mAlums = new ArrayList<>();
         this.mAlums.add(AlbumEntity.createDefaultAlbum());
         this.mInflater = LayoutInflater.from(context);
+        this.mDefaultRes = BoxingManager.getInstance().getBoxingConfig().getAlbumPlaceHolderRes();
     }
 
     public void setAlbumOnClickListener(OnAlbumClickListener albumOnClickListener) {
@@ -66,7 +69,7 @@ public class BoxingAlbumAdapter extends RecyclerView.Adapter implements View.OnC
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final AlbumViewHolder albumViewHolder = (AlbumViewHolder) holder;
-        albumViewHolder.mCoverImg.setImageResource(R.drawable.ic_boxing_default_image);
+        albumViewHolder.mCoverImg.setImageResource(mDefaultRes);
         final int adapterPos = holder.getAdapterPosition();
         final AlbumEntity album = mAlums.get(adapterPos);
 

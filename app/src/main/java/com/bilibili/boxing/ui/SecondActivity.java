@@ -67,7 +67,8 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.content_layout, fragment, BoxingBottomSheetFragment.TAG).commit();
 
-            BoxingConfig singleImgConfig = new BoxingConfig(BoxingConfig.Mode.SINGLE_IMG);
+            BoxingConfig singleImgConfig = new BoxingConfig(BoxingConfig.Mode.SINGLE_IMG)
+                    .withMediaPlaceHolderRes(R.drawable.ic_boxing_default_image).withAlbumPlaceHolderRes(R.drawable.ic_boxing_default_image);
             Boxing.of(singleImgConfig).setupFragment(fragment, new Boxing.OnBoxingFinishListener() {
 
                 @Override
