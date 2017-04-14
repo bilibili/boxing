@@ -136,12 +136,17 @@ public class BoxingRawImageFragment extends BoxingBaseFragment {
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         if (mAttacher != null) {
             mAttacher.cleanup();
             mAttacher = null;
+
+            final AbsBoxingViewActivity activity = (AbsBoxingViewActivity) getActivity();
+            if (activity != null) {
+                activity.recycleRawImage(mImageView, mMedia.getPath());
+            }
             mImageView = null;
         }
+        super.onDestroyView();
     }
 
     private static class BoxingCallback implements IBoxingCallback {

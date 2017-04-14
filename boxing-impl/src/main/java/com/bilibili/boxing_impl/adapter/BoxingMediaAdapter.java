@@ -113,6 +113,13 @@ public class BoxingMediaAdapter extends RecyclerView.Adapter {
     }
 
     @Override
+    public void onViewRecycled(RecyclerView.ViewHolder holder) {
+        if (holder instanceof ImageViewHolder) {
+            ((ImageViewHolder) holder).mItemLayout.recycleMedia();
+        }
+    }
+
+    @Override
     public long getItemId(int position) {
         return position;
     }

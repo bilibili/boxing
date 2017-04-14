@@ -26,6 +26,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bilibili.boxing.BoxingMediaLoader;
+import com.bilibili.boxing.loader.IBoxingMediaLoader;
+import com.bilibili.boxing.loader.IBoxingMediaRecyclingLoader;
 import com.bilibili.boxing.model.entity.AlbumEntity;
 import com.bilibili.boxing.model.entity.impl.ImageMedia;
 import com.bilibili.boxing_impl.R;
@@ -39,8 +41,9 @@ import java.util.List;
  *
  * @author ChenSL
  */
-public class BoxingAlbumAdapter extends RecyclerView.Adapter implements View.OnClickListener {
-    private static final String UNKNOW_ALBUM_NAME = "?";
+public class BoxingAlbumAdapter extends RecyclerView.Adapter<BoxingAlbumAdapter.AlbumViewHolder> implements View.OnClickListener {
+    private static final String UNKNOWN_ALBUM_NAME = "?";
+    private static final int COVER_IMAGE_INDEX = 0;
 
     private int mCurrentAlbumPos;
 
@@ -59,21 +62,21 @@ public class BoxingAlbumAdapter extends RecyclerView.Adapter implements View.OnC
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AlbumViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new AlbumViewHolder(mInflater.inflate(R.layout.layout_boxing_album_item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        final AlbumViewHolder albumViewHolder = (AlbumViewHolder) holder;
+    public void onBindViewHolder(AlbumViewHolder albumViewHolder, int position) {
         albumViewHolder.mCoverImg.setImageResource(R.drawable.ic_boxing_default_image);
-        final int adapterPos = holder.getAdapterPosition();
+        final int adapterPos = albumViewHolder.getAdapterPosition();
         final AlbumEntity album = mAlums.get(adapterPos);
 
         if (album != null && album.hasImages()) {
             albumViewHolder.mNameTxt.setText(album.mBucketName);
-            ImageMedia media = (ImageMedia) album.mImageList.get(0);
+            ImageMedia media = (ImageMedia) album.mImageList.get(COVER_IMAGE_INDEX);
             if (media != null) {
+                albumViewHolder.mCoverImagePath = media.getPath();
                 BoxingMediaLoader.getInstance().displayThumbnail(albumViewHolder.mCoverImg, media.getPath(), 50, 50);
             }
             albumViewHolder.mLayout.setTag(adapterPos);
@@ -82,9 +85,16 @@ public class BoxingAlbumAdapter extends RecyclerView.Adapter implements View.OnC
             albumViewHolder.mSizeTxt.setText(albumViewHolder.mSizeTxt.
                     getResources().getString(R.string.boxing_album_images_fmt, album.mCount));
         } else {
-            albumViewHolder.mNameTxt.setText(UNKNOW_ALBUM_NAME);
+            albumViewHolder.mNameTxt.setText(UNKNOWN_ALBUM_NAME);
             albumViewHolder.mSizeTxt.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onViewRecycled(AlbumViewHolder holder) {
+        super.onViewRecycled(holder);
+        if (holder.mCoverImagePath.isEmpty()) return;
+        BoxingMediaLoader.getInstance().recycleThumbnail(holder.mCoverImg, holder.mCoverImagePath);
     }
 
     public void addAllData(List<AlbumEntity> alums) {
@@ -127,12 +137,13 @@ public class BoxingAlbumAdapter extends RecyclerView.Adapter implements View.OnC
         }
     }
 
-    private static class AlbumViewHolder extends RecyclerView.ViewHolder {
+    static class AlbumViewHolder extends RecyclerView.ViewHolder {
         ImageView mCoverImg;
         TextView mNameTxt;
         TextView mSizeTxt;
         View mLayout;
         ImageView mCheckedImg;
+        String mCoverImagePath = "";
 
         AlbumViewHolder(final View itemView) {
             super(itemView);

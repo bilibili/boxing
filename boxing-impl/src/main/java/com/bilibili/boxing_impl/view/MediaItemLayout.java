@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -30,6 +31,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bilibili.boxing.BoxingMediaLoader;
+import com.bilibili.boxing.loader.IBoxingMediaLoader;
+import com.bilibili.boxing.loader.IBoxingMediaRecyclingLoader;
 import com.bilibili.boxing.model.entity.BaseMedia;
 import com.bilibili.boxing.model.entity.impl.ImageMedia;
 import com.bilibili.boxing.model.entity.impl.VideoMedia;
@@ -50,6 +53,7 @@ public class MediaItemLayout extends FrameLayout {
     private View mFontLayout;
     private ImageView mCoverImg;
     private ScreenType mScreenType;
+    private String mCoverImagePath = "";
 
     private enum ScreenType {
         SMALL(100), NORMAL(180), LARGE(320);
@@ -126,13 +130,15 @@ public class MediaItemLayout extends FrameLayout {
     public void setMedia(BaseMedia media) {
         if (media instanceof ImageMedia) {
             mVideoLayout.setVisibility(GONE);
-            setCover(((ImageMedia) media).getThumbnailPath());
+            mCoverImagePath = ((ImageMedia) media).getThumbnailPath();
+            setCover(mCoverImagePath);
         } else if (media instanceof VideoMedia) {
             mVideoLayout.setVisibility(VISIBLE);
             VideoMedia videoMedia = (VideoMedia) media;
             ((TextView) mVideoLayout.findViewById(R.id.video_duration_txt)).setText(videoMedia.getDuration());
             ((TextView) mVideoLayout.findViewById(R.id.video_size_txt)).setText(videoMedia.getSizeByUnit());
-            setCover(videoMedia.getPath());
+            mCoverImagePath = videoMedia.getPath();
+            setCover(mCoverImagePath);
         }
     }
 
@@ -142,6 +148,14 @@ public class MediaItemLayout extends FrameLayout {
         }
         mCoverImg.setTag(R.string.boxing_app_name, path);
         BoxingMediaLoader.getInstance().displayThumbnail(mCoverImg, path, mScreenType.getValue(), mScreenType.getValue());
+    }
+
+    /**
+     * Should be called when the current media item has been recycled (e.g. when {@link android.support.v7.widget.RecyclerView.Adapter#onViewRecycled(RecyclerView.ViewHolder)} was triggered).
+     */
+    public void recycleMedia() {
+        if (mCoverImg == null || mCoverImagePath.isEmpty()) return;
+        BoxingMediaLoader.getInstance().recycleThumbnail(mCoverImg, mCoverImagePath);
     }
 
     @SuppressWarnings("deprecation")
