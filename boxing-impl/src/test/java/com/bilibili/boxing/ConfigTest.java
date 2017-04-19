@@ -37,8 +37,19 @@ public class ConfigTest {
         config = mPickerManager.getBoxingConfig();
         assertEquals(config.getAlbumPlaceHolderRes(), 0);
 
-        mPickerManager.setBoxingConfig(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).withMediaPlaceHolderRes(R.drawable.ic_boxing_broken_image));
+        mPickerManager.setBoxingConfig(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).withAlbumPlaceHolderRes(R.drawable.ic_boxing_broken_image));
         config = mPickerManager.getBoxingConfig();
         assertEquals(config.getAlbumPlaceHolderRes(), R.drawable.ic_boxing_broken_image);
+    }
+
+    @Test
+    public void testVideoDuration() {
+        mPickerManager.setBoxingConfig(new BoxingConfig(BoxingConfig.Mode.VIDEO));
+        BoxingConfig config = mPickerManager.getBoxingConfig();
+        assertEquals(config.getVideoDurationRes(), 0);
+
+        mPickerManager.setBoxingConfig(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).withVideoDurationRes(R.drawable.ic_boxing_broken_image));
+        config = mPickerManager.getBoxingConfig();
+        assertEquals(config.getVideoDurationRes(), R.drawable.ic_boxing_broken_image);
     }
 }

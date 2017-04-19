@@ -40,6 +40,7 @@ public class BoxingConfig implements Parcelable {
 
     private int mMediaPlaceHolderRes;
     private int mAlbumPlaceHolderRes;
+    private int mVideoDurationRes;
 
     private boolean mNeedCamera;
     private boolean mNeedGif;
@@ -104,8 +105,16 @@ public class BoxingConfig implements Parcelable {
      * get the album drawable resource by {@link BoxingConfig#withAlbumPlaceHolderRes(int)}.
      * @return >0, set a valid drawable resource; otherwise without a placeholder.
      */
-    public int getAlbumPlaceHolderRes() {
+    public @DrawableRes int getAlbumPlaceHolderRes() {
         return mAlbumPlaceHolderRes;
+    }
+
+    /**
+     * get the video drawable resource by {@link BoxingConfig#withVideoDurationRes(int)}.
+     * @return >0, set a valid drawable resource; otherwise without a placeholder.
+     */
+    public @DrawableRes int getVideoDurationRes() {
+        return mVideoDurationRes;
     }
 
     public boolean isNeedLoading() {
@@ -178,13 +187,27 @@ public class BoxingConfig implements Parcelable {
         return this;
     }
 
+    /**
+     * set the image placeholder, default 0
+     */
     public BoxingConfig withMediaPlaceHolderRes(@DrawableRes int mediaPlaceHolderRes) {
         this.mMediaPlaceHolderRes = mediaPlaceHolderRes;
         return this;
     }
 
+    /**
+     * set the album placeholder, default 0
+     */
     public BoxingConfig withAlbumPlaceHolderRes(@DrawableRes int albumPlaceHolderRes) {
         this.mAlbumPlaceHolderRes = albumPlaceHolderRes;
+        return this;
+    }
+
+    /**
+     * set the video duration resource in video mode, default 0
+     */
+    public BoxingConfig withVideoDurationRes(@DrawableRes int videoDurationRes) {
+        this.mVideoDurationRes = videoDurationRes;
         return this;
     }
 

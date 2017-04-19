@@ -79,6 +79,7 @@ BoxingConfig config = new BoxingConfig(Mode); // Mode：Mode.SINGLE_IMG, Mode.MU
 config.needCamera().needGif().withMaxCount(9) // camera, gif support, set selected images count
 .withMediaPlaceHolderRes(resInt) // set the image placeholder, default 0
 .withAlbumPlaceHolderRes(resInt) // set the album placeholder, default 0
+.withVideoDurationRes(resInt) // set the video duration resource in video mode, default 0
 ```
 - Get Boxing, set Intent and call start
 ```java
