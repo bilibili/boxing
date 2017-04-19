@@ -60,7 +60,7 @@ public class BoxingExifHelper {
 
     }
 
-    public static int getRotateDegree(String path) {
+    static int getRotateDegree(String path) {
         int result = 0;
         try {
             ExifInterface exif = new ExifInterface(path);

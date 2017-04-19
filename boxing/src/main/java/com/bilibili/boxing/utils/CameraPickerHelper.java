@@ -228,10 +228,11 @@ public class CameraPickerHelper {
         Bitmap outBitmap = null;
         try {
             int degree = BoxingExifHelper.getRotateDegree(file.getAbsolutePath());
-            Matrix matrix = new Matrix();
-            if (degree != 0) {
-                matrix.postRotate(degree);
+            if (degree == 0) {
+                return true;
             }
+            Matrix matrix = new Matrix();
+            matrix.postRotate(degree);
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = false;
             bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
