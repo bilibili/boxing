@@ -29,6 +29,7 @@ import com.bilibili.boxing.model.config.BoxingConfig;
 import com.bilibili.boxing.model.config.BoxingCropOption;
 import com.bilibili.boxing.model.entity.BaseMedia;
 import com.bilibili.boxing.model.entity.impl.ImageMedia;
+import com.bilibili.boxing_impl.R;
 import com.bilibili.boxing_impl.ui.BoxingActivity;
 
 import org.junit.Before;
@@ -72,7 +73,7 @@ public class PickerActivityTest {
 
     @Test
     public void testCreateSingleImageIntent() {
-        Intent intent = Boxing.of(new BoxingConfig(BoxingConfig.Mode.SINGLE_IMG).needCamera())
+        Intent intent = Boxing.of(new BoxingConfig(BoxingConfig.Mode.SINGLE_IMG).needCamera(R.drawable.ic_boxing_broken_image))
                 .withIntent(mContext, BoxingActivity.class).getIntent();
         assertNotNull(intent);
         BoxingConfig config = BoxingManager.getInstance().getBoxingConfig();
@@ -136,7 +137,7 @@ public class PickerActivityTest {
 
     @Test
     public void testCreateCustomIntent() {
-        BoxingConfig pickerConfig = new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).needCamera();
+        BoxingConfig pickerConfig = new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).needCamera(R.drawable.ic_boxing_broken_image);
         Uri destUri = new Uri.Builder()
                 .scheme("file")
                 .appendPath("test")
