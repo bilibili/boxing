@@ -34,6 +34,7 @@ import com.bilibili.boxing.model.BoxingManager;
 import com.bilibili.boxing.model.entity.BaseMedia;
 import com.bilibili.boxing.model.entity.impl.ImageMedia;
 import com.bilibili.boxing.model.entity.impl.VideoMedia;
+import com.bilibili.boxing_impl.BoxingResHelper;
 import com.bilibili.boxing_impl.R;
 import com.bilibili.boxing_impl.WindowManagerHelper;
 
@@ -150,10 +151,10 @@ public class MediaItemLayout extends FrameLayout {
     public void setChecked(boolean isChecked) {
         if (isChecked) {
             mFontLayout.setVisibility(View.VISIBLE);
-            mCheckImg.setImageDrawable(getResources().getDrawable(R.drawable.ic_boxing_checked));
+            mCheckImg.setImageDrawable(getResources().getDrawable(BoxingResHelper.getMediaCheckedRes()));
         } else {
             mFontLayout.setVisibility(View.GONE);
-            mCheckImg.setImageDrawable(getResources().getDrawable(R.drawable.shape_boxing_unchecked));
+            mCheckImg.setImageDrawable(getResources().getDrawable(BoxingResHelper.getMediaUncheckedRes()));
         }
     }
 

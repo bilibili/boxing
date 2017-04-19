@@ -2,6 +2,7 @@ package com.bilibili.boxing;
 
 import com.bilibili.boxing.model.BoxingManager;
 import com.bilibili.boxing.model.config.BoxingConfig;
+import com.bilibili.boxing_impl.BoxingResHelper;
 import com.bilibili.boxing_impl.R;
 
 import org.junit.Before;
@@ -51,5 +52,29 @@ public class ConfigTest {
         mPickerManager.setBoxingConfig(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).withVideoDurationRes(R.drawable.ic_boxing_broken_image));
         config = mPickerManager.getBoxingConfig();
         assertEquals(config.getVideoDurationRes(), R.drawable.ic_boxing_broken_image);
+    }
+
+
+    @Test
+    public void testImageSelectionRes() {
+        mPickerManager.setBoxingConfig(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG));
+        BoxingConfig config = mPickerManager.getBoxingConfig();
+        assertEquals(config.getMediaCheckedRes(), 0);
+        assertEquals(BoxingResHelper.getMediaCheckedRes(), R.drawable.ic_boxing_checked);
+
+        mPickerManager.setBoxingConfig(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).withMediaCheckedRes(R.drawable.ic_boxing_broken_image));
+        config = mPickerManager.getBoxingConfig();
+        assertEquals(config.getMediaCheckedRes(), R.drawable.ic_boxing_broken_image);
+        assertEquals(BoxingResHelper.getMediaCheckedRes(), R.drawable.ic_boxing_broken_image);
+
+        mPickerManager.setBoxingConfig(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG));
+        config = mPickerManager.getBoxingConfig();
+        assertEquals(config.getMediaUnCheckedRes(), 0);
+        assertEquals(BoxingResHelper.getMediaUncheckedRes(), R.drawable.shape_boxing_unchecked);
+
+        mPickerManager.setBoxingConfig(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).withMediaUncheckedRes(R.drawable.ic_boxing_broken_image));
+        config = mPickerManager.getBoxingConfig();
+        assertEquals(config.getMediaUnCheckedRes(), R.drawable.ic_boxing_broken_image);
+        assertEquals(BoxingResHelper.getMediaUncheckedRes(), R.drawable.ic_boxing_broken_image);
     }
 }

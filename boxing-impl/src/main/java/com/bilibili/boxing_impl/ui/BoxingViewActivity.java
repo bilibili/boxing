@@ -38,6 +38,7 @@ import com.bilibili.boxing.model.BoxingManager;
 import com.bilibili.boxing.model.entity.BaseMedia;
 import com.bilibili.boxing.model.entity.impl.ImageMedia;
 import com.bilibili.boxing.model.task.IMediaTask;
+import com.bilibili.boxing_impl.BoxingResHelper;
 import com.bilibili.boxing_impl.R;
 import com.bilibili.boxing_impl.view.HackyViewPager;
 
@@ -209,7 +210,7 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
 
     private void setMenuIcon(boolean isSelected) {
         if (mNeedEdit) {
-            mSelectedMenuItem.setIcon(isSelected ? R.drawable.ic_boxing_checked : R.drawable.shape_boxing_unchecked);
+            mSelectedMenuItem.setIcon(isSelected ? BoxingResHelper.getMediaCheckedRes(): BoxingResHelper.getMediaUncheckedRes());
         }
     }
 

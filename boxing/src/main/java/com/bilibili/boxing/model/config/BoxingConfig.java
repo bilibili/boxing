@@ -39,6 +39,8 @@ public class BoxingConfig implements Parcelable {
     private BoxingCropOption mCropOption;
 
     private int mMediaPlaceHolderRes;
+    private int mMediaCheckedRes;
+    private int mMediaUnCheckedRes;
     private int mAlbumPlaceHolderRes;
     private int mVideoDurationRes;
 
@@ -99,6 +101,22 @@ public class BoxingConfig implements Parcelable {
      */
     public @DrawableRes int getMediaPlaceHolderRes() {
         return mMediaPlaceHolderRes;
+    }
+
+    /**
+     * get the media checked drawable resource by {@link BoxingConfig#withMediaCheckedRes(int)}.
+     * @return >0, set a valid drawable resource; otherwise without a placeholder.
+     */
+    public @DrawableRes  int getMediaCheckedRes() {
+        return mMediaCheckedRes;
+    }
+
+    /**
+     * get the media unchecked drawable resource by {@link BoxingConfig#withMediaPlaceHolderRes(int)}.
+     * @return >0, set a valid drawable resource; otherwise without a placeholder.
+     */
+    public @DrawableRes int getMediaUnCheckedRes() {
+        return mMediaUnCheckedRes;
     }
 
     /**
@@ -196,6 +214,22 @@ public class BoxingConfig implements Parcelable {
     }
 
     /**
+     * set the image placeholder, otherwise use default drawable.
+     */
+    public BoxingConfig withMediaCheckedRes(@DrawableRes int mediaCheckedResRes) {
+        this.mMediaCheckedRes = mediaCheckedResRes;
+        return this;
+    }
+
+    /**
+     * set the image placeholder, otherwise use default drawable.
+     */
+    public BoxingConfig withMediaUncheckedRes(@DrawableRes int mediaUncheckedRes) {
+        this.mMediaUnCheckedRes = mediaUncheckedRes;
+        return this;
+    }
+
+    /**
      * set the album placeholder, default 0
      */
     public BoxingConfig withAlbumPlaceHolderRes(@DrawableRes int albumPlaceHolderRes) {
@@ -215,7 +249,7 @@ public class BoxingConfig implements Parcelable {
     public String toString() {
         return "BoxingConfig{" +
                 "mMode=" + mMode +
-                ", mNeedCamera=" + mNeedCamera +
+                ", mViewMode=" + mViewMode +
                 '}';
     }
 
@@ -230,7 +264,10 @@ public class BoxingConfig implements Parcelable {
         dest.writeInt(this.mViewMode == null ? -1 : this.mViewMode.ordinal());
         dest.writeParcelable(this.mCropOption, flags);
         dest.writeInt(this.mMediaPlaceHolderRes);
+        dest.writeInt(this.mMediaCheckedRes);
+        dest.writeInt(this.mMediaUnCheckedRes);
         dest.writeInt(this.mAlbumPlaceHolderRes);
+        dest.writeInt(this.mVideoDurationRes);
         dest.writeByte(this.mNeedCamera ? (byte) 1 : (byte) 0);
         dest.writeByte(this.mNeedGif ? (byte) 1 : (byte) 0);
         dest.writeByte(this.mNeedPaging ? (byte) 1 : (byte) 0);
@@ -244,7 +281,10 @@ public class BoxingConfig implements Parcelable {
         this.mViewMode = tmpMViewMode == -1 ? null : ViewMode.values()[tmpMViewMode];
         this.mCropOption = in.readParcelable(BoxingCropOption.class.getClassLoader());
         this.mMediaPlaceHolderRes = in.readInt();
+        this.mMediaCheckedRes = in.readInt();
+        this.mMediaUnCheckedRes = in.readInt();
         this.mAlbumPlaceHolderRes = in.readInt();
+        this.mVideoDurationRes = in.readInt();
         this.mNeedCamera = in.readByte() != 0;
         this.mNeedGif = in.readByte() != 0;
         this.mNeedPaging = in.readByte() != 0;

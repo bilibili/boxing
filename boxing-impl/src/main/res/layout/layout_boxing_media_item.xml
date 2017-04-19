@@ -30,8 +30,8 @@
 
     <ImageView
         android:id="@+id/media_item_check"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:padding="6dp"
         android:src="@drawable/shape_boxing_unchecked"/>
