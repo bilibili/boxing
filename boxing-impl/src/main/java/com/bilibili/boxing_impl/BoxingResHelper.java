@@ -23,4 +23,9 @@ public class BoxingResHelper {
         int result = BoxingManager.getInstance().getBoxingConfig().getMediaUnCheckedRes();
         return result > 0 ? result : R.drawable.shape_boxing_unchecked;
     }
+
+    @DrawableRes
+    public static int getCameraRes() {
+        return BoxingManager.getInstance().getBoxingConfig().getCameraRes();
+    }
 }

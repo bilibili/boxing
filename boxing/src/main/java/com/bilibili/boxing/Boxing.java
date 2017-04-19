@@ -77,7 +77,7 @@ public class Boxing {
     public static Boxing get() {
         BoxingConfig config = BoxingManager.getInstance().getBoxingConfig();
         if (config == null) {
-            config = new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).needCamera().needGif();
+            config = new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).needGif();
             BoxingManager.getInstance().setBoxingConfig(config);
         }
         return new Boxing(config);
@@ -105,7 +105,7 @@ public class Boxing {
      * create a boxing entry. use {@link BoxingConfig.Mode#MULTI_IMG}.
      */
     public static Boxing of() {
-        BoxingConfig config = new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).needCamera().needGif();
+        BoxingConfig config = new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).needGif();
         return new Boxing(config);
     }
 

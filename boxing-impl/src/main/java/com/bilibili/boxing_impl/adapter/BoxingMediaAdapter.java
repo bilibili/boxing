@@ -23,11 +23,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.bilibili.boxing.model.BoxingManager;
 import com.bilibili.boxing.model.config.BoxingConfig;
 import com.bilibili.boxing.model.entity.BaseMedia;
 import com.bilibili.boxing.model.entity.impl.ImageMedia;
+import com.bilibili.boxing_impl.BoxingResHelper;
 import com.bilibili.boxing_impl.R;
 import com.bilibili.boxing_impl.view.MediaItemLayout;
 
@@ -89,6 +91,7 @@ public class BoxingMediaAdapter extends RecyclerView.Adapter {
         if (holder instanceof CameraViewHolder) {
             CameraViewHolder viewHolder = (CameraViewHolder) holder;
             viewHolder.mCameraLayout.setOnClickListener(mOnCameraClickListener);
+            viewHolder.mCameraImg.setImageResource(BoxingResHelper.getCameraRes());
         } else {
             int pos = position - mOffset;
             final BaseMedia media = mMedias.get(pos);
@@ -175,10 +178,12 @@ public class BoxingMediaAdapter extends RecyclerView.Adapter {
 
     private static class CameraViewHolder extends RecyclerView.ViewHolder {
         View mCameraLayout;
+        ImageView mCameraImg;
 
         CameraViewHolder(final View itemView) {
             super(itemView);
             mCameraLayout = itemView.findViewById(R.id.camera_layout);
+            mCameraImg = (ImageView) itemView.findViewById(R.id.camera_img);
         }
     }
 

@@ -54,7 +54,6 @@ public class ConfigTest {
         assertEquals(config.getVideoDurationRes(), R.drawable.ic_boxing_broken_image);
     }
 
-
     @Test
     public void testImageSelectionRes() {
         mPickerManager.setBoxingConfig(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG));
@@ -76,5 +75,18 @@ public class ConfigTest {
         config = mPickerManager.getBoxingConfig();
         assertEquals(config.getMediaUnCheckedRes(), R.drawable.ic_boxing_broken_image);
         assertEquals(BoxingResHelper.getMediaUncheckedRes(), R.drawable.ic_boxing_broken_image);
+    }
+
+    @Test
+    public void testCameraRes() {
+        mPickerManager.setBoxingConfig(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG));
+        BoxingConfig config = mPickerManager.getBoxingConfig();
+        assertEquals(config.getCameraRes(), 0);
+        assertEquals(BoxingResHelper.getCameraRes(), 0);
+
+        mPickerManager.setBoxingConfig(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).needCamera(R.drawable.ic_boxing_broken_image));
+        config = mPickerManager.getBoxingConfig();
+        assertEquals(config.getCameraRes(), R.drawable.ic_boxing_broken_image);
+        assertEquals(BoxingResHelper.getCameraRes(), R.drawable.ic_boxing_broken_image);
     }
 }

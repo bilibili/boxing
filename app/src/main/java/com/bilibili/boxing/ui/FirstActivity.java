@@ -118,7 +118,8 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
                 Boxing.of(singleCropImgConfig).withIntent(this, BoxingActivity.class).start(this, REQUEST_CODE);
                 break;
             case R.id.multi_image_btn:
-                Boxing.of().withIntent(this, BoxingActivity.class).start(this, REQUEST_CODE);
+                BoxingConfig config = new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).needCamera(R.drawable.ic_boxing_camera_white).needGif();
+                Boxing.of(config).withIntent(this, BoxingActivity.class).start(this, REQUEST_CODE);
                 break;
             case R.id.video_btn:
                 BoxingConfig videoConfig = new BoxingConfig(BoxingConfig.Mode.VIDEO).withVideoDurationRes(R.drawable.ic_boxing_play);

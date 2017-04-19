@@ -70,7 +70,7 @@ BoxingCrop.getInstance().init(new IBoxingCrop());  // 需要实现 IBoxingCrop
   指定模式：图片单选，多选，视频单选，是否支持gif和相机。
 ```java
 BoxingConfig config = new BoxingConfig(Mode); // Mode：Mode.SINGLE_IMG, Mode.MULTI_IMG, Mode.VIDEO
-config.needCamera().needGif().withMaxCount(9); // 支持gif，相机，设置最大选图数
+config.needCamera(cameraRes).needGif().withMaxCount(9); // 支持gif，相机，设置最大选图数
 .withMediaPlaceHolderRes(resInt) // 设置默认图片占位图，默认无
 .withAlbumPlaceHolderRes(resInt) // 设置默认相册占位图，默认无
 .withVideoDurationRes(resInt) // 视频模式下，时长的图标，默认无

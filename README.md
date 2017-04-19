@@ -76,7 +76,7 @@ BoxingCrop.getInstance().init(new IBoxingCrop());  // a class implements IBoxing
   Specify the mode(Mode.SINGLE_IMG, Mode.MULTI_IMG, Mode.VIDEO) with camera and gif support. 
 ```java
 BoxingConfig config = new BoxingConfig(Mode); // Mode：Mode.SINGLE_IMG, Mode.MULTI_IMG, Mode.VIDEO
-config.needCamera().needGif().withMaxCount(9) // camera, gif support, set selected images count
+config.needCamera(cameraRes).needGif().withMaxCount(9) // camera, gif support, set selected images count
 .withMediaPlaceHolderRes(resInt) // set the image placeholder, default 0
 .withAlbumPlaceHolderRes(resInt) // set the album placeholder, default 0
 .withVideoDurationRes(resInt) // set the video duration resource in video mode, default 0

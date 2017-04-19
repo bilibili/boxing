@@ -26,11 +26,10 @@
                 android:minWidth="100dp">
 
     <ImageView
-        android:id="@+id/camera_txt"
+        android:id="@+id/camera_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:src="@drawable/ic_boxing_camera_white"
         android:textColor="@color/boxing_white"
         android:textSize="14sp"/>
 </RelativeLayout>

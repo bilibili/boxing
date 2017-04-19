@@ -43,6 +43,7 @@ public class BoxingConfig implements Parcelable {
     private int mMediaUnCheckedRes;
     private int mAlbumPlaceHolderRes;
     private int mVideoDurationRes;
+    private int mCameraRes;
 
     private boolean mNeedCamera;
     private boolean mNeedGif;
@@ -112,11 +113,19 @@ public class BoxingConfig implements Parcelable {
     }
 
     /**
-     * get the media unchecked drawable resource by {@link BoxingConfig#withMediaPlaceHolderRes(int)}.
+     * get the media unchecked drawable resource by {@link BoxingConfig#withMediaUncheckedRes(int)} (int)}.
      * @return >0, set a valid drawable resource; otherwise without a placeholder.
      */
     public @DrawableRes int getMediaUnCheckedRes() {
         return mMediaUnCheckedRes;
+    }
+
+    /**
+     * get the media unchecked drawable resource by {@link BoxingConfig#withMediaPlaceHolderRes(int)}.
+     * @return >0, set a valid drawable resource; otherwise without a placeholder.
+     */
+    public @DrawableRes int getCameraRes() {
+        return mCameraRes;
     }
 
     /**
@@ -168,9 +177,10 @@ public class BoxingConfig implements Parcelable {
     }
 
     /**
-     * call this means camera is needed.
+     * set the camera res.
      */
-    public BoxingConfig needCamera() {
+    public BoxingConfig needCamera(int cameraRes) {
+        this.mCameraRes = cameraRes;
         this.mNeedCamera = true;
         return this;
     }
@@ -268,6 +278,7 @@ public class BoxingConfig implements Parcelable {
         dest.writeInt(this.mMediaUnCheckedRes);
         dest.writeInt(this.mAlbumPlaceHolderRes);
         dest.writeInt(this.mVideoDurationRes);
+        dest.writeInt(this.mCameraRes);
         dest.writeByte(this.mNeedCamera ? (byte) 1 : (byte) 0);
         dest.writeByte(this.mNeedGif ? (byte) 1 : (byte) 0);
         dest.writeByte(this.mNeedPaging ? (byte) 1 : (byte) 0);
@@ -285,6 +296,7 @@ public class BoxingConfig implements Parcelable {
         this.mMediaUnCheckedRes = in.readInt();
         this.mAlbumPlaceHolderRes = in.readInt();
         this.mVideoDurationRes = in.readInt();
+        this.mCameraRes = in.readInt();
         this.mNeedCamera = in.readByte() != 0;
         this.mNeedGif = in.readByte() != 0;
         this.mNeedPaging = in.readByte() != 0;

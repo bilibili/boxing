@@ -40,7 +40,7 @@ public class IntentFilterActivity extends BoxingActivity {
                 .appendPath(cropPath)
                 .appendPath(String.format(Locale.US, "%s.jpg", System.currentTimeMillis()))
                 .build();
-        BoxingConfig config = new BoxingConfig(BoxingConfig.Mode.SINGLE_IMG).needCamera().withCropOption(new BoxingCropOption(destUri));
+        BoxingConfig config = new BoxingConfig(BoxingConfig.Mode.SINGLE_IMG).needCamera(R.drawable.ic_boxing_camera_white).withCropOption(new BoxingCropOption(destUri));
         BoxingManager.getInstance().setBoxingConfig(config);
         super.onCreate(savedInstanceState);
 
