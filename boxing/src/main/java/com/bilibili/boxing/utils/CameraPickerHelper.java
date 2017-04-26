@@ -52,6 +52,7 @@ import java.util.concurrent.FutureTask;
  * @author ChenSL
  */
 public class CameraPickerHelper {
+    private static final int MAX_CAMER_PHOTO_SIZE = 4 * 1024 * 1024;
     public static final int REQ_CODE_CAMERA = 0x2001;
     private static final String STATE_SAVED_KEY = "com.bilibili.boxing.utils.CameraPickerHelper.saved_state";
 
@@ -231,6 +232,7 @@ public class CameraPickerHelper {
             if (degree == 0) {
                 return true;
             }
+            int quality = file.length() >= MAX_CAMER_PHOTO_SIZE ? 90 : 100;
             Matrix matrix = new Matrix();
             matrix.postRotate(degree);
             BitmapFactory.Options options = new BitmapFactory.Options();
@@ -238,7 +240,7 @@ public class CameraPickerHelper {
             bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
             outBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, false);
             outputStream = new FileOutputStream(file);
-            outBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+            outBitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
             outputStream.flush();
             return true;
         } finally {
