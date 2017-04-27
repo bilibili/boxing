@@ -77,7 +77,7 @@ public class BoxingFrescoLoader implements IBoxingMediaLoader {
         if (TextUtils.isEmpty(cache)) {
             throw new IllegalStateException("the cache dir is null");
         }
-        if (cache != null) {
+        if (!TextUtils.isEmpty(cache)) {
             DiskCacheConfig diskCacheConfig = DiskCacheConfig.newBuilder(context)
                     .setBaseDirectoryPath(new File(cache))
                     .setBaseDirectoryName(IMAGE_PIPELINE_CACHE_DIR)
@@ -175,8 +175,9 @@ public class BoxingFrescoLoader implements IBoxingMediaLoader {
                 }
                 if (dataSource == null) {
                     callback.onFail(new NullPointerException("data source is null."));
+                } else {
+                    callback.onFail(dataSource.getFailureCause());
                 }
-                callback.onFail(dataSource.getFailureCause());
             }
 
         }, UiThreadImmediateExecutorService.getInstance());
