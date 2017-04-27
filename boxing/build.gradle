@@ -22,7 +22,7 @@ def siteUrl = "https://github.com/Bilibili/boxing"
 def gitUrl = "https://github.com/Bilibili/boxing.git"
 
 group = "com.bilibili"
-version = "0.6.0"
+version = "0.7.0"
 
 android {
     compileSdkVersion 24
@@ -32,7 +32,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
-        versionName "0.6.0"
+        versionName "0.7.0"
     }
     buildTypes {
         release {
