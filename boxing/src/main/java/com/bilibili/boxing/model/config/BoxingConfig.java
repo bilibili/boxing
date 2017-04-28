@@ -179,7 +179,7 @@ public class BoxingConfig implements Parcelable {
     /**
      * set the camera res.
      */
-    public BoxingConfig needCamera(int cameraRes) {
+    public BoxingConfig needCamera(@DrawableRes int cameraRes) {
         this.mCameraRes = cameraRes;
         this.mNeedCamera = true;
         return this;

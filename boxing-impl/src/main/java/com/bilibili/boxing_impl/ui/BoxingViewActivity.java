@@ -105,10 +105,8 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
         mNeedLoading = BoxingManager.getInstance().getBoxingConfig().isNeedLoading();
         mNeedEdit = BoxingManager.getInstance().getBoxingConfig().isNeedEdit();
         mMaxCount = getMaxCount();
-        if (mNeedLoading && mImages == null) {
-            mImages = new ArrayList<>();
-        } else {
-            mImages = new ArrayList<>();
+        mImages = new ArrayList<>();
+        if (!mNeedLoading && mSelectedImages != null) {
             mImages.addAll(mSelectedImages);
         }
     }
@@ -135,7 +133,7 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
     }
 
     private void setOkTextNumber() {
-        if (mImages != null && mNeedEdit) {
+        if (mNeedEdit) {
             int selectedSize = mSelectedImages.size();
             int size = Math.max(mSelectedImages.size(), mMaxCount);
             mOkBtn.setText(getString(R.string.boxing_image_preview_ok_fmt, String.valueOf(selectedSize)
