@@ -156,6 +156,10 @@ public class ImageMedia extends BaseMedia implements Parcelable {
         return mWidth;
     }
 
+    public String getCompressPath() {
+        return mCompressPath;
+    }
+
     public void removeExif() {
         BoxingExifHelper.removeExif(getPath());
     }
