@@ -25,7 +25,7 @@ import android.support.annotation.DrawableRes;
  * The pick config.<br/>
  * 1.{@link Mode} is necessary. <br/>
  * 2.specify functions: camera, gif, paging. <br/>
- * calling {@link #needCamera()} to displayThumbnail a camera icon. <br/>
+ * calling {@link #needCamera(int)} to displayThumbnail a camera icon. <br/>
  * calling {@link #needGif()} to displayThumbnail gif photos. <br/>
  * calling {@link #needPaging(boolean)} to create load medias page by page, by default is true.
  *
