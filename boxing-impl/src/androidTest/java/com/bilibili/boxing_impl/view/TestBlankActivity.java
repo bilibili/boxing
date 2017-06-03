@@ -54,7 +54,7 @@ public class TestBlankActivity extends FragmentActivity {
 
             }
         });
-        BoxingViewFragment fragment = BoxingViewFragment.newInstance();
+        BoxingViewFragment fragment = BoxingViewFragment.Companion.newInstance();
         fragment.setTitleTxt((TextView) findViewById(R.id.pick_album_txt));
         fragment.setPresenter(new PickerPresenter(fragment));
         fragment.setPickerConfig(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG));

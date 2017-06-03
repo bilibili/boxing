@@ -173,7 +173,7 @@ public class PickerModuleTest {
         mPickerManager.setBoxingConfig(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).withMaxCount(0));
         config = mPickerManager.getBoxingConfig();
         count = config.getMaxCount();
-        assertEquals(count, BoxingConfig.DEFAULT_SELECTED_COUNT);
+        assertEquals(count, BoxingConfig.Companion.getDEFAULT_SELECTED_COUNT());
 
 
     }

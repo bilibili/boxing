@@ -58,7 +58,7 @@ public class PickerActivityTest {
 
     @Test
     public void testCreateVideoIntent() {
-        Intent intent = Boxing.of(new BoxingConfig(BoxingConfig.Mode.VIDEO))
+        Intent intent = Boxing.Companion.of(new BoxingConfig(BoxingConfig.Mode.VIDEO))
                 .withIntent(mContext, BoxingActivity.class).getIntent();
         assertNotNull(intent);
         BoxingConfig config = BoxingManager.getInstance().getBoxingConfig();
@@ -67,13 +67,13 @@ public class PickerActivityTest {
         assertEquals(config.isNeedCamera(), false);
         BoxingCropOption cropOptions = config.getCropOption();
         assertEquals(cropOptions, null);
-        ArrayList<BaseMedia> list = intent.getParcelableArrayListExtra(Boxing.EXTRA_SELECTED_MEDIA);
+        ArrayList<BaseMedia> list = intent.getParcelableArrayListExtra(Boxing.Companion.getEXTRA_SELECTED_MEDIA());
         assertEquals(null, list);
     }
 
     @Test
     public void testCreateSingleImageIntent() {
-        Intent intent = Boxing.of(new BoxingConfig(BoxingConfig.Mode.SINGLE_IMG).needCamera(R.drawable.ic_boxing_broken_image))
+        Intent intent = Boxing.Companion.of(new BoxingConfig(BoxingConfig.Mode.SINGLE_IMG).needCamera(R.drawable.ic_boxing_broken_image))
                 .withIntent(mContext, BoxingActivity.class).getIntent();
         assertNotNull(intent);
         BoxingConfig config = BoxingManager.getInstance().getBoxingConfig();
@@ -82,7 +82,7 @@ public class PickerActivityTest {
         assertEquals(config.isNeedCamera(), true);
         BoxingCropOption cropOptions = config.getCropOption();
         assertEquals(cropOptions, null);
-        ArrayList<BaseMedia> list = intent.getParcelableArrayListExtra(Boxing.EXTRA_SELECTED_MEDIA);
+        ArrayList<BaseMedia> list = intent.getParcelableArrayListExtra(Boxing.Companion.getEXTRA_SELECTED_MEDIA());
         assertEquals(list, null);
     }
 
@@ -93,7 +93,7 @@ public class PickerActivityTest {
                 .appendPath("test")
                 .appendPath(String.format(Locale.US, "%s.jpg", System.currentTimeMillis()))
                 .build();
-        Intent intent = Boxing.of(new BoxingConfig(BoxingConfig.Mode.SINGLE_IMG).withCropOption(new BoxingCropOption(destUri)))
+        Intent intent = Boxing.Companion.of(new BoxingConfig(BoxingConfig.Mode.SINGLE_IMG).withCropOption(new BoxingCropOption(destUri)))
                 .withIntent(mContext, BoxingActivity.class).getIntent();
         assertNotNull(intent);
         BoxingConfig config = BoxingManager.getInstance().getBoxingConfig();
@@ -102,13 +102,13 @@ public class PickerActivityTest {
         assertEquals(config.isNeedCamera(), false);
         BoxingCropOption cropOptions = config.getCropOption();
         assertNotNull(cropOptions);
-        ArrayList<BaseMedia> list = intent.getParcelableArrayListExtra(Boxing.EXTRA_SELECTED_MEDIA);
+        ArrayList<BaseMedia> list = intent.getParcelableArrayListExtra(Boxing.Companion.getEXTRA_SELECTED_MEDIA());
         assertEquals(list, null);
     }
 
     @Test
     public void testCreateMultiImageIntent() {
-        Intent intent = Boxing.of(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).needGif())
+        Intent intent = Boxing.Companion.of(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).needGif())
                 .withIntent(mContext, BoxingActivity.class).getIntent();
         assertNotNull(intent);
         BoxingConfig config = BoxingManager.getInstance().getBoxingConfig();
@@ -117,21 +117,21 @@ public class PickerActivityTest {
         assertEquals(config.isNeedCamera(), false);
         BoxingCropOption cropOptions = config.getCropOption();
         assertNull(cropOptions);
-        ArrayList<BaseMedia> list = intent.getParcelableArrayListExtra(Boxing.EXTRA_SELECTED_MEDIA);
+        ArrayList<BaseMedia> list = intent.getParcelableArrayListExtra(Boxing.Companion.getEXTRA_SELECTED_MEDIA());
         assertEquals(list, null);
 
-        Intent intent1 = Boxing.of(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).needGif()).
+        Intent intent1 = Boxing.Companion.of(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).needGif()).
                 withIntent(mContext, BoxingActivity.class, new ArrayList<ImageMedia>()).getIntent();
         assertNotNull(intent1);
-        ArrayList<BaseMedia> list1 = intent.getParcelableArrayListExtra(Boxing.EXTRA_SELECTED_MEDIA);
+        ArrayList<BaseMedia> list1 = intent.getParcelableArrayListExtra(Boxing.Companion.getEXTRA_SELECTED_MEDIA());
         assertEquals(list1, null);
 
         ArrayList<ImageMedia> medias = new ArrayList<>();
         medias.add(new ImageMedia("test", "test"));
-        Intent intent2 = Boxing.of(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).needGif()).
+        Intent intent2 = Boxing.Companion.of(new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).needGif()).
                 withIntent(mContext, BoxingActivity.class, medias).getIntent();
         assertNotNull(intent2);
-        ArrayList<BaseMedia> list2 = intent2.getParcelableArrayListExtra(Boxing.EXTRA_SELECTED_MEDIA);
+        ArrayList<BaseMedia> list2 = intent2.getParcelableArrayListExtra(Boxing.Companion.getEXTRA_SELECTED_MEDIA());
         assertEquals(list2, medias);
     }
 
@@ -149,7 +149,7 @@ public class PickerActivityTest {
         medias.add(new ImageMedia("test1", "test1"));
         pickerConfig.withCropOption(cropOptions);
 
-        Intent intent = Boxing.of(pickerConfig).withIntent(mContext, BoxingActivity.class, medias).getIntent();
+        Intent intent = Boxing.Companion.of(pickerConfig).withIntent(mContext, BoxingActivity.class, medias).getIntent();
         assertNotNull(intent);
 
         BoxingConfig config = BoxingManager.getInstance().getBoxingConfig();
@@ -159,7 +159,7 @@ public class PickerActivityTest {
         assertEquals(config.isNeedGif(), false);
         BoxingCropOption cropOptionsResult = pickerConfig.getCropOption();
         assertEquals(cropOptions, cropOptionsResult);
-        ArrayList<BaseMedia> list = intent.getParcelableArrayListExtra(Boxing.EXTRA_SELECTED_MEDIA);
+        ArrayList<BaseMedia> list = intent.getParcelableArrayListExtra(Boxing.Companion.getEXTRA_SELECTED_MEDIA());
         assertEquals(list, medias);
 
     }

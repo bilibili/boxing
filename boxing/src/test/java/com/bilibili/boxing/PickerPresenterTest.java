@@ -141,7 +141,7 @@ public class PickerPresenterTest {
         Mockito.verify(mPickerManager).loadAlbum(any(ContentResolver.class)
                 , mAlbumTaskCallback.capture());
         List<AlbumEntity> albums = new ArrayList<>();
-        albums.add(AlbumEntity.createDefaultAlbum());
+        albums.add(AlbumEntity.Companion.createDefaultAlbum());
         mAlbumTaskCallback.getValue().postAlbumList(albums);
 
         ArgumentCaptor<List> showVideoCaptor = ArgumentCaptor.forClass(List.class);

@@ -90,49 +90,49 @@ public class PickerUtilTest {
         ImageMedia media1 = new ImageMedia("1223", "../boxing-impl/src/main/res/drawable-hdpi/ic_boxing_broken_image.png");
         media1.setSize("233");
 
-        boolean result1 = CompressTask.compress(null, null, 0);
+        boolean result1 = CompressTask.INSTANCE.compress(null, null, 0);
         assertTrue(!result1);
-        result1 = CompressTask.compress(null, media, 0);
+        result1 = CompressTask.INSTANCE.compress(null, media, 0);
         assertTrue(!result1);
-        result1 = CompressTask.compress(illegalCompressor, media, 0);
+        result1 = CompressTask.INSTANCE.compress(illegalCompressor, media, 0);
         assertTrue(!result1);
-        result1= CompressTask.compress(illegalCompressor, media, 1000);
+        result1= CompressTask.INSTANCE.compress(illegalCompressor, media, 1000);
         assertTrue(!result1);
 
-        result1 = CompressTask.compress(compressor, media1, 1000);
+        result1 = CompressTask.INSTANCE.compress(compressor, media1, 1000);
         assertTrue(result1);
 
     }
 
     @Test
     public void testFileHelper() throws ExecutionException, InterruptedException {
-        boolean nullFile = BoxingFileHelper.createFile(null);
+        boolean nullFile = BoxingFileHelper.INSTANCE.createFile(null);
         assertTrue(!nullFile);
 
-        boolean hasFile = BoxingFileHelper.createFile("/");
+        boolean hasFile = BoxingFileHelper.INSTANCE.createFile("/");
         assertTrue(hasFile);
 
     }
 
     @Test
     public void testCacheDir() {
-        String nullFile = BoxingFileHelper.getCacheDir(null);
+        String nullFile = BoxingFileHelper.INSTANCE.getCacheDir(null);
         assertTrue(nullFile == null);
     }
 
     @Test
     public void testGetExternalDCIM() {
         PowerMockito.mockStatic(Environment.class);
-        String file = BoxingFileHelper.getExternalDCIM(BoxingFileHelper.DEFAULT_SUB_DIR);
+        String file = BoxingFileHelper.INSTANCE.getExternalDCIM(BoxingFileHelper.INSTANCE.getDEFAULT_SUB_DIR());
         assertNull(file);
 
         PowerMockito.when(Environment.getExternalStorageState()).thenReturn(Environment.MEDIA_MOUNTED);
-        file = BoxingFileHelper.getExternalDCIM(BoxingFileHelper.DEFAULT_SUB_DIR);
+        file = BoxingFileHelper.INSTANCE.getExternalDCIM(BoxingFileHelper.INSTANCE.getDEFAULT_SUB_DIR());
         assertNull(file);
 
         PowerMockito.when(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM))
                 .thenReturn(new File("DCIM"));
-        file = BoxingFileHelper.getExternalDCIM(BoxingFileHelper.DEFAULT_SUB_DIR);
+        file = BoxingFileHelper.INSTANCE.getExternalDCIM(BoxingFileHelper.INSTANCE.getDEFAULT_SUB_DIR());
         assertNotNull(file);
     }
 
@@ -142,13 +142,13 @@ public class PickerUtilTest {
         boolean fail = helper.onActivityResult(0, 0);
         assertFalse(fail);
 
-        fail = helper.onActivityResult(CameraPickerHelper.REQ_CODE_CAMERA, 0);
+        fail = helper.onActivityResult(CameraPickerHelper.Companion.getREQ_CODE_CAMERA(), 0);
         assertFalse(fail);
 
         fail = helper.onActivityResult(0, Activity.RESULT_OK);
         assertFalse(fail);
 
-        boolean suc = helper.onActivityResult(CameraPickerHelper.REQ_CODE_CAMERA, Activity.RESULT_OK);
+        boolean suc = helper.onActivityResult(CameraPickerHelper.Companion.getREQ_CODE_CAMERA(), Activity.RESULT_OK);
         Assert.assertTrue(suc);
     }
 }

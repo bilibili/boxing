@@ -16,8 +16,10 @@
  */
 
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
+apply plugin: 'kotlin-kapt'
 def siteUrl = "https://github.com/Bilibili/boxing"
 def gitUrl = "https://github.com/Bilibili/boxing.git"
 
@@ -119,7 +121,7 @@ bintray {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile "com.android.support:appcompat-v7:25.0.1"
+    compile "com.android.support:appcompat-v7:25.3.1"
 
     // Mock
     testCompile "org.powermock:powermock-module-junit4:1.6.4"
@@ -132,6 +134,13 @@ dependencies {
         exclude group: 'commons-logging'
         exclude group: 'org.apache.httpcomponents'
     }
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
 
+    compile "org.jetbrains.anko:anko-sdk25:$anko_version"
+    compile "org.jetbrains.anko:anko-appcompat-v7-common:$anko_version"
+
+}
+repositories {
+    mavenCentral()
 }

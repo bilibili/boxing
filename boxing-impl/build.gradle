@@ -16,6 +16,7 @@
  */
 
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 def siteUrl = "https://github.com/Bilibili/boxing"
@@ -50,6 +51,10 @@ android {
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
     }
 }
 
@@ -121,7 +126,7 @@ bintray {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:design:25.0.1'
+    compile 'com.android.support:design:25.3.1'
     compile('com.chensl.rotatephotoview:rotatephotoview:1.0.5') {
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'support-v4'
@@ -135,4 +140,8 @@ dependencies {
     }
     androidTestCompile 'com.android.support.test:runner:0.5'
     compile project(":boxing")
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

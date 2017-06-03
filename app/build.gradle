@@ -16,6 +16,8 @@
  */
 
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 24
@@ -26,6 +28,8 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -55,4 +59,8 @@ dependencies {
         exclude group: 'com.squareup.okhttp3'
     }
     compile 'com.facebook.fresco:animated-gif:1.0.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }
