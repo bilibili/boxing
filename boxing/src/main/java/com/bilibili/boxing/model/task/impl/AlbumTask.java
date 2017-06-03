@@ -98,6 +98,10 @@ public class AlbumTask {
         boolean isNeedGif = mPickerConfig != null && mPickerConfig.isNeedGif();
 
         String selectionId = isNeedGif ? SELECTION_ID : SELECTION_ID_WITHOUT_GIF;
+        if (mPickerConfig != null && mPickerConfig.getMediaFileterSel() != null) {
+            selectionId += " and " + mPickerConfig.getMediaFileterSel();
+        }
+
         String[] args = isNeedGif ? SELECTION_ARGS_IMAGE_MIME_TYPE : SELECTION_ARGS_IMAGE_MIME_TYPE_WITHOUT_GIF;
         String[] selectionArgs = new String[args.length + 1];
         selectionArgs[0] = buckId;

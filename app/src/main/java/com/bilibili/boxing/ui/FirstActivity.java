@@ -38,6 +38,7 @@ import com.bilibili.boxing.demo.R;
 import com.bilibili.boxing.model.BoxingManager;
 import com.bilibili.boxing.model.config.BoxingConfig;
 import com.bilibili.boxing.model.config.BoxingCropOption;
+import com.bilibili.boxing.model.config.MediaFilter;
 import com.bilibili.boxing.model.entity.BaseMedia;
 import com.bilibili.boxing.model.entity.impl.ImageMedia;
 import com.bilibili.boxing.utils.BoxingFileHelper;
@@ -102,7 +103,7 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
                 BoxingConfig singleImgConfig = new BoxingConfig(BoxingConfig.Mode.SINGLE_IMG)
                         // .mediaFilter(new MediaFilter(1 * 1024 * 1024))
                         // .mediaFilter(new MediaFilter(500, 500))
-                        // .mediaFilter(new MediaFilter(200, 200, 50 * 1024))
+                        .mediaFilter(new MediaFilter(200, 200, 50 * 1024))
                         .withMediaPlaceHolderRes(R.drawable.ic_boxing_default_image);
                 Boxing.of(singleImgConfig).withIntent(this, BoxingActivity.class).start(this, COMPRESS_REQUEST_CODE);
                 break;
