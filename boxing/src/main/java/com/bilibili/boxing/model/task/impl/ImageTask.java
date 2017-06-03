@@ -106,7 +106,7 @@ public class ImageTask implements IMediaTask<ImageMedia> {
             String order = isNeedPaging ? Images.Media.DATE_MODIFIED + " desc" + " LIMIT "
                     + page * IMediaTask.PAGE_LIMIT + " , " + IMediaTask.PAGE_LIMIT : Images.Media.DATE_MODIFIED + " desc";
             String selectionId = isNeedGif ? SELECTION_ID : SELECTION_ID_WITHOUT_GIF;
-            cursor = query(cr, bucketId, columns, isDefaultAlbum, isNeedGif, imageMimeType, args, order, selectionId);
+            cursor = query(cr, bucketId, columns, isDefaultAlbum, isNeedGif, imageMimeType, args, order, filterMediaSelectionId(selectionId));
             addItem(totalCount, result, cursor, callback);
         } finally {
             if (cursor != null) {
@@ -159,8 +159,11 @@ public class ImageTask implements IMediaTask<ImageMedia> {
                          boolean isNeedGif, String imageMimeType, String[] args, String order, String selectionId) {
         Cursor resultCursor;
         if (isDefaultAlbum) {
-            resultCursor = cr.query(Images.Media.EXTERNAL_CONTENT_URI, columns, imageMimeType,
-                    args, order);
+            String defaultAlbumSelectionId = imageMimeType;
+            if (mPickerConfig != null && mPickerConfig.getMediaFileterSel() != null) {
+                defaultAlbumSelectionId = filterMediaSelectionId("(" + imageMimeType + ")");
+            }
+            resultCursor = cr.query(Images.Media.EXTERNAL_CONTENT_URI, columns, defaultAlbumSelectionId, args, order);
         } else {
             if (isNeedGif) {
                 resultCursor = cr.query(Images.Media.EXTERNAL_CONTENT_URI, columns, selectionId,
@@ -194,10 +197,10 @@ public class ImageTask implements IMediaTask<ImageMedia> {
                         Images.Media.DATE_MODIFIED + " desc");
             } else {
                 if (isNeedGif) {
-                    allCursor = cr.query(Images.Media.EXTERNAL_CONTENT_URI, columns, SELECTION_ID,
+                    allCursor = cr.query(Images.Media.EXTERNAL_CONTENT_URI, columns, filterMediaSelectionId(SELECTION_ID),
                             new String[]{bucketId, "image/jpeg", "image/png", "image/jpg", "image/gif"}, Images.Media.DATE_MODIFIED + " desc");
                 } else {
-                    allCursor = cr.query(Images.Media.EXTERNAL_CONTENT_URI, columns, SELECTION_ID_WITHOUT_GIF,
+                    allCursor = cr.query(Images.Media.EXTERNAL_CONTENT_URI, columns, filterMediaSelectionId(SELECTION_ID_WITHOUT_GIF),
                             new String[]{bucketId, "image/jpeg", "image/png", "image/jpg"}, Images.Media.DATE_MODIFIED + " desc");
                 }
             }
@@ -210,6 +213,13 @@ public class ImageTask implements IMediaTask<ImageMedia> {
             }
         }
         return result;
+    }
+
+    private String filterMediaSelectionId(String selectionId) {
+        if (mPickerConfig != null && mPickerConfig.getMediaFileterSel() == null) {
+            return selectionId;
+        }
+        return selectionId += " and " + mPickerConfig.getMediaFileterSel();
     }
 
     private void clear() {
