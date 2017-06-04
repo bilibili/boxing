@@ -216,7 +216,7 @@ public class ImageTask implements IMediaTask<ImageMedia> {
     }
 
     private String filterMediaSelectionId(String selectionId) {
-        if (mPickerConfig != null && mPickerConfig.getMediaFileterSel() == null) {
+        if (mPickerConfig == null || mPickerConfig.getMediaFileterSel() == null) {
             return selectionId;
         }
         return selectionId += " and " + mPickerConfig.getMediaFileterSel();
