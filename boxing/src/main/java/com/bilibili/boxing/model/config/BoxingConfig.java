@@ -48,6 +48,7 @@ public class BoxingConfig implements Parcelable {
     private boolean mNeedCamera;
     private boolean mNeedGif;
     private boolean mNeedPaging = true;
+    private String mMediaFilterSel;
 
     private int mMaxCount = DEFAULT_SELECTED_COUNT;
 
@@ -72,6 +73,10 @@ public class BoxingConfig implements Parcelable {
 
     public boolean isNeedPaging() {
         return mNeedPaging;
+    }
+
+    public String getMediaFileterSel() {
+        return mMediaFilterSel;
     }
 
     public Mode getMode() {
@@ -193,6 +198,13 @@ public class BoxingConfig implements Parcelable {
         return this;
     }
 
+    public BoxingConfig mediaFilter(MediaFilter mediaFilter) {
+        if (mediaFilter != null) {
+            this.mMediaFilterSel = mediaFilter.getSelection();
+        }
+        return this;
+    }
+
     public BoxingConfig withViewer(ViewMode viewMode) {
         this.mViewMode = viewMode;
         return this;
@@ -283,6 +295,7 @@ public class BoxingConfig implements Parcelable {
         dest.writeByte(this.mNeedGif ? (byte) 1 : (byte) 0);
         dest.writeByte(this.mNeedPaging ? (byte) 1 : (byte) 0);
         dest.writeInt(this.mMaxCount);
+        dest.writeString(this.mMediaFilterSel);
     }
 
     protected BoxingConfig(Parcel in) {
@@ -301,6 +314,7 @@ public class BoxingConfig implements Parcelable {
         this.mNeedGif = in.readByte() != 0;
         this.mNeedPaging = in.readByte() != 0;
         this.mMaxCount = in.readInt();
+        this.mMediaFilterSel = in.readString();
     }
 
     public static final Creator<BoxingConfig> CREATOR = new Creator<BoxingConfig>() {
