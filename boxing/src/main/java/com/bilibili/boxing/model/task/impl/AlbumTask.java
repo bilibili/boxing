@@ -24,7 +24,9 @@ import android.support.annotation.WorkerThread;
 import android.support.v4.util.ArrayMap;
 import android.text.TextUtils;
 
+import com.bilibili.boxing.model.BoxingManager;
 import com.bilibili.boxing.model.callback.IAlbumTaskCallback;
+import com.bilibili.boxing.model.config.BoxingConfig;
 import com.bilibili.boxing.model.entity.AlbumEntity;
 import com.bilibili.boxing.model.entity.impl.ImageMedia;
 import com.bilibili.boxing.utils.BoxingExecutor;
@@ -42,35 +44,25 @@ import java.util.Map;
 public class AlbumTask {
     private static final String UNKNOWN_ALBUM_NAME = "unknow";
     private static final String SELECTION_IMAGE_MIME_TYPE = Media.MIME_TYPE + "=? or " + Media.MIME_TYPE + "=? or " + Media.MIME_TYPE + "=? or " + Media.MIME_TYPE + "=?";
+    private static final String SELECTION_IMAGE_MIME_TYPE_WITHOUT_GIF = Media.MIME_TYPE + "=? or " + Media.MIME_TYPE + "=? or " + Media.MIME_TYPE + "=?";
     private static final String SELECTION_ID = Media.BUCKET_ID + "=? and (" + SELECTION_IMAGE_MIME_TYPE + " )";
+    private static final String SELECTION_ID_WITHOUT_GIF = Media.BUCKET_ID + "=? and (" + SELECTION_IMAGE_MIME_TYPE_WITHOUT_GIF + " )";
+    private static final String[] SELECTION_ARGS_IMAGE_MIME_TYPE = {"image/jpeg", "image/png", "image/jpg", "image/gif"};
+    private static final String[] SELECTION_ARGS_IMAGE_MIME_TYPE_WITHOUT_GIF = {"image/jpeg", "image/png", "image/jpg"};
     private int mUnknownAlbumNumber = 1;
     private Map<String, AlbumEntity> mBucketMap;
     private AlbumEntity mDefaultAlbum;
+    private BoxingConfig mPickerConfig;
 
     public AlbumTask() {
         this.mBucketMap = new ArrayMap<>();
         this.mDefaultAlbum = AlbumEntity.createDefaultAlbum();
+        this.mPickerConfig = BoxingManager.getInstance().getBoxingConfig();
     }
 
     public void start(@NonNull final ContentResolver cr, @NonNull final IAlbumTaskCallback callback) {
-        buildDefaultAlbum(cr);
         buildAlbumInfo(cr);
         getAlbumList(callback);
-    }
-
-    private void buildDefaultAlbum(ContentResolver cr) {
-        Cursor cursor = null;
-        try {
-            cursor = cr.query(Media.EXTERNAL_CONTENT_URI, new String[]{Media.BUCKET_ID}, null,
-                    null, null);
-            if (cursor != null) {
-                mDefaultAlbum.mCount = cursor.getCount();
-            }
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
     }
 
     private void buildAlbumInfo(ContentResolver cr) {
@@ -103,8 +95,16 @@ public class AlbumTask {
      */
     private void buildAlbumCover(ContentResolver cr, String buckId, AlbumEntity album) {
         String[] photoColumn = new String[]{Media._ID, Media.DATA};
-        Cursor coverCursor = cr.query(Media.EXTERNAL_CONTENT_URI, photoColumn, SELECTION_ID,
-                new String[]{buckId, "image/jpeg", "image/png", "image/jpg", "image/gif"}, Media.DATE_MODIFIED + " desc");
+        boolean isNeedGif = mPickerConfig != null && mPickerConfig.isNeedGif();
+        String selectionId = isNeedGif ? SELECTION_ID : SELECTION_ID_WITHOUT_GIF;
+        String[] args = isNeedGif ? SELECTION_ARGS_IMAGE_MIME_TYPE : SELECTION_ARGS_IMAGE_MIME_TYPE_WITHOUT_GIF;
+        String[] selectionArgs = new String[args.length + 1];
+        selectionArgs[0] = buckId;
+        for (int i = 1; i < selectionArgs.length; i++) {
+            selectionArgs[i] = args[i-1];
+        }
+        Cursor coverCursor = cr.query(Media.EXTERNAL_CONTENT_URI, photoColumn, selectionId,
+                selectionArgs, Media.DATE_MODIFIED + " desc");
         try {
             if (coverCursor != null && coverCursor.moveToFirst()) {
                 String picPath = coverCursor.getString(coverCursor.getColumnIndex(Media.DATA));
@@ -123,12 +123,14 @@ public class AlbumTask {
     }
 
     private void getAlbumList(@NonNull final IAlbumTaskCallback callback) {
+        mDefaultAlbum.mCount = 0;
         List<AlbumEntity> tmpList = new ArrayList<>();
         if (mBucketMap == null) {
             postAlbums(callback, tmpList);
         }
         for (Map.Entry<String, AlbumEntity> entry : mBucketMap.entrySet()) {
             tmpList.add(entry.getValue());
+            mDefaultAlbum.mCount += entry.getValue().mCount;
         }
         if (tmpList.size() > 0 && tmpList.get(0) != null) {
             mDefaultAlbum.mImageList = tmpList.get(0).mImageList;
