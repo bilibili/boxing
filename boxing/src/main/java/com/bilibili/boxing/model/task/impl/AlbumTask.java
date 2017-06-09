@@ -79,7 +79,7 @@ public class AlbumTask {
                     if (!TextUtils.isEmpty(buckId)) {
                         buildAlbumCover(cr, buckId, album);
                     }
-                } while (bucketCursor.moveToNext() && !bucketCursor.isLast());
+                } while (bucketCursor.moveToNext());
             }
         } finally {
             if (bucketCursor != null) {
