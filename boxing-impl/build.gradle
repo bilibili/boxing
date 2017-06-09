@@ -25,14 +25,14 @@ group = "com.bilibili"
 version = "0.7.5"
 
 android {
-    compileSdkVersion 24
+    compileSdkVersion 25
     buildToolsVersion "25.0.1"
 
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
-        versionName "0.7.5"
+        versionName version
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
 
@@ -121,7 +121,7 @@ bintray {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:design:25.0.1'
+    compile 'com.android.support:design:25.3.1'
     compile('com.chensl.rotatephotoview:rotatephotoview:1.0.5') {
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'support-v4'

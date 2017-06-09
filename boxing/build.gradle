@@ -25,14 +25,14 @@ group = "com.bilibili"
 version = "0.7.5"
 
 android {
-    compileSdkVersion 24
+    compileSdkVersion 25
     buildToolsVersion "25.0.1"
 
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
-        versionName "0.7.5"
+        versionName version
     }
     buildTypes {
         release {
@@ -119,7 +119,7 @@ bintray {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile "com.android.support:appcompat-v7:25.0.1"
+    compile "com.android.support:appcompat-v7:25.3.1"
 
     // Mock
     testCompile "org.powermock:powermock-module-junit4:1.6.4"
