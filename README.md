@@ -124,6 +124,10 @@ Use camera in Android N, add this in AndroidManifest.xml
 </provider>                 
 ```
 
+### Kotlin Support
+Stay hungry, stay foolish.
+checkout `feature/kotlin` for fun.
+
 ### TODO
 Support different config at the same moment.
 

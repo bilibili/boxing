@@ -119,6 +119,9 @@ Android N 版本使用相机必须在AndroidManifest.xml中添加
 </provider>                 
 ```
 
+### Kotlin
+checkout `feature/kotlin` 来玩一玩吧。
+
 ### TODO
 支持同时存在多个不同的config。
 
