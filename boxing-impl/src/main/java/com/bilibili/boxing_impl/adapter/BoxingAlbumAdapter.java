@@ -19,6 +19,7 @@ package com.bilibili.boxing_impl.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +75,9 @@ public class BoxingAlbumAdapter extends RecyclerView.Adapter implements View.OnC
         final AlbumEntity album = mAlums.get(adapterPos);
 
         if (album != null && album.hasImages()) {
-            albumViewHolder.mNameTxt.setText(album.mBucketName);
+            String albumName = TextUtils.isEmpty(album.mBucketName) ?
+                    albumViewHolder.mNameTxt.getContext().getString(R.string.boxing_default_album_name) :album.mBucketName;
+            albumViewHolder.mNameTxt.setText(albumName);
             ImageMedia media = (ImageMedia) album.mImageList.get(0);
             if (media != null) {
                 BoxingMediaLoader.getInstance().displayThumbnail(albumViewHolder.mCoverImg, media.getPath(), 50, 50);

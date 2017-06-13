@@ -41,7 +41,6 @@ public class AlbumEntity implements Parcelable {
 
     public AlbumEntity() {
         mCount = 0;
-        mBucketName = DEFAULT_NAME;
         mImageList = new ArrayList<>();
         mIsSelected = false;
     }
@@ -49,7 +48,6 @@ public class AlbumEntity implements Parcelable {
     public static AlbumEntity createDefaultAlbum() {
         AlbumEntity result = new AlbumEntity();
         result.mBucketId = DEFAULT_NAME;
-        result.mBucketName = "所有相片";
         result.mIsSelected = true;
         return result;
     }

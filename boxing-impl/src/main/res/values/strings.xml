@@ -44,5 +44,8 @@
     <string name="boxing_default_album">默认相册</string>
     <string name="boxing_nothing_found">什么也找不到</string>
     <string name="boxing_too_many_picture_fmt">您最多只能选择%d张图片</string>
+    <string name="boxing_default_album_name">所有相片</string>
+    <string name="boxing_preview">预览</string>
+
 
 </resources>

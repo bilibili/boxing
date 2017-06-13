@@ -56,7 +56,7 @@
             android:layout_gravity="left|center_vertical"
             android:layout_marginLeft="@dimen/boxing_item_spacing"
             android:background="@drawable/selector_boxing_btn_solid"
-            android:text="预览"
+            android:text="@string/boxing_preview"
             android:textAppearance="@style/Boxing.TextAppearance.App.Medium"
             android:textColor="@color/boxing_white"/>
 

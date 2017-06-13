@@ -39,8 +39,10 @@
         , please allow "storage space" right in the "System Settings" dialog box or authorization.</string>
     <string name="boxing_camera_permission_deny">To access your camera to take pictures,
         enable the "Use Camera" permission in the "System Settings" or Authorization dialog box.</string>
-    <string name="boxing_default_album">pictures</string>
+    <string name="boxing_default_album">Pictures</string>
     <string name="boxing_crop_error">sorry, error occurs when cropping</string>
     <string name="boxing_nothing_found">nothing!</string>
     <string name="boxing_too_many_picture_fmt">You can only select up to %d pictures</string>
+    <string name="boxing_default_album_name">Pictures</string>
+    <string name="boxing_preview">Preview</string>
 </resources>
