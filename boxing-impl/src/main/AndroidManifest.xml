@@ -19,9 +19,7 @@
           package="com.bilibili.boxing_impl">
 
     <application
-        android:allowBackup="true"
         android:label="@string/boxing_app_name"
-        android:supportsRtl="true"
         android:theme="@style/Boxing.AppTheme">
 
         <activity
