@@ -111,7 +111,7 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
                 Uri destUri = new Uri.Builder()
                         .scheme("file")
                         .appendPath(cachePath)
-                        .appendPath(String.format(Locale.US, "%s.jpg", System.currentTimeMillis()))
+                        .appendPath(String.format(Locale.US, "%s.png", System.currentTimeMillis()))
                         .build();
                 BoxingConfig singleCropImgConfig = new BoxingConfig(BoxingConfig.Mode.SINGLE_IMG).withCropOption(new BoxingCropOption(destUri))
                         .withMediaPlaceHolderRes(R.drawable.ic_boxing_default_image);
