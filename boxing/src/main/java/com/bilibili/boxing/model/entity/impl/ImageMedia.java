@@ -105,7 +105,7 @@ public class ImageMedia extends BaseMedia implements Parcelable {
         return CompressTask.compress(imageCompressor, this, MAX_IMAGE_SIZE);
     }
 
-    public boolean compress(ImageCompressor imageCompressor, int maxSize) {
+    public boolean compress(ImageCompressor imageCompressor, long maxSize) {
         return CompressTask.compress(imageCompressor, this, maxSize);
     }
 
