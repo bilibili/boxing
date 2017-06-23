@@ -34,6 +34,8 @@ import java.security.NoSuchAlgorithmException;
 
 
 /**
+ * A compress for image.
+ *
  * @author ChenSL
  */
 public class ImageCompressor {
@@ -65,6 +67,15 @@ public class ImageCompressor {
     }
 
     public File compress(@NonNull File file) throws IOException, NullPointerException, IllegalArgumentException {
+        return compress(file, MAX_LIMIT_SIZE);
+    }
+
+    /**
+     * @param file file to compress.
+     * @param maxsize the proximate max size for compression, not for the image with large ratio.
+     * @return may be a little bigger than expected for performance.
+     */
+    public File compress(@NonNull File file, long maxsize) throws IOException, NullPointerException, IllegalArgumentException {
         if (!file.exists()) {
             throw new IllegalArgumentException("file not found : " + file.getAbsolutePath());
         }
@@ -95,7 +106,7 @@ public class ImageCompressor {
             }
             saveBitmap(rotatedBitmap, outFile);
             rotatedBitmap.recycle();
-            compressQuality(outFile, MAX_LIMIT_SIZE, 20);
+            compressQuality(outFile, maxsize, 20);
         } else {
             if (checkOptions.outHeight >= MAX_HEIGHT && checkOptions.outWidth >= MAX_WIDTH) {
                 checkOptions.inSampleSize = 2;

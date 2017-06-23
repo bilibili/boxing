@@ -36,6 +36,11 @@ public class CompressTask {
         return compress(new ImageCompressor(context), image, ImageCompressor.MAX_LIMIT_SIZE_LONG);
     }
 
+    /**
+     * @param imageCompressor see {@link ImageCompressor}.
+     * @param maxSize the proximate max size for compression
+     * @return may be a little bigger than expected for performance.
+     */
     public static boolean compress(final ImageCompressor imageCompressor, final ImageMedia image, final long maxSize) {
         if (imageCompressor == null || image == null || maxSize <= 0) {
             return false;
@@ -57,7 +62,7 @@ public class CompressTask {
                     return true;
                 } else {
                     try {
-                        File result = imageCompressor.compress(needCompressFile);
+                        File result = imageCompressor.compress(needCompressFile, maxSize);
                         boolean suc = BoxingFileHelper.isFileValid(result);
                         image.setCompressPath(suc ? result.getAbsolutePath() : null);
                         return suc;
