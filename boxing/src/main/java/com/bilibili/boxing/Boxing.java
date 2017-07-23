@@ -40,8 +40,10 @@ import java.util.List;
  * 1.call {@link #of(BoxingConfig)} to pick a mode.<br/>
  * 2.to use {@link AbsBoxingActivity} + {@link AbsBoxingViewFragment} combination,
  * call {@link #withIntent(Context, Class)} to make a intent and {@link #start(Activity)} to start a new Activity.<br/>
- * to use {@link AbsBoxingViewFragment} only, just call {@link #setupFragment(AbsBoxingViewFragment, OnBoxingFinishListener)}.<br/>
- * 3 4.to get result from a new Activity, call {@link #getResult(Intent)} in {@link Activity#onActivityResult(int, int, Intent)}.
+ * to use {@link AbsBoxingViewFragment} only, just call
+ * {@link #setupFragment(AbsBoxingViewFragment, OnBoxingFinishListener)}.<br/>
+ * 3 4.to get result from a new Activity, call {@link #getResult(Intent)} in
+ * {@link Activity#onActivityResult(int, int, Intent)}.
  *
  * @author ChenSL
  */
@@ -72,7 +74,19 @@ public class Boxing {
     }
 
     /**
-     * call {@link #of(BoxingConfig)} first to specify the mode otherwise {@link BoxingConfig.Mode#MULTI_IMG} is used.<br/>
+     * get selected media result.
+     */
+    @Nullable
+    public static ArrayList<BaseMedia> getSelectedResult(Intent data) {
+        if (data != null) {
+            return data.getParcelableArrayListExtra(EXTRA_SELECTED_MEDIA);
+        }
+        return null;
+    }
+
+    /**
+     * call {@link #of(BoxingConfig)} first to specify the mode otherwise {@link BoxingConfig.Mode#MULTI_IMG} is used
+     * .<br/>
      */
     public static Boxing get() {
         BoxingConfig config = BoxingManager.getInstance().getBoxingConfig();
@@ -153,7 +167,8 @@ public class Boxing {
      * @param pos     the start position.
      * @param albumId the specify album id.
      */
-    public Boxing withIntent(Context context, Class<?> cls, ArrayList<? extends BaseMedia> medias, int pos, String albumId) {
+    public Boxing withIntent(Context context, Class<?> cls, ArrayList<? extends BaseMedia> medias, int pos, String
+            albumId) {
         mIntent.setClass(context, cls);
         if (medias != null && !medias.isEmpty()) {
             mIntent.putExtra(EXTRA_SELECTED_MEDIA, medias);

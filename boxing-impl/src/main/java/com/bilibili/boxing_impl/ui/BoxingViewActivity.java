@@ -216,14 +216,14 @@ public class BoxingViewActivity extends AbsBoxingViewActivity {
     public void startLoading() {
         if (!mNeedLoading) {
             mCurrentImageItem = (ImageMedia) mSelectedImages.get(mStartPos);
-            if (mStartPos > 0 && mStartPos < mSelectedImages.size()) {
-                mGallery.setCurrentItem(mStartPos, false);
-            }
             mToolbar.setTitle(getString(R.string.boxing_image_preview_title_fmt, String.valueOf(mStartPos + 1)
                     , String.valueOf(mSelectedImages.size())));
             mProgressBar.setVisibility(View.GONE);
             mGallery.setVisibility(View.VISIBLE);
             mAdapter.setMedias(mImages);
+            if (mStartPos > 0 && mStartPos < mSelectedImages.size()) {
+                mGallery.setCurrentItem(mStartPos, false);
+            }
         } else {
             loadMedia(mAlbumId, mStartPos, mCurrentPage);
             mAdapter.setMedias(mImages);
