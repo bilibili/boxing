@@ -4,6 +4,7 @@ sudo: false
 before_install:
   - chmod +x gradlew
   - android list target
+group: deprecated-2017Q3
 android:
   components:
     - platform-tools
