@@ -196,7 +196,7 @@ public abstract class AbsBoxingViewFragment extends Fragment implements PickerCo
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (REQUEST_CODE_PERMISSION == requestCode) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 onRequestPermissionSuc(requestCode, permissions, grantResults);
             } else {
                 onRequestPermissionError(permissions, new SecurityException("request " + permissions[0] + " error."));
