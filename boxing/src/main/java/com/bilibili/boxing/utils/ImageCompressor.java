@@ -22,6 +22,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import java.io.ByteArrayOutputStream;
@@ -29,8 +30,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
 
 
 /**
@@ -97,6 +100,9 @@ public class ImageCompressor {
         int width = checkOptions.outWidth;
         int height = checkOptions.outHeight;
         File outFile = createCompressFile(file);
+        if (outFile == null) {
+            throw new NullPointerException("the compressed file create fail, the compressed path is null.");
+        }
         if (!isLargeRatio(width, height)) {
             int[] display = getCompressDisplay(width, height);
             Bitmap bitmap = compressDisplay(absPath, display[0], display[1]);
@@ -290,20 +296,26 @@ public class ImageCompressor {
         return outFile;
     }
 
-    public File getCompressOutFile(File file) {
-        return new File(getCompressOutFilePath(file));
+    public @Nullable File getCompressOutFile(File file) {
+        String path = getCompressOutFilePath(file);
+        return TextUtils.isEmpty(path) ? null: new File(path);
     }
 
-    public File getCompressOutFile(String filePth) {
-        return new File(getCompressOutFilePath(filePth));
+    public @Nullable File getCompressOutFile(String filePth) {
+        String path = getCompressOutFilePath(filePth);
+        return TextUtils.isEmpty(path) ? null: new File(path);
     }
 
-    public String getCompressOutFilePath(File file) {
+    public @Nullable String getCompressOutFilePath(File file) {
         return getCompressOutFilePath(file.getAbsolutePath());
     }
 
-    public String getCompressOutFilePath(String filePath) {
-        return mOutFileFile + File.separator + COMPRESS_FILE_PREFIX + signMD5(filePath.getBytes()) + ".jpg";
+    public @Nullable String getCompressOutFilePath(String filePath) {
+        try {
+            return mOutFileFile + File.separator + COMPRESS_FILE_PREFIX + signMD5(filePath.getBytes("UTF-8")) + ".jpg";
+        } catch (UnsupportedEncodingException e) {
+            return null;
+        }
     }
 
     public String signMD5(byte[] source) {
@@ -326,7 +338,7 @@ public class ImageCompressor {
             str[k++] = HEX_DIGITS[byte0 >>> 4 & 0xf];
             str[k++] = HEX_DIGITS[byte0 & 0xf];
         }
-        return new String(str).toLowerCase();
+        return new String(str).toLowerCase(Locale.getDefault());
     }
 
     private boolean isLargeRatio(int width, int height) {

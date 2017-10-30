@@ -39,7 +39,7 @@ import java.util.List;
 @WorkerThread
 public class VideoTask implements IMediaTask<VideoMedia> {
 
-    private static String[] MEDIA_COL = new String[]{
+    private final static String[] MEDIA_COL = new String[]{
             MediaStore.Video.Media.DATA,
             MediaStore.Video.Media._ID,
             MediaStore.Video.Media.TITLE,

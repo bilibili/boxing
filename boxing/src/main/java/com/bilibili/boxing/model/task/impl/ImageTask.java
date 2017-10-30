@@ -45,12 +45,21 @@ import java.util.Map;
  */
 @WorkerThread
 public class ImageTask implements IMediaTask<ImageMedia> {
-    private static final String SELECTION_IMAGE_MIME_TYPE = Images.Media.MIME_TYPE + "=? or " + Images.Media.MIME_TYPE + "=? or " + Images.Media.MIME_TYPE + "=? or " + Images.Media.MIME_TYPE + "=?";
-    private static final String SELECTION_IMAGE_MIME_TYPE_WITHOUT_GIF = Images.Media.MIME_TYPE + "=? or " + Images.Media.MIME_TYPE + "=? or " + Images.Media.MIME_TYPE + "=?";
+    private static final String CONJUNCTION_SQL = "=? or";
+    private static final String SELECTION_IMAGE_MIME_TYPE = Images.Media.MIME_TYPE + CONJUNCTION_SQL + " " + Images.Media.MIME_TYPE + CONJUNCTION_SQL + " " + Images.Media.MIME_TYPE + CONJUNCTION_SQL + " " + Images.Media.MIME_TYPE + "=?";
+    private static final String SELECTION_IMAGE_MIME_TYPE_WITHOUT_GIF = Images.Media.MIME_TYPE + CONJUNCTION_SQL + " " + Images.Media.MIME_TYPE + CONJUNCTION_SQL + " " + Images.Media.MIME_TYPE + "=?";
     private static final String SELECTION_ID = Images.Media.BUCKET_ID + "=? and (" + SELECTION_IMAGE_MIME_TYPE + " )";
     private static final String SELECTION_ID_WITHOUT_GIF = Images.Media.BUCKET_ID + "=? and (" + SELECTION_IMAGE_MIME_TYPE_WITHOUT_GIF + " )";
-    private static final String[] SELECTION_ARGS_IMAGE_MIME_TYPE = {"image/jpeg", "image/png", "image/jpg", "image/gif"};
-    private static final String[] SELECTION_ARGS_IMAGE_MIME_TYPE_WITHOUT_GIF = {"image/jpeg", "image/png", "image/jpg"};
+
+    private static final String IMAGE_JPEG = "image/jpeg";
+    private static final String IMAGE_PNG = "image/png";
+    private static final String IMAGE_JPG = "image/jpg";
+    private static final String IMAGE_GIF = "image/gif";
+    private static final String[] SELECTION_ARGS_IMAGE_MIME_TYPE = {IMAGE_JPEG, IMAGE_PNG, IMAGE_JPG, IMAGE_GIF};
+    private static final String[] SELECTION_ARGS_IMAGE_MIME_TYPE_WITHOUT_GIF = {IMAGE_JPEG, IMAGE_PNG, IMAGE_JPG};
+
+    private static final String DESC = " desc";
+
     private BoxingConfig mPickerConfig;
     private Map<String, String> mThumbnailMap;
 
@@ -103,8 +112,8 @@ public class ImageTask implements IMediaTask<ImageMedia> {
 
             String imageMimeType = isNeedGif ? SELECTION_IMAGE_MIME_TYPE : SELECTION_IMAGE_MIME_TYPE_WITHOUT_GIF;
             String[] args = isNeedGif ? SELECTION_ARGS_IMAGE_MIME_TYPE : SELECTION_ARGS_IMAGE_MIME_TYPE_WITHOUT_GIF;
-            String order = isNeedPaging ? Images.Media.DATE_MODIFIED + " desc" + " LIMIT "
-                    + page * IMediaTask.PAGE_LIMIT + " , " + IMediaTask.PAGE_LIMIT : Images.Media.DATE_MODIFIED + " desc";
+            String order = isNeedPaging ? Images.Media.DATE_MODIFIED + DESC + " LIMIT "
+                    + page * IMediaTask.PAGE_LIMIT + " , " + IMediaTask.PAGE_LIMIT : Images.Media.DATE_MODIFIED + DESC;
             String selectionId = isNeedGif ? SELECTION_ID : SELECTION_ID_WITHOUT_GIF;
             cursor = query(cr, bucketId, columns, isDefaultAlbum, isNeedGif, imageMimeType, args, order, selectionId);
             addItem(totalCount, result, cursor, callback);
@@ -191,14 +200,14 @@ public class ImageTask implements IMediaTask<ImageMedia> {
             if (isDefaultAlbum) {
                 allCursor = cr.query(Images.Media.EXTERNAL_CONTENT_URI, columns,
                         SELECTION_IMAGE_MIME_TYPE, SELECTION_ARGS_IMAGE_MIME_TYPE,
-                        Images.Media.DATE_MODIFIED + " desc");
+                        Images.Media.DATE_MODIFIED + DESC);
             } else {
                 if (isNeedGif) {
                     allCursor = cr.query(Images.Media.EXTERNAL_CONTENT_URI, columns, SELECTION_ID,
-                            new String[]{bucketId, "image/jpeg", "image/png", "image/jpg", "image/gif"}, Images.Media.DATE_MODIFIED + " desc");
+                            new String[]{bucketId, IMAGE_JPEG, IMAGE_PNG, IMAGE_JPG, IMAGE_GIF}, Images.Media.DATE_MODIFIED + DESC);
                 } else {
                     allCursor = cr.query(Images.Media.EXTERNAL_CONTENT_URI, columns, SELECTION_ID_WITHOUT_GIF,
-                            new String[]{bucketId, "image/jpeg", "image/png", "image/jpg"}, Images.Media.DATE_MODIFIED + " desc");
+                            new String[]{bucketId, IMAGE_JPEG, IMAGE_PNG, IMAGE_JPG}, Images.Media.DATE_MODIFIED + DESC);
                 }
             }
             if (allCursor != null) {
