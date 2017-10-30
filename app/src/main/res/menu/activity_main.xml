@@ -17,8 +17,8 @@
   -->
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_fresco" android:title="@string/menu_fresco" />
     <item android:id="@+id/menu_glide" android:title="@string/menu_glide" />
+    <item android:id="@+id/menu_fresco" android:title="@string/menu_fresco" />
     <item android:id="@+id/menu_picasso" android:title="@string/menu_picasso" />
 
 </menu>
