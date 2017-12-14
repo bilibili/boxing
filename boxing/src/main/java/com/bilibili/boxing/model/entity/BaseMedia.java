@@ -50,7 +50,7 @@ public abstract class BaseMedia implements Parcelable {
 
     public long getSize() {
         try {
-            long result = Long.valueOf(mSize);
+            long result = Long.parseLong(mSize);
             return result > 0 ? result : 0;
         }catch (NumberFormatException size) {
             return 0;

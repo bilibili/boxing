@@ -18,9 +18,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.bilibili.boxing_impl">
 
-    <application
-        android:label="@string/boxing_app_name"
-        android:theme="@style/Boxing.AppTheme">
+    <application>
 
         <activity
             android:name="com.bilibili.boxing_impl.ui.BoxingActivity"

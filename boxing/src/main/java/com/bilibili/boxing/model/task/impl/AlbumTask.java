@@ -127,6 +127,7 @@ public class AlbumTask {
         List<AlbumEntity> tmpList = new ArrayList<>();
         if (mBucketMap == null) {
             postAlbums(callback, tmpList);
+            return;
         }
         for (Map.Entry<String, AlbumEntity> entry : mBucketMap.entrySet()) {
             tmpList.add(entry.getValue());

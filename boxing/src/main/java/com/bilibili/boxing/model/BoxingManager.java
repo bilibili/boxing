@@ -35,7 +35,7 @@ import com.bilibili.boxing.utils.BoxingExecutor;
  * @author ChenSL
  */
 public class BoxingManager {
-    private static BoxingManager INSTANCE = new BoxingManager();
+    private static final BoxingManager INSTANCE = new BoxingManager();
 
     private BoxingConfig mConfig;
 

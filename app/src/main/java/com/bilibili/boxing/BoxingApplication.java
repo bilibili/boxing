@@ -19,7 +19,7 @@ package com.bilibili.boxing;
 
 import android.app.Application;
 
-import com.bilibili.boxing.impl.BoxingFrescoLoader;
+import com.bilibili.boxing.impl.BoxingGlideLoader;
 import com.bilibili.boxing.impl.BoxingUcrop;
 import com.bilibili.boxing.loader.IBoxingMediaLoader;
 
@@ -34,7 +34,7 @@ public class BoxingApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        IBoxingMediaLoader loader = new BoxingFrescoLoader(this);
+        IBoxingMediaLoader loader = new BoxingGlideLoader();
         BoxingMediaLoader.getInstance().init(loader);
         BoxingCrop.getInstance().init(new BoxingUcrop());
     }

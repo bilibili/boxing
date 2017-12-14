@@ -1,18 +1,22 @@
 language: android
-jdk: oraclejdk8
-sudo: false
 before_install:
   - chmod +x gradlew
   - android list target
+group: deprecated-2017Q3
 android:
   components:
+    - tools
     - platform-tools
     - tools
     - build-tools-25.0.1
-    - android-24
+    - build-tools-24.0.3
+    - android-22
+    - android-25
     - extra-android-support
+    - extra-google-m2repository
     - extra-android-m2repository
-    - sys-img-armeabi-v7a-android-21
+    - addon-google_apis-google-19
+    - sys-img-armeabi-v7a-android-22
   licenses:
     - 'android-sdk-preview-license-.+'
     - 'android-sdk-license-.+'
@@ -24,7 +28,11 @@ env:
     - GRADLE_OPTS="-Xms128m"
 # Emulator Management: Create, Start and Wait
 before_script:
-  - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a --skin WVGA800
+  - mkdir -p $ANDROID_HOME/licenses
+  - echo "8933bad161af4178b1185d1a37fbf41ea5269c55" > $ANDROID_HOME/licenses/android-sdk-license
+  - echo "d56f5187479451eabf01fb78af6dfcb131a6481e" >> $ANDROID_HOME/licenses/android-sdk-license
+  
+  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
