@@ -509,7 +509,7 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
 
                 AlbumEntity albumMedia = albums.get(pos);
                 loadMedias(0, albumMedia.mBucketId);
-                mTitleTxt.setText(albumMedia.mBucketName);
+                mTitleTxt.setText(albumMedia.mBucketName == null ? getString(R.string.boxing_default_album_name) : albumMedia.mBucketName);
 
                 for (AlbumEntity album : albums) {
                     album.mIsSelected = false;
