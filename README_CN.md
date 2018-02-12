@@ -12,6 +12,7 @@
 - 支持gif
 - 支持视频选择功能
 - 提供图片压缩
+- 多图生成gif（checkout feature/gif-encode), 见 [Bilibili/BurstLinker](https://github.com/Bilibili/BurstLinker)
 
 ### Download                                                                  
 ---
