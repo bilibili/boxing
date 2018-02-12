@@ -18,6 +18,8 @@
 package com.bilibili.boxing.ui;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -45,7 +47,10 @@ import com.bilibili.boxing.utils.ImageCompressor;
 import com.bilibili.boxing_impl.ui.BoxingActivity;
 import com.bilibili.boxing_impl.ui.BoxingBottomSheetActivity;
 import com.bilibili.boxing_impl.view.SpacesItemDecoration;
+import com.bilibili.burstlinker.BurstLinker;
+import com.bilibili.burstlinker.GifEncodeException;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -57,10 +62,12 @@ import java.util.Locale;
  */
 public class FirstActivity extends AppCompatActivity implements View.OnClickListener {
     private static final int REQUEST_CODE = 1024;
+    private static final int REQUEST_CODE_GIF = REQUEST_CODE + 1;
     private static final int COMPRESS_REQUEST_CODE = 2048;
 
     private RecyclerView mRecyclerView;
     private MediaResultAdapter mAdapter;
+    private ImageView mGifImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +80,8 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.multi_image_btn).setOnClickListener(this);
         findViewById(R.id.video_btn).setOnClickListener(this);
         findViewById(R.id.outside_bs_btn).setOnClickListener(this);
+        findViewById(R.id.gif_encode).setOnClickListener(this);
+        mGifImg = (ImageView) findViewById(R.id.gif_result);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.media_recycle_view);
         mAdapter = new MediaResultAdapter();
@@ -129,7 +138,10 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
                 BoxingConfig bsConfig = new BoxingConfig(BoxingConfig.Mode.SINGLE_IMG);
                 Boxing.of(bsConfig).withIntent(this, BoxingBottomSheetActivity.class).start(this, REQUEST_CODE);
                 break;
-
+            case R.id.gif_encode:
+                BoxingConfig config1 = new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).needCamera(R.drawable.ic_boxing_camera_white).needGif();
+                Boxing.of(config1).withIntent(this, BoxingActivity.class).start(this, REQUEST_CODE_GIF);
+                break;
             default:
                 break;
         }
@@ -162,6 +174,35 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
                     mAdapter.setList(imageMedias);
                 }
 
+            } else if (requestCode == REQUEST_CODE_GIF) {
+                // optional
+                int delayMs = 1000;
+                ImageMedia imageMedia = (ImageMedia) medias.get(0);
+                int width = imageMedia.getWidth();
+                int height = imageMedia.getHeight();
+                String filePath = getExternalCacheDir() + File.separator + "out.gif";
+                BurstLinker burstLinker = new BurstLinker();
+                List<Bitmap> bitmaps = new ArrayList<>(medias.size());
+                for (int i = 0; i < medias.size(); i++) {
+                    Bitmap bitmap = BitmapFactory.decodeFile(medias.get(i).getPath());
+                    bitmaps.add(bitmap);
+                }
+                try {
+                    burstLinker.init(width, height, filePath, 4);
+                    burstLinker.connectArray(bitmaps, BurstLinker.OCTREE_QUANTIZER,
+                                BurstLinker.NO_DITHER, 0, 0, delayMs);
+                    mGifImg.setVisibility(View.VISIBLE);
+                } catch (GifEncodeException e) {
+                    e.printStackTrace();
+                } finally {
+                    burstLinker.release();
+                    for (Bitmap bitmap : bitmaps) {
+                        if (bitmap != null) {
+                            bitmap.recycle();
+                        }
+                    }
+                }
+                BoxingMediaLoader.getInstance().displayRaw(mGifImg, filePath, width, height, null);
             }
         }
     }

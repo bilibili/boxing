@@ -12,6 +12,7 @@ Android multi-media selector based on MVP mode.[中文文档](README_CN.md)  [![
 - Gif support
 - Video selection
 - Image compression
+- Gif encode(checkout feature/gif-encode to have fun), see [Bilibili/BurstLinker](https://github.com/Bilibili/BurstLinker)
 
 ### Download
 ---

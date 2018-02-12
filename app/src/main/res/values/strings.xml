@@ -23,6 +23,7 @@
     <string name="second_demo">2.使用自定义Fragment</string>
     <string name="second_demo_title">自定义Fragment</string>
     <string name="bottom_sheet">Bottom Sheet</string>
+    <string name="gif_encode">gif合成</string>
 
     <string name="menu_fresco">Fresco</string>
     <string name="menu_glide">Glide</string>

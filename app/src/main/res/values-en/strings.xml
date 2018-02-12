@@ -23,4 +23,5 @@
     <string name="second_demo_title">Custom Fragment</string>
     <string name="first_demo_title">Custom Activity</string>
     <string name="bottom_sheet">Bottom Sheet</string>
+    <string name="gif_encode">Encode gif</string>
 </resources>
