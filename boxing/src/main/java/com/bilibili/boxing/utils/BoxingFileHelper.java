@@ -39,10 +39,7 @@ public class BoxingFileHelper {
             return false;
         }
         final File file = new File(path);
-        if (file.exists()) {
-            return true;
-        }
-        return file.mkdirs();
+        return file.exists() || file.mkdirs();
 
     }
 
@@ -75,22 +72,21 @@ public class BoxingFileHelper {
 
     @Nullable
     public static String getExternalDCIM(String subDir) {
-        String result = null;
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
             if (file == null) {
-                return result;
+                return null;
             }
             String dir = "/bili/boxing";
             if (!TextUtils.isEmpty(subDir)) {
                 dir = subDir;
             }
-            result = file.getAbsolutePath() + dir;
+            String result = file.getAbsolutePath() + dir;
             BoxingLog.d("external DCIM is: " + result);
             return result;
         }
         BoxingLog.d("external DCIM do not exist.");
-        return result;
+        return null;
     }
 
     public static boolean isFileValid(String path) {
@@ -101,7 +97,7 @@ public class BoxingFileHelper {
         return isFileValid(file);
     }
 
-    public static boolean isFileValid(File file) {
-        return file.exists() && file.isFile() && file.length() > 0 && file.canRead();
+    static boolean isFileValid(File file) {
+        return file != null && file.exists() && file.isFile() && file.length() > 0 && file.canRead();
     }
 }

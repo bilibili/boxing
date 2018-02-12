@@ -62,7 +62,7 @@ public class BoxingMediaAdapter extends RecyclerView.Adapter {
     public BoxingMediaAdapter(Context context) {
         this.mInflater = LayoutInflater.from(context);
         this.mMedias = new ArrayList<>();
-        this.mSelectedMedias = new ArrayList<>();
+        this.mSelectedMedias = new ArrayList<>(9);
         this.mMediaConfig = BoxingManager.getInstance().getBoxingConfig();
         this.mOffset = mMediaConfig.isNeedCamera() ? 1 : 0;
         this.mMultiImageMode = mMediaConfig.getMode() == BoxingConfig.Mode.MULTI_IMG;
@@ -145,14 +145,17 @@ public class BoxingMediaAdapter extends RecyclerView.Adapter {
         }
         mSelectedMedias.clear();
         mSelectedMedias.addAll(selectedMedias);
+        notifyDataSetChanged();
     }
 
     public void addAllData(@NonNull List<BaseMedia> data) {
+        int oldSize = mMedias.size();
         this.mMedias.addAll(data);
+        int size = mMedias.size();
         if (getItemViewType(0) == CAMERA_TYPE) {
-            notifyItemRangeInserted(1, mMedias.size());
+            notifyItemRangeInserted(oldSize + 1, size);
         } else {
-            notifyItemRangeInserted(0, mMedias.size());
+            notifyItemRangeInserted(oldSize, size);
         }
     }
 

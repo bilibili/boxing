@@ -291,7 +291,6 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
             onViewActivityRequest(selectedMedias, mMediaAdapter.getAllMedias(), isBackClick);
             if (isBackClick) {
                 mMediaAdapter.setSelectedMedias(selectedMedias);
-                mMediaAdapter.notifyDataSetChanged();
             }
             updateMultiPickerLayoutState(selectedMedias);
         }
