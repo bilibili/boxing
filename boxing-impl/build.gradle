@@ -25,12 +25,12 @@ group = "com.bilibili"
 version = "1.0.2"
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "25.0.1"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 25
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName version
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
@@ -121,13 +121,13 @@ bintray {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:design:25.3.1'
+    compile "com.android.support:design:${rootProject.ext.androidSupportLibraryVersion}"
     compile('com.chensl.rotatephotoview:rotatephotoview:1.0.5') {
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'support-v4'
         exclude module: 'recyclerview-v7'
     }
-    testCompile('junit:junit:4.12')
+    testCompile 'junit:junit:4.12'
     androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2') {
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'support-v4'
