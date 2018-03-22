@@ -38,6 +38,7 @@ import com.bilibili.boxing.presenter.PickerContract;
 import com.bilibili.boxing.utils.BoxingFileHelper;
 import com.bilibili.boxing_impl.R;
 import com.bilibili.boxing_impl.adapter.BoxingMediaAdapter;
+import com.bilibili.boxing_impl.view.HackyGridLayoutManager;
 import com.bilibili.boxing_impl.view.SpacesItemDecoration;
 
 import java.util.ArrayList;
@@ -84,8 +85,9 @@ public class BoxingBottomSheetFragment extends AbsBoxingViewFragment implements 
         super.onViewCreated(view, savedInstanceState);
         mEmptyTxt = (TextView) view.findViewById(R.id.empty_txt);
         mRecycleView = (RecyclerView) view.findViewById(R.id.media_recycleview);
+        mRecycleView.setHasFixedSize(true);
         mLoadingView = (ProgressBar) view.findViewById(R.id.loading);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), GRID_COUNT);
+        GridLayoutManager gridLayoutManager = new HackyGridLayoutManager(getActivity(), GRID_COUNT);
         gridLayoutManager.setSmoothScrollbarEnabled(true);
         mRecycleView.setLayoutManager(gridLayoutManager);
         mRecycleView.addItemDecoration(new SpacesItemDecoration(getResources().getDimensionPixelOffset(R.dimen.boxing_media_margin), GRID_COUNT));

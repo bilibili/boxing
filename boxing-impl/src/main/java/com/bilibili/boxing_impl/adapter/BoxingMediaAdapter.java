@@ -152,21 +152,13 @@ public class BoxingMediaAdapter extends RecyclerView.Adapter {
         int oldSize = mMedias.size();
         this.mMedias.addAll(data);
         int size = mMedias.size();
-        if (getItemViewType(0) == CAMERA_TYPE) {
-            notifyItemRangeInserted(oldSize + 1, size);
-        } else {
-            notifyItemRangeInserted(oldSize, size);
-        }
+        notifyItemRangeInserted(oldSize, size);
     }
 
     public void clearData() {
         int size = mMedias.size();
         this.mMedias.clear();
-        if (getItemViewType(0) == CAMERA_TYPE) {
-            notifyItemRangeRemoved(1, size);
-        } else {
-            notifyItemRangeRemoved(0, size);
-        }
+        notifyItemRangeRemoved(0, size);
     }
 
     public List<BaseMedia> getAllMedias() {

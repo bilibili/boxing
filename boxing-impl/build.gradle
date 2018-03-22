@@ -120,19 +120,19 @@ bintray {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile "com.android.support:design:${rootProject.ext.androidSupportLibraryVersion}"
-    compile('com.chensl.rotatephotoview:rotatephotoview:1.0.5') {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    api "com.android.support:design:${rootProject.ext.androidSupportLibraryVersion}"
+    implementation('com.chensl.rotatephotoview:rotatephotoview:1.0.5') {
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'support-v4'
         exclude module: 'recyclerview-v7'
     }
-    testCompile 'junit:junit:4.12'
-    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2') {
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation('com.android.support.test.espresso:espresso-contrib:2.2') {
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'support-v4'
         exclude module: 'recyclerview-v7'
     }
-    androidTestCompile 'com.android.support.test:runner:0.5'
-    compile project(":boxing")
+    androidTestImplementation 'com.android.support.test:runner:0.5'
+    api project(":boxing")
 }

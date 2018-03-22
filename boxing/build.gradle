@@ -118,15 +118,15 @@ bintray {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile "com.android.support:appcompat-v7:${rootProject.ext.androidSupportLibraryVersion}"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    api "com.android.support:appcompat-v7:${rootProject.ext.androidSupportLibraryVersion}"
     // Mock
-    testCompile 'org.powermock:powermock-module-junit4:1.6.4'
-    testCompile 'org.powermock:powermock-module-junit4-rule:1.6.4'
-    testCompile 'org.powermock:powermock-api-mockito:1.6.4'
-    testCompile 'org.powermock:powermock-classloading-xstream:1.6.4'
+    testImplementation 'org.powermock:powermock-module-junit4:1.6.4'
+    testImplementation 'org.powermock:powermock-module-junit4-rule:1.6.4'
+    testImplementation 'org.powermock:powermock-api-mockito:1.6.4'
+    testImplementation 'org.powermock:powermock-classloading-xstream:1.6.4'
     // Robolectric
-    testCompile('org.robolectric:robolectric:3.1.2') {
+    testImplementation('org.robolectric:robolectric:3.1.2') {
         exclude group: 'commons-logging'
         exclude group: 'org.apache.httpcomponents'
     }

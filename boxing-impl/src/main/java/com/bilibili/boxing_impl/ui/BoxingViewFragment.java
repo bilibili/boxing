@@ -50,6 +50,7 @@ import com.bilibili.boxing_impl.R;
 import com.bilibili.boxing_impl.WindowManagerHelper;
 import com.bilibili.boxing_impl.adapter.BoxingAlbumAdapter;
 import com.bilibili.boxing_impl.adapter.BoxingMediaAdapter;
+import com.bilibili.boxing_impl.view.HackyGridLayoutManager;
 import com.bilibili.boxing_impl.view.MediaItemLayout;
 import com.bilibili.boxing_impl.view.SpacesItemDecoration;
 
@@ -140,6 +141,7 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
     private void initViews(View view) {
         mEmptyTxt = (TextView) view.findViewById(R.id.empty_txt);
         mRecycleView = (RecyclerView) view.findViewById(R.id.media_recycleview);
+        mRecycleView.setHasFixedSize(true);
         mLoadingView = (ProgressBar) view.findViewById(R.id.loading);
         initRecycleView();
 
@@ -157,7 +159,7 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
     }
 
     private void initRecycleView() {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), GRID_COUNT);
+        GridLayoutManager gridLayoutManager = new HackyGridLayoutManager(getActivity(), GRID_COUNT);
         gridLayoutManager.setSmoothScrollbarEnabled(true);
         mRecycleView.setLayoutManager(gridLayoutManager);
         mRecycleView.addItemDecoration(new SpacesItemDecoration(getResources().getDimensionPixelOffset(R.dimen.boxing_media_margin), GRID_COUNT));
