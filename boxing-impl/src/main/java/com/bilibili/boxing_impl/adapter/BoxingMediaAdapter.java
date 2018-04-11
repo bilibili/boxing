@@ -151,7 +151,7 @@ public class BoxingMediaAdapter extends RecyclerView.Adapter {
     public void addAllData(@NonNull List<BaseMedia> data) {
         int oldSize = mMedias.size();
         this.mMedias.addAll(data);
-        int size = mMedias.size();
+        int size = data.size();
         notifyItemRangeInserted(oldSize, size);
     }
 
