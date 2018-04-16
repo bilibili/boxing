@@ -210,7 +210,6 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
                     path = media.getPath();
                 }
                 BoxingMediaLoader.getInstance().displayThumbnail(mediaViewHolder.mImageView, path, 150, 150);
-                mediaViewHolder.itemView.setTag(position);
             }
         }
 
