@@ -56,7 +56,8 @@ import static android.support.v4.content.PermissionChecker.PERMISSION_GRANTED;
  * @author ChenSL
  */
 public abstract class AbsBoxingViewFragment extends Fragment implements PickerContract.View {
-    public static final String[] STORAGE_PERMISSIONS = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    public static final String[] STORAGE_PERMISSIONS =
+            {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     public static final String[] CAMERA_PERMISSIONS = {Manifest.permission.CAMERA};
 
     private static final int REQUEST_CODE_PERMISSION = 233;
@@ -180,8 +181,9 @@ public abstract class AbsBoxingViewFragment extends Fragment implements PickerCo
 
     private void checkPermissionAndLoad() {
         try {
-            if (!BoxingBuilderConfig.TESTING &&  Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-                    && ContextCompat.checkSelfPermission(getActivity(), STORAGE_PERMISSIONS[0]) != PERMISSION_GRANTED) {
+            if (!BoxingBuilderConfig.TESTING && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                    && ContextCompat.checkSelfPermission(getActivity(), STORAGE_PERMISSIONS[0]) != PERMISSION_GRANTED
+                    && ContextCompat.checkSelfPermission(getActivity(), STORAGE_PERMISSIONS[1]) != PERMISSION_GRANTED) {
                 requestPermissions(STORAGE_PERMISSIONS, REQUEST_CODE_PERMISSION);
             } else {
                 startLoading();
