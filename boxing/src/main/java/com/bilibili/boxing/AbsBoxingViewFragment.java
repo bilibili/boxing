@@ -201,7 +201,8 @@ public abstract class AbsBoxingViewFragment extends Fragment implements PickerCo
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 onRequestPermissionSuc(requestCode, permissions, grantResults);
             } else {
-                onRequestPermissionError(permissions, new SecurityException("request " + permissions[0] + " error."));
+                onRequestPermissionError(permissions,
+                        new SecurityException("request android.permission.READ_EXTERNAL_STORAGE error."));
             }
         }
     }
