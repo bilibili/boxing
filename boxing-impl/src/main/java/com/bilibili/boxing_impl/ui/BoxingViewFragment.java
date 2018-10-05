@@ -40,6 +40,7 @@ import android.widget.Toast;
 
 import com.bilibili.boxing.AbsBoxingViewFragment;
 import com.bilibili.boxing.Boxing;
+import com.bilibili.boxing.BoxingMediaFilter;
 import com.bilibili.boxing.model.BoxingManager;
 import com.bilibili.boxing.model.config.BoxingConfig;
 import com.bilibili.boxing.model.entity.AlbumEntity;
@@ -111,7 +112,7 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
             if (permissions[0].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 Toast.makeText(getContext(), R.string.boxing_storage_permission_deny, Toast.LENGTH_SHORT).show();
                 showEmptyData();
-            } else if (permissions[0].equals(Manifest.permission.CAMERA)){
+            } else if (permissions[0].equals(Manifest.permission.CAMERA)) {
                 Toast.makeText(getContext(), R.string.boxing_camera_permission_deny, Toast.LENGTH_SHORT).show();
             }
         }
@@ -178,6 +179,7 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
             return;
         }
         showData();
+        medias = BoxingMediaFilter.INSTANCE.filterMedia(medias);
         mMediaAdapter.addAllData(medias);
         checkSelectedMedia(medias, mMediaAdapter.getSelectedMedias());
     }
@@ -206,6 +208,7 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
             mTitleTxt.setOnClickListener(null);
             return;
         }
+        albums = BoxingMediaFilter.INSTANCE.startFilter(albums);
         mAlbumWindowAdapter.addAllData(albums);
     }
 
@@ -320,9 +323,9 @@ public class BoxingViewFragment extends AbsBoxingViewFragment implements View.On
             mDialog.setIndeterminate(true);
             mDialog.setMessage(getString(R.string.boxing_handling));
         }
-       if (!mDialog.isShowing()) {
-           mDialog.show();
-       }
+        if (!mDialog.isShowing()) {
+            mDialog.show();
+        }
     }
 
     private void dismissProgressDialog() {

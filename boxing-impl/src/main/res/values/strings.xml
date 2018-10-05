@@ -30,6 +30,7 @@
     <string name="boxing_pick_single_video">视频单选</string>
     <string name="boxing_pick_multi_image">图片多选</string>
     <string name="boxing_pick_single_image_crop">图片单选加裁剪</string>
+    <string name="boxing_pick_single_image_filter">图片单选加筛选</string>
     <string name="boxing_pick_single_image">图片单选</string>
     <string name="boxing_video_title">视频相册</string>
     <string name="boxing_finish">完成</string>

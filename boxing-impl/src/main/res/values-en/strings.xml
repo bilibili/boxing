@@ -29,6 +29,7 @@
     <string name="boxing_pick_single_video">Pick a video</string>
     <string name="boxing_pick_multi_image">Pick pictures</string>
     <string name="boxing_pick_single_image_crop">Pick a picture with crop</string>
+    <string name="boxing_pick_single_image_filter">Pick a picture with filter</string>
     <string name="boxing_pick_single_image">Pick a picture</string>
     <string name="boxing_video_title">videos</string>
     <string name="boxing_storage_deny">Device storage read error or temporarily unavailable. Please try again later</string>

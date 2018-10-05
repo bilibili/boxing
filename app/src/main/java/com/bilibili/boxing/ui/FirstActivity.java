@@ -33,8 +33,10 @@ import android.widget.Toast;
 
 import com.bilibili.boxing.AbsBoxingActivity;
 import com.bilibili.boxing.Boxing;
+import com.bilibili.boxing.BoxingMediaFilter;
 import com.bilibili.boxing.BoxingMediaLoader;
 import com.bilibili.boxing.demo.R;
+import com.bilibili.boxing.impl.BoxingFilter;
 import com.bilibili.boxing.model.BoxingManager;
 import com.bilibili.boxing.model.config.BoxingConfig;
 import com.bilibili.boxing.model.config.BoxingCropOption;
@@ -70,6 +72,7 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
 
         findViewById(R.id.single_image_btn).setOnClickListener(this);
         findViewById(R.id.single_image_btn_crop_btn).setOnClickListener(this);
+        findViewById(R.id.single_image_btn_filter_btn).setOnClickListener(this);
         findViewById(R.id.multi_image_btn).setOnClickListener(this);
         findViewById(R.id.video_btn).setOnClickListener(this);
         findViewById(R.id.outside_bs_btn).setOnClickListener(this);
@@ -97,6 +100,7 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         int id = v.getId();
+        BoxingMediaFilter.INSTANCE.init(null);
         switch (id) {
             case R.id.single_image_btn:
                 BoxingConfig singleImgConfig = new BoxingConfig(BoxingConfig.Mode.SINGLE_IMG).withMediaPlaceHolderRes(R.drawable.ic_boxing_default_image);
@@ -116,6 +120,11 @@ public class FirstActivity extends AppCompatActivity implements View.OnClickList
                 BoxingConfig singleCropImgConfig = new BoxingConfig(BoxingConfig.Mode.SINGLE_IMG).withCropOption(new BoxingCropOption(destUri))
                         .withMediaPlaceHolderRes(R.drawable.ic_boxing_default_image);
                 Boxing.of(singleCropImgConfig).withIntent(this, BoxingActivity.class).start(this, REQUEST_CODE);
+                break;
+            case R.id.single_image_btn_filter_btn:
+                BoxingMediaFilter.INSTANCE.init(new BoxingFilter());
+                BoxingConfig filterImgConfig = new BoxingConfig(BoxingConfig.Mode.SINGLE_IMG).withMediaPlaceHolderRes(R.drawable.ic_boxing_default_image);
+                Boxing.of(filterImgConfig).withIntent(this, BoxingActivity.class).start(this, COMPRESS_REQUEST_CODE);
                 break;
             case R.id.multi_image_btn:
                 BoxingConfig config = new BoxingConfig(BoxingConfig.Mode.MULTI_IMG).needCamera(R.drawable.ic_boxing_camera_white).needGif();
