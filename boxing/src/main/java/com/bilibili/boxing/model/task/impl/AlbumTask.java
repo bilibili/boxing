@@ -16,6 +16,10 @@
  */
 package com.bilibili.boxing.model.task.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.provider.MediaStore.Images.Media;
@@ -23,17 +27,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.WorkerThread;
 import android.support.v4.util.ArrayMap;
 import android.text.TextUtils;
-
 import com.bilibili.boxing.model.BoxingManager;
 import com.bilibili.boxing.model.callback.IAlbumTaskCallback;
 import com.bilibili.boxing.model.config.BoxingConfig;
 import com.bilibili.boxing.model.entity.AlbumEntity;
 import com.bilibili.boxing.model.entity.impl.ImageMedia;
 import com.bilibili.boxing.utils.BoxingExecutor;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * A task to load albums.
@@ -69,7 +68,7 @@ public class AlbumTask {
         String[] distinctBucketColumns = new String[]{Media.BUCKET_ID, Media.BUCKET_DISPLAY_NAME};
         Cursor bucketCursor = null;
         try {
-            bucketCursor = cr.query(Media.EXTERNAL_CONTENT_URI, distinctBucketColumns, "0==0)" + " GROUP BY(" + Media.BUCKET_ID, null,
+            bucketCursor = cr.query(Media.EXTERNAL_CONTENT_URI, distinctBucketColumns, "0==0)" + " GROUP BY (" + Media.BUCKET_ID, null,
                     Media.DATE_MODIFIED + " desc");
             if (bucketCursor != null && bucketCursor.moveToFirst()) {
                 do {
